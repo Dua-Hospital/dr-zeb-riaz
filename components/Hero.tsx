@@ -1,4 +1,4 @@
-import { DOCTOR, type SiteContent } from '@/lib/content';
+import { DOCTOR, visibleCare, type SiteContent } from '@/lib/content';
 import { bookingHref } from '@/lib/links';
 import type { Locale } from '@/lib/site';
 import { Icon } from './icons';
@@ -7,9 +7,7 @@ import { PortraitCard } from './PortraitCard';
 import { StatusPill } from './live/StatusPill';
 import { TodayCard } from './live/TodayCard';
 
-const ECG = 'M0 23 H170 l12 -4 l10 4 h18 l10 -20 l14 40 l10 -26 l8 6 h40 l10 -5 l10 5 H500';
-
-/** The hero bento: main card, portrait, "Where is he today?" and the info strip (spec §3.2). */
+/** The hero bento: main card, portrait, today card and the info strip (spec §3). */
 export function Hero({ c, locale }: { c: SiteContent; locale: Locale }) {
   const h = c.hero;
   const name = locale === 'ur' ? DOCTOR.nameUr : DOCTOR.name;
@@ -25,10 +23,7 @@ export function Hero({ c, locale }: { c: SiteContent; locale: Locale }) {
               {name.slice(0, cut + 1)}
               <span>{name.slice(cut + 1)}</span>
             </h1>
-            <svg className="ecg" viewBox="0 0 500 46" aria-hidden="true">
-              <path d={ECG} />
-              <circle className="dot" r="5" />
-            </svg>
+            <span className="h-rule" aria-hidden="true" />
             <div className="h-ur ur" lang="ur">
               {h.urLine}
             </div>
@@ -44,8 +39,8 @@ export function Hero({ c, locale }: { c: SiteContent; locale: Locale }) {
               {h.chips.map((chip) => (
                 <span key={chip}>{chip}</span>
               ))}
-              <a href="#treatments">
-                {h.seeAll}
+              <a href="#care">
+                {h.seeAll(String(visibleCare().length))}
                 <Icon name="arrow" />
               </a>
             </div>
@@ -55,7 +50,7 @@ export function Hero({ c, locale }: { c: SiteContent; locale: Locale }) {
                 {h.ctaBook}
                 <Icon name="arrow" className="arr" />
               </a>
-              <a className="btn btn-ghost" href="#clinics">
+              <a className="btn btn-ghost" href="#clinic">
                 <Icon name="clock" />
                 {h.ctaTimings}
               </a>

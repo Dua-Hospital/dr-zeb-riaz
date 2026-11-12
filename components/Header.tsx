@@ -11,11 +11,11 @@ export function Header({ c, locale }: { c: SiteContent; locale: Locale }) {
     <header className="nav">
       <MobileMenu locale={locale}>
         <a className="brand" href="#top">
-          {/* Dr. Hasan Aziz "HA" monogram. Decorative: the name follows as text. */}
-          <img className="logo" src="/brand/dr-hasan-aziz-mark.svg" alt="" width={42} height={42} />
+          {/* Dr. Zeb Riaz mark (Dua hand, Zeb hand, mother and baby). Decorative: the name follows as text. */}
+          <img className="logo" src="/brand/zeb-mark-full.svg" alt="" width={48} height={48} />
           <span>
             {locale === 'ur' ? DOCTOR.nameUr : DOCTOR.name}
-            <small>{c.nav.subtitle}</small>
+            <small>{c.nav.endorse}</small>
           </span>
         </a>
         <nav className="nav-links" aria-label={c.nav.menu}>

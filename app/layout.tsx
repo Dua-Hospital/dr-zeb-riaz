@@ -21,11 +21,11 @@ const gulzar = Gulzar({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default:
-      'Dr. Hasan Aziz — Consultant Physician & Medical Specialist in Multan',
-    template: '%s | Dr. Hasan Aziz',
+    default: 'Dr. Zeb Riaz — Gynaecologist & Obstetrician in Multan | Dua Hospital',
+    // Page titles already name her and Dua Hospital, so no suffix is added.
+    template: '%s',
   },
-  applicationName: 'Dr. Hasan Aziz',
+  applicationName: 'Dr. Zeb Riaz',
   category: 'health' as Metadata['category'],
   icons: { icon: '/icon.svg' },
   formatDetection: { telephone: false, address: true, email: false },

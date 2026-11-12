@@ -14,7 +14,7 @@ import { BackToTop } from './nav/BackToTop';
 import { Reveal } from './nav/Reveal';
 import { SmoothNav } from './nav/SmoothNav';
 import { Reviews } from './Reviews';
-import { Treatments } from './Treatments';
+import { Care } from './Care';
 
 /** The whole page for one locale. */
 export function Page({ locale }: { locale: Locale }) {
@@ -34,7 +34,7 @@ export function Page({ locale }: { locale: Locale }) {
       <main id="top" tabIndex={-1}>
         <Hero c={c} locale={locale} />
         <About c={c} />
-        <Treatments c={c} locale={locale} />
+        <Care c={c} locale={locale} />
         <Clinics c={c} locale={locale} />
         <Booking c={c} locale={locale} />
         <Reviews c={c} />

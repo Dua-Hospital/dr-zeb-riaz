@@ -6,7 +6,7 @@ import { Icon } from './icons';
 
 const ICONS: readonly IconName[] = ['cal', 'clock', 'steth', 'wa'];
 
-/** The four clickable info cards under the hero (spec §3.2). */
+/** The four clickable info cards under the hero (spec §3). */
 export function InfoStrip({ c, locale }: { c: SiteContent; locale: Locale }) {
   return (
     <div className="ribbon">

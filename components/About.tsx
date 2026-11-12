@@ -6,11 +6,11 @@ import { Icon } from './icons';
 
 const VISIT_ICONS: readonly IconName[] = ['wa', 'file', 'steth', 'list'];
 
-/** Section 01: who the doctor is, qualifications and what a visit looks like. */
+/** Section 01: qualifications, expertise and what a visit looks like (spec §3, Z6). */
 export function About({ c }: { c: SiteContent }) {
   const a = c.about;
   return (
-    <section id="doctor">
+    <section id="about">
       <div className="wrap about">
         <div className="about-l rv">
           <span className="overline">
@@ -24,11 +24,11 @@ export function About({ c }: { c: SiteContent }) {
           </p>
           <div className="about-photo-card rv" style={{ marginTop: 28, marginBottom: 20 }}>
             <Image
-              src="/images/dr-hasan-aziz-consultation.jpg"
+              src="/images/dr-zeb-riaz-about.jpg"
               alt={DOCTOR.name}
-              width={640}
-              height={400}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              width={1066}
+              height={1599}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 18%' }}
             />
             <span className="about-photo-badge">
               <Icon name="steth" />

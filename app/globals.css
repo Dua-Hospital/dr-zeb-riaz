@@ -17,7 +17,6 @@
   --sh:0 1px 2px rgba(3,37,79,.04),0 8px 24px -14px rgba(3,37,79,.12);
   --sh-hi:0 2px 4px rgba(3,37,79,.05),0 28px 56px -24px rgba(3,37,79,.28);
   --ease:cubic-bezier(.22,1,.36,1);
-  --photo:url("/images/dr-hasan-aziz-hero.jpg");
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-figtree),system-ui,sans-serif;color:var(--n900);background:var(--bg);font-size:17px;line-height:28px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -30,8 +29,8 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .card{background:var(--n0);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh)}
 
 /* type — brand "Web Desktop" styles */
-.overline{display:inline-flex;align-items:center;gap:10px;font-size:13px;line-height:16px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--b600)}
-.overline .num{display:inline-grid;place-items:center;min-width:28px;height:22px;padding:0 6px;border-radius:6px;background:var(--b100);color:var(--b700);letter-spacing:0;font-variant-numeric:tabular-nums}
+.overline{display:inline-flex;align-items:center;gap:10px;font-size:13px;line-height:16px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--r500)}
+.overline .num{display:inline-grid;place-items:center;min-width:28px;height:22px;padding:0 6px;border-radius:6px;background:var(--r100);color:var(--r700);letter-spacing:0;font-variant-numeric:tabular-nums}
 h2{font-size:clamp(30px,2.2vw + 18px,40px);line-height:1.2;letter-spacing:-.04em;font-weight:700;color:var(--b900);margin:16px 0 12px}
 .lead{font-size:20px;line-height:32px;color:var(--n600);max-width:56ch}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px 40px;margin-bottom:36px;flex-wrap:wrap}
@@ -61,7 +60,7 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .nav{position:sticky;top:12px;z-index:50;max-width:1240px;margin:12px auto 0;padding:0 24px}
 .nav-in{display:flex;align-items:center;gap:16px;height:68px;padding:0 10px 0 14px;background:rgba(255,255,255,.98);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border:1px solid rgba(231,232,232,.95);border-radius:999px;box-shadow:var(--sh)}
 .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:17px;color:var(--b900);line-height:1.2;min-width:0}
-.logo{width:42px;height:42px;object-fit:contain;flex:none;display:block}
+.logo{width:48px;height:48px;object-fit:contain;flex:none;display:block}
 .brand small{display:block;font-weight:500;font-size:13px;color:var(--n500)}
 .nav-links{display:flex;gap:2px;margin-inline-start:auto}
 .nav-links a{white-space:nowrap;font-size:15px;font-weight:500;color:var(--n600);padding:8px 13px;border-radius:999px;transition:background .2s,color .2s}
@@ -106,11 +105,10 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .q-bar span:not(.ic):not(.tag){display:block}
 .h-name{font-size:clamp(46px,4.2vw + 14px,76px);line-height:1;letter-spacing:-.05em;font-weight:800;color:var(--b900);margin:10px 0 0}
 .h-name span{color:var(--b600)}
-.ecg{display:block;width:100%;max-width:500px;height:46px;margin:10px 0 0}
-.ecg path{fill:none;stroke:var(--b600);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:640;stroke-dashoffset:640;animation:draw 3.6s var(--ease) .3s infinite}
-.ecg .dot{fill:var(--g500);offset-path:path("M0 23 H170 l12 -4 l10 4 h18 l10 -20 l14 40 l10 -26 l8 6 h40 l10 -5 l10 5 H500");animation:run 3.6s var(--ease) .3s infinite;opacity:0}
-@keyframes draw{0%{stroke-dashoffset:640;opacity:1}55%,82%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
-@keyframes run{0%{offset-distance:0%;opacity:1}55%{offset-distance:100%;opacity:1}82%,100%{offset-distance:100%;opacity:0}}
+/* champagne rule under the name (replaces the template's ECG line): draws in once */
+.h-rule{display:block;width:80px;height:3px;border-radius:3px;background:var(--c500);margin:16px 0 4px;transform-origin:left;animation:rule .6s var(--ease) .3s both}
+[dir=rtl] .h-rule{transform-origin:right}
+@keyframes rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .h-ur{font-size:24px;color:var(--b700);margin-top:2px}
 .h-statement{font-size:22px;line-height:34px;color:var(--n600);max-width:36ch;margin:18px 0 16px;font-weight:500}
 .h-statement strong{display:block;color:var(--b900);font-weight:700;font-size:26px;line-height:34px;letter-spacing:-.02em;margin-bottom:4px}
@@ -139,7 +137,12 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .cred{display:flex;gap:12px;align-items:flex-start;padding:18px 20px;line-height:20px}
 .cred+.cred{border-inline-start:1px solid var(--line)}
 .cred .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--b50);color:var(--b600);flex:none}
-.cred+.cred .ic{background:var(--g100);color:var(--g800)}
+.cred+.cred .ic{background:var(--r100);color:var(--r700)}
+.cred-4{grid-template-columns:repeat(4,1fr)}
+.cred-4 .cred{flex-direction:column;gap:8px;padding:14px 14px}
+.cred-4 .cred b{font-size:15px;line-height:20px}
+.cred-4 .cred span:not(.ic){font-size:12.5px;line-height:17px}
+.cred-4 .cred:last-child .ic{background:var(--c100);color:var(--c700)}
 .cred small{display:block;font-size:12px;line-height:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--n500)}
 .cred b{display:block;font-size:17px;line-height:24px;color:var(--b900)}
 .cred span:not(.ic){display:block;font-size:13.5px;line-height:19px;color:var(--n500)}
@@ -261,6 +264,8 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .cl-time{display:flex;align-items:baseline;gap:4px 12px;flex-wrap:wrap}
 .cl-time b{font-size:32px;line-height:40px;font-weight:800;letter-spacing:-.03em;color:var(--b900);font-variant-numeric:tabular-nums}
 .cl-time span{color:var(--n500);font-size:15px}
+.cl-time .cl-label{flex-basis:100%;font-size:12px;line-height:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--r500)}
+.cl-time .cl-season{flex-basis:100%;font-weight:600;color:var(--n600)}
 .week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .week div{text-align:center;padding:8px 0;border-radius:10px;font-size:13px;line-height:20px;font-weight:700;background:var(--b600);color:#fff}
 .week div.off{background:var(--n50);color:var(--n500);border:1px solid var(--line)}
@@ -290,7 +295,7 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .phone{justify-self:center;width:330px;max-width:100%;border-radius:40px;background:#0B1B33;padding:12px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.08)}
 .screen{border-radius:30px;overflow:hidden;background:#EFEAE2}
 .wa-top{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#075E54;color:#fff;font-size:14px;line-height:20px}
-.wa-top .av{width:36px;height:36px;border-radius:50%;background:url("/images/dr-hasan-aziz-consultation.jpg") center 15%/cover}
+.wa-top .av{width:36px;height:36px;border-radius:50%;background:url("/images/dr-zeb-riaz-avatar.jpg") center 20%/cover}
 .wa-top small{display:block;opacity:.75;font-size:12px}
 .chat{padding:16px 12px;display:flex;flex-direction:column;gap:8px;min-height:340px;color:var(--n900)}
 .msg{max-width:86%;padding:8px 11px 6px;border-radius:12px;font-size:14px;line-height:20px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
@@ -338,12 +343,12 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 @keyframes fade{from{opacity:0;transform:translateY(-6px)}}
 
 /* final cta */
-.final{margin-top:120px;border-radius:var(--r-xl);background:var(--b600);color:#fff;padding:52px 60px;display:flex;align-items:center;justify-content:space-between;gap:32px;position:relative;overflow:hidden}
-.final svg.bg-ecg{position:absolute;left:0;right:0;bottom:14px;width:100%;height:80px;opacity:.2}
-.final svg.bg-ecg path{fill:none;stroke:#fff;stroke-width:2;stroke-dasharray:1500;stroke-dashoffset:1500;animation:draw2 7s linear infinite}
-@keyframes draw2{to{stroke-dashoffset:-1500}}
+.final{margin-top:120px;border-radius:var(--r-xl);background:var(--b900);color:#fff;padding:52px 60px;display:flex;align-items:center;justify-content:space-between;gap:32px;position:relative;overflow:hidden}
+.final svg.bg-arc{position:absolute;left:0;right:0;bottom:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.final svg.bg-arc path{fill:none;stroke:var(--c500);stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-dasharray:1400;stroke-dashoffset:1400;animation:arc 9s var(--ease) infinite alternate}
+@keyframes arc{to{stroke-dashoffset:0}}
 .final>div{position:relative;display:flex;align-items:center;gap:22px}
-.final .av{width:84px;height:84px;border-radius:50%;background:url("/images/dr-hasan-aziz-about.jpg") center 15%/cover;border:3px solid rgba(255,255,255,.6);flex:none}
+.final .av{width:84px;height:84px;border-radius:50%;background:url("/images/dr-zeb-riaz-avatar.jpg") center 20%/cover;border:3px solid var(--c500);flex:none}
 .final h2{color:#fff;margin:0 0 4px;font-size:clamp(26px,1.6vw + 16px,36px)}
 .final p{color:var(--b100)}
 .final .btn-pri{background:#fff;color:var(--b700);position:relative}
@@ -353,13 +358,19 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 32px;font-size:15px;line-height:24px}
 .ft{display:grid;grid-template-columns:1.5fr 1fr 1.2fr 1fr;gap:40px}
 .ft-brand .nm{font-size:22px;line-height:28px;font-weight:700;color:#fff}
+.ft-lockup{display:flex;align-items:center;gap:12px}
+.ft-lockup img{width:52px;height:52px;flex:none}
+.ft-lockup small{display:block;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--r200)}
+.ft-clinic span{display:block}
+.ft-dua{display:inline-flex;align-items:center;gap:10px}
+.ft-dua img{width:28px;height:28px;background:#fff;border-radius:6px;padding:2px;flex:none}
 .ft-brand p{margin:6px 0 2px;color:var(--b200)}
 .ft-brand .ur{font-size:20px;color:#fff;display:block;margin-bottom:18px;text-align:left}
 .ft-brand .btn{background:#fff;color:var(--b800);box-shadow:none;--h:48px;font-size:15px}
 .ft h4{font-size:13px;line-height:16px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--b300);margin-bottom:16px}
 .ft-links a{display:flex;align-items:center;gap:10px;padding:5px 0;color:var(--b100);transition:color .2s,transform .25s var(--ease)}
 .ft-links a:hover{color:#fff;transform:translateX(3px)}
-.ft-links a .n{font-size:12px;font-weight:700;color:var(--b400);font-variant-numeric:tabular-nums;width:20px}
+.ft-links a .n{font-size:12px;font-weight:700;color:var(--r300);font-variant-numeric:tabular-nums;width:20px}
 .ft-clinic{padding:0 0 14px;margin-bottom:14px;border-bottom:1px solid rgba(191,209,231,.14)}
 .ft-clinic b{display:block;color:#fff;font-size:16px}
 .ft-clinic span{display:block}
@@ -383,6 +394,8 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
   .btn-pri::after,.cl-map .shadow{animation:none}
   .btn:hover,.rb:hover,.tx:hover,.review:hover{transform:none}
   .tx:hover .ic{transform:none}
+  .final svg.bg-arc path{animation:none;stroke-dashoffset:0}
+  .h-rule{animation:none}
 }
 
 /* ================= RESPONSIVE ================= */

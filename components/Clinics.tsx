@@ -4,14 +4,15 @@ import { bookingHref, directionsHref } from '@/lib/links';
 import type { Locale } from '@/lib/site';
 import { Icon } from './icons';
 import { ClinicBadge } from './live/ClinicBadge';
+import { SeasonHours } from './live/SeasonHours';
 import { WeekStrip } from './live/WeekStrip';
 
-/** Section 03: one card per clinic. Badge and week strip are neutral until hydrated. */
+/** Section 03: the Dua Hospital card. Badge, hours and week strip are neutral until hydrated. */
 export function Clinics({ c, locale }: { c: SiteContent; locale: Locale }) {
   const t = c.clinics;
   const ur = locale === 'ur';
   return (
-    <section id="clinics">
+    <section id="clinic">
       <div className="wrap">
         <div className="sec-head">
           <div className="rv">
@@ -26,8 +27,8 @@ export function Clinics({ c, locale }: { c: SiteContent; locale: Locale }) {
         <div className="cl-grid">
           {CLINICS.map((clinic, i) => {
             const name = ur ? clinic.nameUr : clinic.name;
-            const address = clinic.address?.[locale] ?? t.toConfirmAddress;
-            const landmark = clinic.landmark?.[locale] ?? t.toConfirmLandmark;
+            const address = clinic.address[locale];
+            const landmark = clinic.landmark[locale];
             return (
               <article
                 className="card clinic rv"
@@ -64,10 +65,7 @@ export function Clinics({ c, locale }: { c: SiteContent; locale: Locale }) {
                     </div>
                     <ClinicBadge clinic={clinic} locale={locale} />
                   </div>
-                  <div className="cl-time">
-                    <b dir="ltr">{clinic.hoursText}</b>
-                    <span>{clinic.daysText[locale]}</span>
-                  </div>
+                  <SeasonHours clinic={clinic} locale={locale} />
                   <WeekStrip clinic={clinic} locale={locale} />
                   <div className="cl-addr">
                     <Icon name="pin" />
@@ -81,7 +79,7 @@ export function Clinics({ c, locale }: { c: SiteContent; locale: Locale }) {
                       <Icon name="nav" />
                       {t.directions}
                     </a>
-                    <a className="btn btn-pri wa-link" href={bookingHref(locale, name)} target="_blank" rel="noopener">
+                    <a className="btn btn-pri wa-link" href={bookingHref(locale)} target="_blank" rel="noopener">
                       <Icon name="wa" />
                       {t.bookHere}
                     </a>

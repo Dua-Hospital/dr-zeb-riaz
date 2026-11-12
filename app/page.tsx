@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { getContent } from '@/lib/content';
+import { DOCTOR, getContent } from '@/lib/content';
 import { SITE_URL } from '@/lib/site';
 import { Page } from '@/components/Page';
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: `${SITE_URL}/`,
-    siteName: 'Dr. Hasan Aziz',
+    siteName: DOCTOR.name,
     locale: 'en_PK',
     title: content.meta.title,
     description: content.meta.description,

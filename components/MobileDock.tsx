@@ -7,7 +7,7 @@ import { Icon } from './icons';
 export function MobileDock({ c, locale }: { c: SiteContent; locale: Locale }) {
   return (
     <div className="dock">
-      <a className="btn btn-ghost" href="#clinics">
+      <a className="btn btn-ghost" href="#clinic">
         <Icon name="clock" />
         {c.dock.timings}
       </a>

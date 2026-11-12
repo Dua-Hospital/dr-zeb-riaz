@@ -1,18 +1,23 @@
 import type { CSSProperties } from 'react';
-import { TREATMENTS, TREATMENT_GROUPS, type SiteContent } from '@/lib/content';
+import { visibleCare, visibleGroups, type SiteContent } from '@/lib/content';
 import { bookingHref } from '@/lib/links';
 import type { Locale } from '@/lib/site';
 import { Icon } from './icons';
-import { TreatmentTabs } from './TreatmentTabs';
+import { CareTabs } from './CareTabs';
 
-/** Section 02: all 21 cards are server-rendered (visible without JS); the tabs only filter. */
-export function Treatments({ c, locale }: { c: SiteContent; locale: Locale }) {
-  const t = c.treatments;
+/**
+ * Section 02: every confirmed care card is server-rendered (visible without JS); the tabs only
+ * filter. Pending items and groups with no shown item are left out (spec §6.2).
+ */
+export function Care({ c, locale }: { c: SiteContent; locale: Locale }) {
+  const t = c.care;
   const ur = locale === 'ur';
-  const counts: Record<string, number> = { all: TREATMENTS.length };
-  for (const g of TREATMENT_GROUPS) counts[g] = TREATMENTS.filter((x) => x.group === g).length;
+  const items = visibleCare();
+  const groups = visibleGroups();
+  const counts: Record<string, number> = { all: items.length };
+  for (const g of groups) counts[g] = items.filter((x) => x.group === g).length;
   return (
-    <section id="treatments">
+    <section id="care">
       <div className="wrap">
         <div className="sec-head">
           <div className="rv">
@@ -23,10 +28,10 @@ export function Treatments({ c, locale }: { c: SiteContent; locale: Locale }) {
             <h2>{t.heading}</h2>
             <p className="lead">{t.lead}</p>
           </div>
-          <TreatmentTabs groups={['all', ...TREATMENT_GROUPS]} labels={t.groups} counts={counts} />
+          <CareTabs groups={['all', ...groups]} labels={t.groups} counts={counts} />
         </div>
         <div className="tx-grid" id="tx">
-          {TREATMENTS.map((x, i) => (
+          {items.map((x, i) => (
             <div
               className="card tx rv"
               key={x.name}

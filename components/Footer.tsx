@@ -6,15 +6,15 @@ import { navItems } from './nav/items';
 
 // Section numbers match the section overlines, so they stay fixed even when Reviews (05) is hidden.
 const NUMBERS: Record<string, string> = {
-  '#doctor': '01',
-  '#treatments': '02',
-  '#clinics': '03',
+  '#about': '01',
+  '#care': '02',
+  '#clinic': '03',
   '#book': '04',
   '#reviews': '05',
   '#faq': '06',
 };
 
-/** The four-column footer (spec §3.11). No back-to-top link: the floating button does that. */
+/** The four-column footer (spec §3.11), endorsed by the Dua Hospital logo. No back-to-top link: the floating button does that. */
 export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
   const f = c.footer;
   const ur = locale === 'ur';
@@ -24,7 +24,13 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
       <div className="wrap">
         <div className="ft">
           <div className="ft-brand">
-            <div className="nm">{ur ? DOCTOR.nameUr : DOCTOR.name}</div>
+            <div className="ft-lockup">
+              <img src="/brand/zeb-mark-reversed.svg" alt="" width={52} height={52} />
+              <div>
+                <div className="nm">{ur ? DOCTOR.nameUr : DOCTOR.name}</div>
+                <small>{c.nav.endorse}</small>
+              </div>
+            </div>
             <p>
               {f.tagline1}
               <br />
@@ -54,7 +60,8 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
             {CLINICS.map((clinic) => (
               <div className="ft-clinic" key={clinic.id}>
                 <b>{ur ? clinic.nameUr : clinic.name}</b>
-                <span dir="ltr">{clinic.hoursText}</span>
+                <span>{c.clinics.otherSeason.winter(clinic.hoursText.winter)}</span>
+                <span>{c.clinics.otherSeason.summer(clinic.hoursText.summer)}</span>
                 <a href={directionsHref(clinic.mapsQuery)} target="_blank" rel="noopener">
                   <Icon name="nav" />
                   {c.clinics.directions}
@@ -83,7 +90,10 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
           </div>
         </div>
         <div className="ft-bottom">
-          <span>{f.copyright}</span>
+          <span className="ft-dua">
+            <img src="/brand/dua-hospital-logo.svg" alt="Dua Hospital" width={28} height={28} />
+            {f.copyright}
+          </span>
         </div>
       </div>
     </footer>

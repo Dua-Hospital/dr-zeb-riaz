@@ -1,12 +1,12 @@
 'use client';
 
 import { useRef, useState, type KeyboardEvent } from 'react';
-import type { TreatmentGroup } from '@/lib/content';
+import type { CareGroup } from '@/lib/content';
 
-type Key = 'all' | TreatmentGroup;
+type Key = 'all' | CareGroup;
 
 /** Filter tabs. Cards are server-rendered; this only toggles `hide` / `filtered` on the DOM. */
-export function TreatmentTabs({
+export function CareTabs({
   groups,
   labels,
   counts,

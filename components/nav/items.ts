@@ -1,11 +1,11 @@
 import { REVIEWS, type SiteContent } from '@/lib/content';
 
-type NavKey = 'about' | 'treatments' | 'clinics' | 'book' | 'reviews' | 'faq';
+type NavKey = 'about' | 'care' | 'clinic' | 'book' | 'reviews' | 'faq';
 
 const ITEMS: readonly { href: string; key: NavKey }[] = [
-  { href: '#doctor', key: 'about' },
-  { href: '#treatments', key: 'treatments' },
-  { href: '#clinics', key: 'clinics' },
+  { href: '#about', key: 'about' },
+  { href: '#care', key: 'care' },
+  { href: '#clinic', key: 'clinic' },
   { href: '#book', key: 'book' },
   { href: '#reviews', key: 'reviews' },
   { href: '#faq', key: 'faq' },
