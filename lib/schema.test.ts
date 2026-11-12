@@ -27,17 +27,27 @@ test('one physician, one clinic', () => {
   assert.ok(String(clinics[0]['@id']).endsWith('#dua'));
 });
 
-test('seasonal opening hours', () => {
-  const [clinic] = parts().clinics;
-  const specs = clinic.openingHoursSpecification as Node[];
+test('seasonal opening hours use real ISO dates: the season in force, then the next', () => {
+  const winterNow = (buildPageSchema('en', new Date('2026-11-12T06:00:00Z')) as any)['@graph'].find((n: Node) => n['@type'] === 'MedicalClinic');
   assert.deepEqual(
-    specs.map((h) => [h.opens, h.closes, h.validFrom, h.validThrough]),
+    winterNow.openingHoursSpecification.map((h: Node) => [h.opens, h.closes, h.validFrom, h.validThrough]),
     [
-      ['17:00', '21:00', '--11-01', '--03-31'],
-      ['18:00', '22:00', '--04-01', '--10-31'],
+      ['17:00', '21:00', '2026-11-01', '2027-03-31'],
+      ['18:00', '22:00', '2027-04-01', '2027-10-31'],
     ],
   );
-  for (const h of specs) assert.deepEqual(h.dayOfWeek, MON_SAT);
+  const summerNow = (buildPageSchema('en', new Date('2026-06-01T06:00:00Z')) as any)['@graph'].find((n: Node) => n['@type'] === 'MedicalClinic');
+  assert.deepEqual(
+    summerNow.openingHoursSpecification.map((h: Node) => [h.opens, h.closes, h.validFrom, h.validThrough]),
+    [
+      ['18:00', '22:00', '2026-04-01', '2026-10-31'],
+      ['17:00', '21:00', '2026-11-01', '2027-03-31'],
+    ],
+  );
+  // January belongs to the winter that started the previous November.
+  const january = (buildPageSchema('en', new Date('2027-01-15T06:00:00Z')) as any)['@graph'].find((n: Node) => n['@type'] === 'MedicalClinic');
+  assert.deepEqual([january.openingHoursSpecification[0].validFrom, january.openingHoursSpecification[0].validThrough], ['2026-11-01', '2027-03-31']);
+  for (const h of winterNow.openingHoursSpecification) assert.deepEqual(h.dayOfWeek, MON_SAT);
 });
 
 test('services are the visible care items', () => {

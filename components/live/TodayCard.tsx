@@ -17,7 +17,7 @@ export function TodayCard({ locale }: { locale: Locale }) {
   const now = useKarachiNow();
   const sunday = now !== null && !CLINICS.some((x) => x.days[now.day]);
   const hours = now ? CLINICS.map((x) => seasonHours(x, now)) : [];
-  const nextDay = now ? c.days[(nextWorkingDay(now.day, hours) + 6) % 7] : '';
+  const nextDay = now ? c.dayNames[(nextWorkingDay(now.day, hours) + 6) % 7] : '';
   const name = (x: Clinic) => (locale === 'ur' ? x.nameUr : x.name);
   const date =
     now &&

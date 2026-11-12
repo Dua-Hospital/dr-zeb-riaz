@@ -1,3 +1,5 @@
+import { activeSeason, karachiParts } from './clinic-status.ts';
+import type { SeasonId } from './clinic-status.ts';
 import { CLINICS, DOCTOR, getContent, visibleCare } from './content.ts';
 import { SITE_URL } from './site.ts';
 import type { Locale } from './site.ts';
@@ -20,27 +22,36 @@ function hhmm(min: number): string {
 }
 
 const pad = (n: number) => String(n).padStart(2, '0');
-const prevMonth = (m: number) => (m === 1 ? 12 : m - 1);
-const nextMonth = (m: number) => (m === 12 ? 1 : m + 1);
-const lastDay = (m: number) => new Date(2001, m, 0).getDate(); // a non-leap year: Feb → 28
+const lastDay = (year: number, month: number) => new Date(Date.UTC(year, month, 0)).getUTCDate();
+type YM = { y: number; m: number };
+const prev = ({ y, m }: YM): YM => (m === 1 ? { y: y - 1, m: 12 } : { y, m: m - 1 });
+const next = ({ y, m }: YM): YM => (m === 12 ? { y: y + 1, m: 1 } : { y, m: m + 1 });
 
-/** Schema.org recurring date range ("--MM-DD") for winter and for summer, from the winter months. */
-function seasonRanges(winterMonths: readonly number[]) {
-  const start = winterMonths.find((m) => !winterMonths.includes(prevMonth(m))) ?? 11;
-  const end = winterMonths.find((m) => !winterMonths.includes(nextMonth(m))) ?? 3;
-  const sStart = nextMonth(end);
-  const sEnd = prevMonth(start);
-  return {
-    winter: { validFrom: `--${pad(start)}-01`, validThrough: `--${pad(end)}-${pad(lastDay(end))}` },
-    summer: { validFrom: `--${pad(sStart)}-01`, validThrough: `--${pad(sEnd)}-${pad(lastDay(sEnd))}` },
+/**
+ * The season in force at `now` (Pakistan time) and the one after it, as real ISO date ranges
+ * for schema.org `validFrom` / `validThrough`. Recomputed on every build.
+ */
+function seasonPeriods(winterMonths: readonly number[], now: Date) {
+  const { month } = karachiParts(now);
+  const year = Number(new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Karachi', year: 'numeric' }).format(now));
+  const period = (from: YM) => {
+    const season: SeasonId = activeSeason(from.m, winterMonths);
+    let a = from;
+    while (activeSeason(prev(a).m, winterMonths) === season && prev(a).m !== from.m) a = prev(a);
+    let b = from;
+    while (activeSeason(next(b).m, winterMonths) === season && next(b).m !== a.m) b = next(b);
+    return { season, end: b, validFrom: `${a.y}-${pad(a.m)}-01`, validThrough: `${b.y}-${pad(b.m)}-${pad(lastDay(b.y, b.m))}` };
   };
+  const current = period({ y: year, m: month });
+  const following = period(next(current.end));
+  return [current, following];
 }
 
 /**
  * Structured data (JSON-LD) for the page: one Physician and one
  * MedicalClinic (Dua Hospital) with winter and summer hours. No telephone: booking is WhatsApp only.
  */
-export function buildPageSchema(locale: Locale) {
+export function buildPageSchema(locale: Locale, now: Date = new Date()) {
   const isUrdu = locale === 'ur';
   const content = getContent(locale);
   const pageUrl = `${SITE_URL}${isUrdu ? '/ur/' : '/'}`;
@@ -67,13 +78,13 @@ export function buildPageSchema(locale: Locale) {
         addressCountry: 'PK',
       };
     }
-    const ranges = seasonRanges(c.winterMonths);
-    node.openingHoursSpecification = (['winter', 'summer'] as const).map((season) => ({
+    node.openingHoursSpecification = seasonPeriods(c.winterMonths, now).map(({ season, validFrom, validThrough }) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: DAY_NAMES.filter((_, i) => c.days[i]),
       opens: hhmm(c.seasons[season].openMin),
       closes: hhmm(c.seasons[season].closeMin),
-      ...ranges[season],
+      validFrom,
+      validThrough,
     }));
     node.availableService = services;
     return node;

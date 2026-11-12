@@ -11,7 +11,7 @@ export function StatusPill({ locale }: { locale: Locale }) {
   const c = getContent(locale);
   const now = useKarachiNow();
   // c.days is Mon..Sun; status days are 0 = Sunday.
-  const dayName = (d: number) => c.days[(d + 6) % 7];
+  const dayName = (d: number) => c.dayNames[(d + 6) % 7];
 
   let state: LiveState = 'off';
   let text = c.status.neutral;

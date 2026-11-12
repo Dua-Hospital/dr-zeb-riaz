@@ -536,8 +536,8 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
 [dir=rtl][lang=ur] .lead{line-height:2.2;word-spacing:0.1em}
 /* Urdu badges, pills and small labels (brand: Urdu ≥16px, line-height 1.8–2).
    No letter-spacing — it pulls joined Urdu letters apart — and no fixed heights, which clip dots and tails. */
-[dir=rtl][lang=ur] :is(.overline,.cred small,.ex b small,.cl-map .label,.tl .chip,.q-bar .tag,.badge,.pill-status,.pill-status b,.h-conds span,.h-conds a,.tabs button,.week div,.blk h3,.ft h4,.ft-note,.t-status){letter-spacing:0;text-transform:none}
-[dir=rtl][lang=ur] :is(.overline,.cred small,.ex b small,.cl-map .label,.tl .chip,.q-bar .tag,.badge,.pill-status,.h-conds span,.h-conds a,.blk h3,.ft h4,.brand small){font-size:16px;line-height:1.8}
+[dir=rtl][lang=ur] :is(.overline,.cred small,.ex b small,.cl-map .label,.tl .chip,.q-bar .tag,.badge,.pill-status,.pill-status b,.h-conds span,.h-conds a,.tabs button,.week div,.blk h3,.ft h4,.ft-note,.t-status,.cl-time .cl-label,.ft-lockup small){letter-spacing:0;text-transform:none}
+[dir=rtl][lang=ur] :is(.overline,.cred small,.ex b small,.cl-map .label,.tl .chip,.q-bar .tag,.badge,.pill-status,.h-conds span,.h-conds a,.blk h3,.ft h4,.brand small,.cl-time .cl-label,.ft-lockup small){font-size:16px;line-height:1.8}
 [dir=rtl][lang=ur] :is(.h-conds span,.h-conds a,.tabs button){height:auto;min-height:38px;padding-block:4px}
 [dir=rtl][lang=ur] :is(.week div,.cl-time span,.cl-addr small,.h-note,.t-status){font-size:16px;line-height:1.8}
 [dir=rtl][lang=ur] :is(.pill-status,.badge,.tl .chip,.q-bar .tag,.cl-map .label){padding-block:4px;padding-inline:12px}

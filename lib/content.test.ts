@@ -128,3 +128,9 @@ test('pink october copy', () => {
   assert.equal(en.pinkOctober.heading, 'Early checks save lives.');
   assert.equal(en.pinkOctober.cta, 'Book a breast check');
 });
+
+test('full day names for booking prompts', () => {
+  assert.deepEqual(en.dayNames, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']);
+  assert.equal(ur.dayNames.length, 7);
+  assert.equal(en.status.bookOn(en.dayNames[0]), 'Book now for Monday');
+});

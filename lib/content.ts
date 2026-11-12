@@ -213,7 +213,8 @@ export interface SiteContent {
     copyright: string;
   };
   dock: { timings: string; book: string };
-  days: string[]; // Mon..Sun
+  days: string[]; // Mon..Sun, short (week strip)
+  dayNames: string[]; // Mon..Sun, full (booking prompts)
 }
 
 const en: SiteContent = {
@@ -406,6 +407,7 @@ const en: SiteContent = {
   },
   dock: { timings: 'Timings', book: 'Book on WhatsApp' },
   days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  dayNames: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
 };
 
 const BOOK_UR = 'واٹس ایپ پر اپوائنٹمنٹ لیں';
@@ -602,6 +604,7 @@ const ur: SiteContent = {
   },
   dock: { timings: 'اوقات', book: BOOK_UR },
   days: ['پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ', 'اتوار'],
+  dayNames: ['پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ', 'اتوار'],
 };
 
 const dictionaries: Record<Locale, SiteContent> = { en, ur };
