@@ -2,44 +2,31 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { bookingHref, directionsHref } from './links.ts';
 
-const text = (href: string) => new URL(href).searchParams.get('text');
+const text = (href: string) => new URL(href).searchParams.get('text') ?? '';
 
-test('en without clinic', () => {
+test('english message', () => {
   const href = bookingHref('en');
-  assert.ok(href.startsWith('https://wa.me/923336489392?text='));
+  assert.ok(href.startsWith('https://wa.me/923358028888?text='));
   assert.equal(
     text(href),
-    'Assalam o Alaikum. I would like to book an appointment with Dr. Hasan Aziz.\nName:\nProblem:',
+    'Assalam o Alaikum. I would like to book an appointment with Dr. Zeb Riaz at Dua Hospital.\nName:\nProblem:',
   );
 });
 
-test('en with clinic', () => {
+test('breast-check context', () => {
   assert.equal(
-    text(bookingHref('en', 'Hayat Medical Center')),
-    'Assalam o Alaikum. I would like to book an appointment with Dr. Hasan Aziz at Hayat Medical Center.\nName:\nProblem:',
+    text(bookingHref('en', 'breast-check')),
+    'Assalam o Alaikum. I would like to book an appointment with Dr. Zeb Riaz at Dua Hospital for a breast check.\nName:\nProblem:',
   );
 });
 
-test('special characters survive', () => {
-  const href = bookingHref('en', 'A & B #1');
-  assert.ok(text(href)?.includes(' at A & B #1.'));
-  assert.ok(!href.includes(' '));
-  assert.ok(!href.includes('&B'));
-  assert.ok(!href.includes('#'));
-});
-
-test('ur round-trip', () => {
-  assert.equal(
-    text(bookingHref('ur', 'حیات میڈیکل سنٹر')),
-    'السلام علیکم۔ مجھے ڈاکٹر حسن عزیز سے حیات میڈیکل سنٹر میں اپوائنٹمنٹ چاہیے۔\nنام:\nمسئلہ:',
-  );
-});
-
-test('ur without clinic', () => {
-  assert.equal(
-    text(bookingHref('ur')),
-    'السلام علیکم۔ مجھے ڈاکٹر حسن عزیز سے اپوائنٹمنٹ چاہیے۔\nنام:\nمسئلہ:',
-  );
+test('urdu message names her and keeps the context', () => {
+  const plain = text(bookingHref('ur'));
+  const breast = text(bookingHref('ur', 'breast-check'));
+  assert.ok(plain.includes('ڈاکٹر زیب ریاض') && plain.includes('دعا ہسپتال'));
+  assert.notEqual(plain, breast);
+  assert.ok(!/[هيك]/.test(plain + breast));
+  assert.ok(!bookingHref('ur').includes(' '));
 });
 
 test('directions', () => {
