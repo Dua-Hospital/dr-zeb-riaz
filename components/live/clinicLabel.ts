@@ -1,16 +1,23 @@
 import type { Clinic, SiteContent } from '@/lib/content';
-import { clinicState, formatDuration } from '@/lib/clinic-status';
+import { activeSeason, clinicState, formatDuration, hoursFor, type ClinicHours } from '@/lib/clinic-status';
 import type { Locale } from '@/lib/site';
 import type { LiveState } from './useKarachiNow';
 
-/** One clinic's live label and dot state for the given Pakistan time (spec §7.2). */
+type Now = { day: number; minutes: number; month: number };
+
+/** The clinic's hours for the season in force at `now` (spec §7.2). */
+export function seasonHours(clinic: Clinic, now: Now): ClinicHours {
+  return hoursFor(clinic, activeSeason(now.month, clinic.winterMonths));
+}
+
+/** One clinic's live label and dot state for the given Pakistan time (spec §7.3). */
 export function clinicLabel(
   clinic: Clinic,
-  now: { day: number; minutes: number },
+  now: Now,
   c: SiteContent,
   locale: Locale,
 ): { state: LiveState; text: string } {
-  const s = clinicState(now.day, now.minutes, clinic);
+  const s = clinicState(now.day, now.minutes, seasonHours(clinic, now));
   switch (s.kind) {
     case 'open':
       return { state: 'open', text: c.status.open };

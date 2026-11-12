@@ -4,24 +4,20 @@ import type { CSSProperties } from 'react';
 import { CLINICS, getContent, type Clinic } from '@/lib/content';
 import { TRACK_END, TRACK_START, formatClock, trackPercent, nextWorkingDay } from '@/lib/clinic-status';
 import type { Locale } from '@/lib/site';
-import { clinicLabel } from './clinicLabel';
+import { clinicLabel, seasonHours } from './clinicLabel';
 import { dotClass, useKarachiNow } from './useKarachiNow';
 
-// Tick labels sit at the real clinic boundaries (open and close times), placed by minutes —
-// not spread evenly — so they line up with the bars. Opening times anchor to the bar's start,
-// closing times to its end, so a short bar's two labels don't overlap.
-const TICKS = CLINICS.flatMap((x) => [
-  { m: x.openMin, edge: 'start' as const },
-  { m: x.closeMin, edge: 'end' as const },
-]).sort((a, b) => a.m - b.m);
-const SEG_CLASS: Record<string, string> = { hayat: 'hy', dua: 'du' };
-
-/** "Where is he today?": the 9 AM – 11 PM track, the Now marker and one row per clinic (spec §7.3). */
+/**
+ * "Today at Dua Hospital": the 4 PM – 11 PM track with today's session for the season in
+ * force, the Now marker and one status row (spec §3, §7.2). Before hydration the track shows
+ * no session, so the exported HTML never states a season or a status.
+ */
 export function TodayCard({ locale }: { locale: Locale }) {
   const c = getContent(locale);
   const now = useKarachiNow();
-  const sunday = now !== null && !CLINICS.some((x) => x.days[now.day]); // no clinic works today
-  const nextDay = now ? c.days[(nextWorkingDay(now.day, CLINICS) + 6) % 7] : '';
+  const sunday = now !== null && !CLINICS.some((x) => x.days[now.day]);
+  const hours = now ? CLINICS.map((x) => seasonHours(x, now)) : [];
+  const nextDay = now ? c.days[(nextWorkingDay(now.day, hours) + 6) % 7] : '';
   const name = (x: Clinic) => (locale === 'ur' ? x.nameUr : x.name);
   const date =
     now &&
@@ -31,6 +27,11 @@ export function TodayCard({ locale }: { locale: Locale }) {
       day: 'numeric',
       month: 'long',
     });
+  // Tick labels at the session's real boundaries: opening anchors to the bar's start, closing to its end.
+  const ticks = hours.flatMap((h) => [
+    { m: h.openMin, edge: 'start' as const },
+    { m: h.closeMin, edge: 'end' as const },
+  ]);
 
   // `is-sunday` sits on an inner wrapper: React must not rewrite the `.rv`
   // element's className after Reveal has added `in` to it.
@@ -43,16 +44,16 @@ export function TodayCard({ locale }: { locale: Locale }) {
       <div className={sunday ? 'is-sunday' : undefined}>
         <div className="track">
           <div className="rail" />
-          {CLINICS.map((x) => (
+          {hours.map((h) => (
             <div
-              key={x.id}
-              className={`seg ${SEG_CLASS[x.id] ?? ''}`}
+              key={h.id}
+              className="seg du"
               style={{
-                left: `${trackPercent(x.openMin)}%`,
-                width: `${trackPercent(x.closeMin) - trackPercent(x.openMin)}%`,
+                left: `${trackPercent(h.openMin)}%`,
+                width: `${trackPercent(h.closeMin) - trackPercent(h.openMin)}%`,
               }}
             >
-              <span className="seg-t">{name(x).split(' ')[0]}</span>
+              <span className="seg-t">{name(CLINICS.find((x) => x.id === h.id)!).split(' ')[0]}</span>
             </div>
           ))}
           {now && now.minutes >= TRACK_START && now.minutes <= TRACK_END && (
@@ -60,12 +61,12 @@ export function TodayCard({ locale }: { locale: Locale }) {
               className="now"
               style={{ left: `${trackPercent(now.minutes)}%` }}
               // U+200E (LTR mark) ensures Latin clock tokens remain correctly ordered in RTL.
-              data-t={`${c.today.now} \u200E${formatClock(now.minutes)}`}
+              data-t={`${c.today.now} ‎${formatClock(now.minutes)}`}
             />
           )}
         </div>
         <div className="ticks">
-          {TICKS.map((t) => (
+          {ticks.map((t) => (
             <span key={t.m} className={t.edge} style={{ left: `${trackPercent(t.m)}%` }} dir="ltr">
               {formatClock(t.m)}
             </span>
@@ -74,14 +75,15 @@ export function TodayCard({ locale }: { locale: Locale }) {
         <div className="t-foot">
           {CLINICS.map((x) => {
             const live = now ? clinicLabel(x, now, c, locale) : null;
+            const h = now ? seasonHours(x, now) : null;
             return (
               <div className="t-row" key={x.id}>
                 <span className={dotClass(live ? live.state : 'off')} />
-                <b className="t-name">{name(x).split(' ')[0]}</b>
+                <b className="t-name">{name(x)}</b>
                 <span className="t-time" dir="ltr">
-                  {formatClock(x.openMin)} – {formatClock(x.closeMin)}
+                  {h ? `${formatClock(h.openMin)} – ${formatClock(h.closeMin)}` : ''}
                 </span>
-                <span className="t-status">{live?.text}</span>
+                <span className="t-status">{live ? live.text : x.daysText[locale]}</span>
               </div>
             );
           })}
