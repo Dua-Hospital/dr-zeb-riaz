@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dr. Zeb Riaz — Brand board (draft, placeholders)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Gulzar&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Dua core (unchanged from Dua Hospital guidelines) */
+  --b50:#F3F6FA;--b100:#E1EAF4;--b200:#BFD1E7;--b400:#5687C0;--b600:#074EA2;--b700:#064188;--b800:#04346D;--b900:#03254F;
+  --g100:#E5F3DD;--g500:#71BF44;--g800:#34631E;
+  --n0:#fff;--n100:#E7E8E8;--n200:#D1D3D4;--n400:#8C9095;--n500:#6B6F74;--n600:#50545A;--n900:#231F20;
+  /* Zeb rose */
+  --r50:#FCF2F5;--r100:#F8E6EC;--r200:#F0C9D6;--r300:#E3A0B7;--r400:#CF7095;--r500:#B8476F;--r600:#9C3A5E;--r700:#7A2B48;--r800:#5C2036;--r900:#3E1524;
+  /* Champagne (detail only, never text) */
+  --c100:#F5EDDF;--c300:#E2CDA6;--c500:#C9A46A;--c700:#76592A;
+  /* Page */
+  --cream:#FCF9F4;--line:#EFE5D6;
+  /* Pink October campaign */
+  --p50:#FCE4EE;--p500:#E0457B;--p700:#C2185B;--p900:#8E1A4A;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --sh:0 1px 2px rgba(3,37,79,.04),0 8px 24px -12px rgba(3,37,79,.12);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Figtree',system-ui,sans-serif;color:var(--n900);background:var(--cream);font-size:17px;line-height:28px;-webkit-font-smoothing:antialiased}
+.ur{font-family:'Gulzar',serif;direction:rtl;line-height:2}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{margin:0;color:var(--b900)}
+.sec{padding:96px 0 0}
+.head{max-width:760px;margin-bottom:40px}
+.ov{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--r500)}
+.num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:999px;background:var(--r100);color:var(--r700);font-size:12px;letter-spacing:0}
+.head h2{font-size:40px;line-height:48px;font-weight:700;letter-spacing:-.04em;margin:12px 0 10px}
+.lead{font-size:20px;line-height:32px;color:var(--n600);max-width:56ch;margin:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--sh)}
+.grid{display:grid;gap:16px}
+.lbl{font-size:13px;font-weight:600;color:var(--n500);letter-spacing:.02em}
+.note{font-size:14px;line-height:22px;color:var(--n600)}
+code{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--n600)}
+
+/* ===== Marks ===== */
+.mark{position:relative;display:grid;place-items:center;background:var(--b600);color:#fff;font-weight:800;letter-spacing:-.05em;border-radius:22%}
+.mark i{position:absolute;right:15%;bottom:15%;width:13%;height:13%;border-radius:50%;background:var(--c500)}
+.mark.w{background:#fff;color:var(--b600)}
+.lockup{display:flex;align-items:center;gap:14px}
+.lockup .nm{font-weight:800;letter-spacing:-.04em;color:var(--b900);line-height:1}
+.lockup .nm span{color:var(--b600)}
+.lockup .sub{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--r500);margin-top:6px}
+.endorse{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--n500)}
+.endorse b{color:var(--b600);font-weight:800;letter-spacing:.02em}
+
+/* ===== Cover ===== */
+.cover{padding:72px 0 0}
+.cover .card{padding:64px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;overflow:hidden;position:relative}
+.cover h1{font-size:76px;line-height:76px;font-weight:800;letter-spacing:-.05em}
+.cover h1 span{color:var(--b600)}
+.rule{height:3px;width:88px;background:var(--c500);border-radius:3px;margin:22px 0}
+.cover .ur{font-size:44px;color:var(--b900);text-align:left;margin-top:6px}
+.cover .tag{font-size:20px;line-height:32px;color:var(--n600);max-width:40ch}
+.cover .art{aspect-ratio:1;border-radius:32px;background:var(--r50);position:relative;display:grid;place-items:center}
+.cover .art::before{content:"";position:absolute;inset:12%;border-radius:50%;border:1.5px solid var(--c300)}
+.cover .art::after{content:"";position:absolute;inset:26%;border-radius:50%;background:var(--r100)}
+.cover .art .mark{width:38%;aspect-ratio:1;font-size:64px;z-index:1}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-size:14px;font-weight:600;background:var(--b50);color:var(--b800)}
+.chip.r{background:var(--r100);color:var(--r700)}
+.chip.c{background:var(--c100);color:var(--c700)}
+.chip.p{background:var(--p50);color:var(--p900)}
+
+/* ===== Logo ===== */
+.logo-g{grid-template-columns:repeat(3,1fr)}
+.tile{border-radius:24px;padding:36px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.tile .lbl{margin-top:auto}
+.t-white{background:#fff;border:1px solid var(--line)}
+.t-blue{background:var(--b600)}
+.t-navy{background:var(--b900)}
+.t-rose{background:var(--r50);border:1px solid var(--r100)}
+.t-blue .lbl,.t-navy .lbl{color:var(--b200)}
+.t-blue .nm,.t-navy .nm{color:#fff}
+.t-blue .nm span,.t-navy .nm span{color:var(--b200)}
+.t-blue .sub,.t-navy .sub{color:var(--r200)}
+.sizes{display:flex;align-items:flex-end;gap:20px}
+.rules{grid-template-columns:repeat(4,1fr);margin-top:16px}
+.rules .card{padding:20px;border-radius:18px}
+.rules h4{font-size:15px;margin:10px 0 4px}
+.dot-ok,.dot-no{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:13px;font-weight:800}
+.dot-ok{background:var(--g100);color:var(--g800)}
+.dot-no{background:#C62828}
+
+/* ===== Colour ===== */
+.sw-g{grid-template-columns:repeat(6,1fr)}
+.sw{border-radius:20px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.sw .chipc{height:132px;padding:14px;display:flex;align-items:flex-end;font-size:13px;font-weight:600}
+.sw .info{padding:14px 16px}
+.sw h4{font-size:15px;line-height:20px}
+.sw p{margin:2px 0 0;font-size:13px;line-height:18px;color:var(--n500)}
+.ramp{display:grid;grid-template-columns:repeat(10,1fr);border-radius:16px;overflow:hidden;margin-top:12px}
+.ramp div{height:64px;padding:8px;font-size:12px;font-weight:600;display:flex;align-items:flex-end}
+.prop{display:flex;height:56px;border-radius:16px;overflow:hidden;margin-top:12px;border:1px solid var(--line)}
+.prop div{padding:0 8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
+.pair-g{grid-template-columns:repeat(4,1fr);margin-top:16px}
+.pair{border-radius:16px;padding:18px;font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.pair small{font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.85);color:var(--n900)}
+
+/* ===== Type ===== */
+.type-g{grid-template-columns:1.4fr 1fr}
+.spec{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--n100)}
+.spec:last-child{border:0}
+.spec .lbl{font-size:12px}
+.ur-spec{display:grid;grid-template-columns:1fr 100px;gap:16px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--n100)}
+.ur-spec:last-child{border:0}
+
+/* ===== Components ===== */
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:999px;font:600 16px/24px 'Figtree';border:0;cursor:pointer;transition:background .2s var(--ease),transform .2s var(--ease)}
+.btn .arr{transition:transform .25s var(--ease)}
+.btn:hover .arr{transform:translateX(4px)}
+.btn-pri{background:var(--b600);color:#fff}.btn-pri:hover{background:var(--b700)}
+.btn-ghost{background:#fff;color:var(--b600);box-shadow:inset 0 0 0 1.5px var(--b200)}.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--b600)}
+.btn-soft{background:var(--r100);color:var(--r700)}.btn-soft:hover{background:var(--r200)}
+.btn-camp{background:var(--p700);color:#fff}.btn-camp:hover{background:var(--p900)}
+.comp-g{grid-template-columns:1fr 1fr}
+.comp{padding:32px}
+.comp h3{font-size:17px;margin-bottom:18px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.live{width:9px;height:9px;border-radius:50%;background:var(--g500);position:relative}
+.live::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--g500);animation:ping 1.8s var(--ease) infinite}
+@keyframes ping{to{transform:scale(2.6);opacity:0}}
+.status{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:14px;font-weight:600;color:var(--b900)}
+.svc{padding:22px;border-radius:20px;border:1px solid var(--line);background:#fff;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.svc:hover{transform:translateY(-3px);box-shadow:var(--sh)}
+.svc{display:grid;grid-template-columns:24px 1fr;column-gap:12px;align-items:start}
+.svc .ic{grid-row:span 2;color:var(--r500);padding-top:2px}
+.svc p{grid-column:2}
+.svc h4{font-size:17px;line-height:24px}
+.svc p{font-size:14px;line-height:22px;color:var(--n500);margin:4px 0 0}
+.ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Campaign banner */
+.camp{display:flex;align-items:center;gap:14px;padding:12px 18px;border-radius:16px;background:var(--p50);color:var(--p900);font-size:15px;font-weight:600}
+.camp .go{margin-left:auto;display:inline-flex;align-items:center;gap:6px;color:var(--p700)}
+.rib{width:20px;height:26px;flex:none}
+
+/* ===== Website preview ===== */
+.browser{border-radius:24px;overflow:hidden;border:1px solid var(--line);background:var(--cream);box-shadow:0 30px 60px -30px rgba(3,37,79,.25)}
+.bar{display:flex;gap:7px;align-items:center;padding:12px 16px;background:#fff;border-bottom:1px solid var(--line)}
+.bar i{width:11px;height:11px;border-radius:50%;background:var(--n200)}
+.bar span{margin-left:14px;font-size:12px;color:var(--n500);background:var(--b50);padding:3px 14px;border-radius:999px}
+.campstrip{background:var(--p50);color:var(--p900);font-size:13px;font-weight:600;display:flex;justify-content:center;align-items:center;gap:10px;padding:8px}
+.campstrip a{color:var(--p700);text-decoration:none}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:rgba(252,249,244,.9)}
+.nav .links{display:flex;gap:26px;font-size:15px;font-weight:500;color:var(--n600)}
+.hero{display:grid;grid-template-columns:7fr 5fr;gap:16px;padding:16px 32px 0}
+.hero .main{padding:44px}
+.hero h2{font-size:64px;line-height:64px;font-weight:800;letter-spacing:-.05em;margin:14px 0 0}
+.hero h2 span{color:var(--b600)}
+.hero .ur{font-size:34px;color:var(--b900);text-align:left}
+.hero .lead{font-size:18px;line-height:30px;margin-top:6px}
+.portrait{border-radius:24px;background:var(--r50);position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end}
+.portrait .ph{position:absolute;inset:0;display:grid;place-items:center}
+.portrait .ph .sil{width:62%;aspect-ratio:3/4;border-radius:999px 999px 28px 28px;background:linear-gradient(var(--r100),var(--r200))}
+.portrait .ph em{position:absolute;top:18px;right:18px;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--r700);background:#fff;padding:4px 10px;border-radius:999px}
+.portrait .cred{position:relative;margin:16px;padding:16px 18px;background:#fff;border-radius:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cred div{font-size:13px;line-height:18px;color:var(--n500)}
+.cred b{display:block;font-size:15px;color:var(--b900)}
+.strip{margin:16px 32px 0;display:grid;grid-template-columns:repeat(4,1fr)}
+.strip>div{padding:20px 24px;border-right:1px solid var(--line)}
+.strip>div:last-child{border:0}
+.strip b{display:block;font-size:22px;color:var(--b900);letter-spacing:-.02em}
+.strip span{font-size:14px;color:var(--n500)}
+.pv-sec{padding:56px 32px 0}
+.pv-sec h3{font-size:34px;line-height:40px;letter-spacing:-.04em;margin:10px 0 24px}
+.svc-g{grid-template-columns:repeat(4,1fr)}
+.clinic{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.clinic .card{padding:28px}
+.days{display:flex;gap:6px;margin:16px 0}
+.days span{flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;font-weight:600;background:var(--b50);color:var(--b800)}
+.days span.off{background:var(--n100);color:var(--n600)}
+.days span.now{background:var(--b600);color:#fff}
+.final{margin:56px 32px 32px;border-radius:32px;background:var(--b900);color:#fff;padding:48px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;overflow:hidden}
+.final h3{color:#fff;font-size:36px;line-height:42px;letter-spacing:-.04em}
+.final p{color:var(--b200);margin:8px 0 0}
+.final::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;border:2px solid var(--c500);opacity:.5}
+
+/* Mobile frame */
+.devices{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:start}
+.phone{border-radius:40px;border:10px solid var(--b900);background:var(--cream);overflow:hidden;max-width:340px;margin:0 auto;width:100%}
+.phone .nav{padding:14px 16px}
+.phone .m-hero{padding:8px 14px 0}
+.phone .m-hero .card{padding:22px}
+.phone h2{font-size:38px;line-height:38px;font-weight:800;letter-spacing:-.05em;margin-top:10px}
+.phone h2 span{color:var(--b600)}
+.dock{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px;background:#fff;border-top:1px solid var(--line);margin-top:14px}
+.dock span{height:44px;border-radius:999px;display:grid;place-items:center;font-size:14px;font-weight:600}
+
+/* Social */
+.post{aspect-ratio:1;border-radius:20px;overflow:hidden;position:relative;padding:28px;display:flex;flex-direction:column;justify-content:space-between}
+.post h4{font-size:30px;line-height:34px;font-weight:800;letter-spacing:-.04em}
+.post .ft{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600}
+
+/* Voice */
+.dd-g{grid-template-columns:1fr 1fr}
+.dd{padding:28px;border-radius:24px}
+.dd.ok{background:#fff;border:1px solid var(--line)}
+.dd.no{background:#FDECEC}
+.dd h4{display:flex;align-items:center;gap:10px;font-size:17px;margin-bottom:12px}
+.dd ul{margin:0;padding-left:18px;font-size:15px;line-height:26px;color:var(--n600)}
+.quote{margin-top:14px;padding:14px 16px;border-radius:14px;font-size:15px;line-height:24px}
+
+footer{padding:96px 0 64px;text-align:center;color:var(--n500);font-size:14px}
+.ph-flag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--c100);color:var(--c700);padding:2px 8px;border-radius:999px;vertical-align:middle;margin-left:6px}
+
+@media (max-width:1080px){
+  .cover .card,.type-g,.comp-g,.hero,.clinic,.dd-g{grid-template-columns:1fr}
+  .sw-g{grid-template-columns:repeat(3,1fr)}
+  .logo-g,.devices{grid-template-columns:1fr 1fr}
+  .rules,.pair-g,.svc-g{grid-template-columns:1fr 1fr}
+  .nav .links{display:none}
+}
+@media (max-width:760px){
+  .sw-g,.logo-g,.devices,.rules,.pair-g,.svc-g,.strip{grid-template-columns:1fr}
+  .cover .card{padding:32px}.cover h1{font-size:52px;line-height:52px}
+  .hero h2{font-size:44px;line-height:44px}
+  .ramp{grid-template-columns:repeat(5,1fr)}
+}
+@media (prefers-reduced-motion:reduce){.live::after{animation:none}.svc:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ribbon" viewBox="0 0 24 30"><path d="M12 2c-3 0-5 2.4-5 5.4 0 2.2 1.4 4.4 2.8 6.6L3 26l3.4 2 5.6-9.6 5.6 9.6L21 26l-6.8-12c1.4-2.2 2.8-4.4 2.8-6.6C17 4.4 15 2 12 2zm0 3c1.2 0 2 1 2 2.4 0 1.2-.8 2.8-2 4.6-1.2-1.8-2-3.4-2-4.6C10 6 10.8 5 12 5z" fill="currentColor"/></symbol>
+</svg>
+
+<!-- ============ COVER ============ -->
+<section class="cover"><div class="wrap">
+  <div class="card">
+    <div>
+      <h1>Dr. Zeb<br><span>Riaz</span></h1>
+      <div class="ur">ڈاکٹر زیب ریاض</div>
+      <div class="rule"></div>
+      <p class="tag">Consultant gynaecologist &amp; obstetrician, and CEO of Dua Hospital. Calm, expert care for women through every stage of life.</p>
+      <p class="note" style="margin-top:10px">Brand board · Draft v0.1 <span class="ph-flag">Placeholder content</span></p>
+      <div class="meta">
+        <span class="chip">Dua Blue · trust</span>
+        <span class="chip r">Zeb Rose · care</span>
+        <span class="chip c">Champagne · leadership</span>
+        <span class="chip p"><svg width="10" height="13"><use href="#ribbon"/></svg>Pink October</span>
+      </div>
+    </div>
+    <div class="art"><div class="mark">ZR<i></i></div></div>
+  </div>
+</div></section>
+
+<!-- ============ 01 LOGO ============ -->
+<section class="sec"><div class="wrap">
+  <div class="head">
+    <div class="ov"><span class="num">01</span>Logo</div>
+    <h2>A Dua family mark, with her own signature</h2>
+    <p class="lead">Same square as the Dua doctor marks (HA uses a green dot). Zeb's dot is champagne, a quiet sign of leadership. The name always pairs with "Part of Dua Hospital".</p>
+  </div>
+  <div class="grid logo-g">
+    <div class="tile t-white">
+      <div class="lockup"><div class="mark" style="width:64px;height:64px;font-size:24px">ZR<i></i></div>
+        <div><div class="nm" style="font-size:30px">Dr. Zeb <span>Riaz</span></div><div class="sub">Gynaecologist &amp; obstetrician</div></div></div>
+      <div class="endorse">Part of <b>DUA HOSPITAL</b></div>
+      <div class="lbl">Primary lockup · website header, documents</div>
+    </div>
+    <div class="tile t-blue">
+      <div class="lockup"><div class="mark w" style="width:64px;height:64px;font-size:24px">ZR<i></i></div>
+        <div><div class="nm" style="font-size:30px">Dr. Zeb <span>Riaz</span></div><div class="sub">Gynaecologist &amp; obstetrician</div></div></div>
+      <div class="endorse" style="color:var(--b200)">Part of <b style="color:#fff">DUA HOSPITAL</b></div>
+      <div class="lbl">Reversed · social end cards, signage</div>
+    </div>
+    <div class="tile t-rose">
+      <div class="sizes">
+        <div class="mark" style="width:96px;height:96px;font-size:36px">ZR<i></i></div>
+        <div class="mark" style="width:56px;height:56px;font-size:21px">ZR<i></i></div>
+        <div class="mark" style="width:32px;height:32px;font-size:12px">ZR<i></i></div>
+        <div class="mark" style="width:24px;height:24px;font-size:11px;border-radius:6px">ZR</div>
+      </div>
+      <div class="note">Below 32px drop the dot. Minimum 24px on screen, 8mm in print.</div>
+      <div class="lbl">Monogram · favicon, WhatsApp avatar, watermark</div>
+    </div>
+  </div>
+  <div class="grid rules">
+    <div class="card"><div class="dot-ok">✓</div><h4>Blue square, champagne dot</h4><div class="note">The only colour pairing for the mark.</div></div>
+    <div class="card"><div class="dot-ok">✓</div><h4>Endorse with Dua</h4><div class="note">"Part of Dua Hospital" on every full lockup.</div></div>
+    <div class="card"><div class="dot-no">✕</div><h4>No pink-ribbon mark</h4><div class="note">The ribbon sits beside the logo in October, never inside it.</div></div>
+    <div class="card"><div class="dot-no">✕</div><h4>No rose square</h4><div class="note">Rose never replaces Dua blue in the mark.</div></div>
+  </div>
+</div></section>
+
+<!-- ============ 02 COLOUR ============ -->
+<section class="sec"><div class="wrap">
+  <div class="head">
+    <div class="ov"><span class="num">02</span>Colour</div>
+    <h2>Dua's authority, Zeb's warmth</h2>
+    <p class="lead">Blue and navy are inherited from Dua Hospital and carry trust. Rose is hers. Champagne is a fine line, never a fill for text. Ribbon pink appears only for the breast cancer campaign.</p>
+  </div>
+  <div class="grid sw-g">
+    <div class="sw"><div class="chipc" style="background:var(--b600);color:#fff">Primary</div><div class="info"><h4>Dua Blue 600</h4><p>#074EA2<br>Buttons, links, surname</p></div></div>
+    <div class="sw"><div class="chipc" style="background:var(--b900);color:#fff">Ink</div><div class="info"><h4>Dua Navy 900</h4><p>#03254F<br>Headings, dark bands</p></div></div>
+    <div class="sw"><div class="chipc" style="background:var(--r500);color:#fff">Signature</div><div class="info"><h4>Zeb Rose 500</h4><p>#B8476F<br>Overlines, icons, soft buttons</p></div></div>
+    <div class="sw"><div class="chipc" style="background:var(--r100);color:var(--r700)">Tint</div><div class="info"><h4>Zeb Blush 100</h4><p>#F8E6EC<br>Icon tiles, soft chips</p></div></div>
+    <div class="sw"><div class="chipc" style="background:var(--c500);color:var(--b900)">Detail</div><div class="info"><h4>Champagne 500</h4><p>#C9A46A<br>Rules, monogram dot, rings</p></div></div>
+    <div class="sw"><div class="chipc" style="background:var(--cream);color:var(--c700);border-bottom:1px solid var(--line)">Page</div><div class="info"><h4>Cream</h4><p>#FCF9F4<br>Page background</p></div></div>
+  </div>
+
+  <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:16px">
+    <div class="card" style="padding:24px">
+      <div class="lbl">Zeb Rose ramp</div>
+      <div class="ramp">
+        <div style="background:var(--r50);color:var(--r700)">50</div><div style="background:var(--r100);color:var(--r700)">100</div><div style="background:var(--r200);color:var(--r800)">200</div><div style="background:var(--r300);color:var(--r900)">300</div><div style="background:var(--r400);color:var(--r900)">400</div><div style="background:var(--r500);color:#fff">500</div><div style="background:var(--r600);color:#fff">600</div><div style="background:var(--r700);color:#fff">700</div><div style="background:var(--r800);color:#fff">800</div><div style="background:var(--r900);color:#fff">900</div>
+      </div>
+    </div>
+    <div class="card" style="padding:24px">
+      <div class="lbl">Supporting: Dua Green (live status only) · Pink October (campaign only)</div>
+      <div class="ramp" style="grid-template-columns:repeat(6,1fr)">
+        <div style="background:var(--g100);color:var(--g800)">G100</div><div style="background:var(--g500);color:#224812">G500</div><div style="background:var(--p50);color:var(--p900)">P50</div><div style="background:var(--p500);color:#2A0612">P500</div><div style="background:var(--p700);color:#fff">P700</div><div style="background:var(--p900);color:#fff">P900</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="padding:24px;margin-top:16px">
+    <div class="lbl">Proportion on a typical page</div>
+    <div class="prop">
+      <div style="flex:52;background:var(--cream);color:var(--c700)">Cream + white 52%</div>
+      <div style="flex:20;background:var(--b900);color:#fff">Navy text 20%</div>
+      <div style="flex:12;background:var(--b600);color:#fff">Blue 12%</div>
+      <div style="flex:10;background:var(--r100);color:var(--r700)">Rose 10%</div>
+      <div style="flex:4;background:var(--c500);color:var(--b900)">4%</div>
+      <div style="flex:2;background:var(--g500)"></div>
+    </div>
+  </div>
+
+  <div class="grid pair-g">
+    <div class="pair" style="background:var(--b600);color:#fff">White on Blue 600 <small>AAA 8.0</small></div>
+    <div class="pair" style="background:#fff;color:var(--r500);border:1px solid var(--line)">Rose 500 on white <small style="background:var(--r50)">AA 5.0</small></div>
+    <div class="pair" style="background:var(--r100);color:var(--r700)">Rose 700 on Blush <small>AAA 7.9</small></div>
+    <div class="pair" style="background:#fff;color:var(--c500);border:1px solid var(--line)">Champagne text <small style="background:#FDECEC;color:#C62828">Fails · decor only</small></div>
+  </div>
+</div></section>
+
+<!-- ============ 03 TYPE ============ -->
+<section class="sec"><div class="wrap">
+  <div class="head">
+    <div class="ov"><span class="num">03</span>Typography</div>
+    <h2>Figtree and Gulzar, same as Dua</h2>
+    <p class="lead">No new fonts. Femininity comes from colour, space and softer shapes; authority comes from Figtree ExtraBold and tight tracking on her name.</p>
+  </div>
+  <div class="grid type-g">
+    <div class="card" style="padding:32px">
+      <div class="spec"><div class="lbl">Display 76/76<br>ExtraBold −5%</div><div style="font-size:64px;line-height:64px;font-weight:800;letter-spacing:-.05em;color:var(--b900)">Dr. Zeb <span style="color:var(--b600)">Riaz</span></div></div>
+      <div class="spec"><div class="lbl">H2 40/48<br>Bold −4%</div><div style="font-size:40px;line-height:48px;font-weight:700;letter-spacing:-.04em;color:var(--b900)">Care for every stage</div></div>
+      <div class="spec"><div class="lbl">H4 24/32<br>SemiBold</div><div style="font-size:24px;line-height:32px;font-weight:600;color:var(--b900)">Pregnancy &amp; antenatal care</div></div>
+      <div class="spec"><div class="lbl">Overline 13/16<br>SemiBold +10%</div><div class="ov">Gynaecologist &amp; obstetrician</div></div>
+      <div class="spec"><div class="lbl">Lead 20/32</div><div style="font-size:20px;line-height:32px;color:var(--n600)">From your first visit to your baby's first week, one doctor you can trust.</div></div>
+      <div class="spec"><div class="lbl">Body 17/28</div><div style="color:var(--n900)">Dr. Zeb sees patients at Dua Hospital every evening except Sunday. Book with one WhatsApp message.</div></div>
+    </div>
+    <div class="card" style="padding:32px">
+      <div class="lbl" style="margin-bottom:8px">Urdu · Gulzar (RTL, line-height 2)</div>
+      <div class="ur-spec"><div class="ur" style="font-size:52px;color:var(--b900)">ڈاکٹر زیب ریاض</div><div class="lbl">Display 56</div></div>
+      <div class="ur-spec"><div class="ur" style="font-size:36px;color:var(--b900)">ہر مرحلے پر آپ کا خیال</div><div class="lbl">H2 36/68</div></div>
+      <div class="ur-spec"><div class="ur" style="font-size:20px;color:var(--n600)">حمل سے لے کر بچے کی پیدائش تک، ایک قابلِ اعتماد ڈاکٹر۔</div><div class="lbl">Body 20/40</div></div>
+      <p class="note" style="margin-top:14px">Urdu text is placeholder and needs native review. MBBS, FCPS, MRCOG stay in Latin. Western digits everywhere.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ 04 COMPONENTS ============ -->
+<section class="sec"><div class="wrap">
+  <div class="head">
+    <div class="ov"><span class="num">04</span>Components</div>
+    <h2>Soft shapes, one clear action</h2>
+    <p class="lead">Blue stays the only primary action, as in the Dua rules. Rose is for secondary, softer actions. Campaign pink appears only inside the Pink October banner and page.</p>
+  </div>
+  <div class="grid comp-g">
+    <div class="card comp">
+      <h3>Buttons</h3>
+      <div class="row">
+        <button class="btn btn-pri">Book on WhatsApp <span class="arr">→</span></button>
+        <button class="btn btn-ghost">Clinic timings</button>
+        <button class="btn btn-soft">Pregnancy care</button>
+      </div>
+      <h3 style="margin-top:28px">Status and chips</h3>
+      <div class="row">
+        <span class="status"><span class="live"></span>Open now · until 8 PM</span>
+        <span class="chip r">Antenatal</span><span class="chip">Dua Hospital</span><span class="chip c">CEO</span>
+      </div>
+    </div>
+    <div class="card comp">
+      <h3>Pink October banner</h3>
+      <div class="camp"><svg class="rib" style="color:var(--p500)"><use href="#ribbon"/></svg>Pink October · free breast check consultations<span class="go">Learn more →</span></div>
+      <div class="row" style="margin-top:14px">
+        <button class="btn btn-camp">Book a breast check <span class="arr">→</span></button>
+        <span class="chip p"><svg width="10" height="13"><use href="#ribbon"/></svg>Breast health</span>
+      </div>
+      <p class="note" style="margin-top:14px">Shown all October (or year-round as a slim strip). Removing it returns the page to the everyday brand.</p>
+    </div>
+  </div>
+  <div class="grid svc-g" style="margin-top:16px">
+    <div class="svc"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><path d="M8 21v-4a4 4 0 0 1 8 0v4"/><path d="M12 13c2.5 0 4 1.5 4 4"/></svg></div><h4>Pregnancy care</h4><p>Antenatal visits, scans and birth planning.</p></div>
+    <div class="svc"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div><h4>Fertility &amp; PCOS</h4><p>Help for couples trying to conceive.</p></div>
+    <div class="svc"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h4>Periods &amp; menopause</h4><p>Painful, heavy or irregular cycles.</p></div>
+    <div class="svc"><div class="ic" style="color:var(--p700)"><svg viewBox="0 0 24 30" style="width:18px;height:22px;fill:currentColor;stroke:none"><use href="#ribbon"/></svg></div><h4>Breast health</h4><p>Breast checks and early screening.</p></div>
+  </div>
+</div></section>
+
+<!-- ============ 05 WEBSITE ============ -->
+<section class="sec"><div class="wrap">
+  <div class="head">
+    <div class="ov"><span class="num">05</span>Website</div>
+    <h2>How it comes together</h2>
+    <p class="lead">Same one-page structure as Dr. Hasan Aziz's site, re-dressed in Zeb's palette. Every fact below is a placeholder.</p>
+  </div>
+  <div class="browser">
+    <div class="bar"><i></i><i></i><i></i><span>drzebriaz.com (placeholder)</span></div>
+    <div class="campstrip"><svg width="12" height="15" style="color:var(--p500)"><use href="#ribbon"/></svg>Pink October · free breast check consultations at Dua Hospital <a href="#">Learn more →</a></div>
+    <div class="nav">
+      <div class="lockup"><div class="mark" style="width:44px;height:44px;font-size:17px">ZR<i></i></div><div><div class="nm" style="font-size:20px">Dr. Zeb <span>Riaz</span></div><div class="endorse" style="margin-top:4px;font-size:11px">Part of <b>DUA HOSPITAL</b></div></div></div>
+      <div class="links"><span>About</span><span>Care</span><span>Clinic</span><span>FAQ</span><span class="ur" style="line-height:1;font-size:18px">اردو</span></div>
+      <button class="btn btn-pri" style="height:44px;font-size:15px">Book on WhatsApp <span class="arr">→</span></button>
+    </div>
+    <div class="hero">
+      <div class="card main">
+        <span class="status"><span class="live"></span>Open today · 5:00 – 8:00 PM</span>
+        <div class="ov" style="margin-top:22px;display:flex">Consultant gynaecologist &amp; obstetrician</div>
+        <h2>Dr. Zeb<br><span>Riaz</span></h2>
+        <div class="ur">ڈاکٹر زیب ریاض</div>
+        <div class="rule" style="margin:14px 0"></div>
+        <p class="lead">Calm, expert care for women, from your first visit to your baby's first week. CEO of Dua Hospital, Multan.</p>
+        <div class="row" style="margin-top:26px">
+          <button class="btn btn-pri">Book on WhatsApp <span class="arr">→</span></button>
+          <button class="btn btn-ghost">Clinic timings</button>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="ph"><div class="sil"></div><em>Portrait photo</em></div>
+        <div class="cred">
+          <div><b>MBBS, FCPS</b>Placeholder</div>
+          <div><b>MRCOG (UK)</b>Placeholder</div>
+          <div><b>15+ years</b>Experience</div>
+          <div><b>CEO</b>Dua Hospital</div>
+        </div>
+      </div>
+    </div>
+    <div class="card strip">
+      <div><b>10,000+</b><span>Deliveries (placeholder)</span></div>
+      <div><b>Mon – Sat</b><span>Evening clinic</span></div>
+      <div><b>Female doctor</b><span>Private consultations</span></div>
+      <div><b>WhatsApp</b><span>Book in one message</span></div>
+    </div>
+    <div class="pv-sec">
+      <div class="ov"><span class="num">02</span>Care</div>
+      <h3>What Dr. Zeb can help with</h3>
+      <div class="grid svc-g">
+        <div class="svc"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><path d="M8 21v-4a4 4 0 0 1 8 0v4"/></svg></div><h4>Pregnancy care</h4><p>Antenatal visits and scans.</p></div>
+        <div class="svc"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/></svg></div><h4>Normal &amp; C-section</h4><p>Delivery at Dua Hospital.</p></div>
+        <div class="svc"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div><h4>Fertility &amp; PCOS</h4><p>Trying to conceive.</p></div>
+        <div class="svc"><div class="ic" style="color:var(--p700)"><svg viewBox="0 0 24 30" style="width:18px;height:22px;fill:currentColor;stroke:none"><use href="#ribbon"/></svg></div><h4>Breast health</h4><p>Checks and screening.</p></div>
+      </div>
+    </div>
+    <div class="pv-sec">
+      <div class="ov"><span class="num">03</span>Clinic</div>
+      <h3>Where and when</h3>
+      <div class="clinic">
+        <div class="card">
+          <div class="row" style="justify-content:space-between"><h4 style="font-size:22px">Dua Hospital</h4><span class="chip" style="background:var(--g100);color:var(--g800)"><span class="live"></span>Open now</span></div>
+          <p class="note" style="margin:6px 0 0">Sher Shah Road, Multan (placeholder)</p>
+          <div class="days"><span>Mon</span><span>Tue</span><span class="now">Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span class="off">Sun</span></div>
+          <div class="row"><button class="btn btn-pri" style="height:44px;font-size:15px">Book here →</button><button class="btn btn-ghost" style="height:44px;font-size:15px">Directions</button></div>
+        </div>
+        <div class="card" style="background:var(--r50);border-color:var(--r100)">
+          <div class="ov">Private &amp; respectful</div>
+          <h4 style="font-size:22px;margin:10px 0 8px">A female doctor, a private room</h4>
+          <p class="note">Every consultation is one-to-one. Bring a family member if you wish. Your history stays between you and Dr. Zeb.</p>
+          <button class="btn btn-soft" style="height:44px;font-size:15px;margin-top:10px">What to bring →</button>
+        </div>
+      </div>
+    </div>
+    <div class="final">
+      <div><h3>Ready when you are.</h3><p>Send one WhatsApp message and the clinic will confirm your time.</p></div>
+      <button class="btn" style="background:#fff;color:var(--b900)">Book on WhatsApp <span class="arr">→</span></button>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ 06 MOBILE + SOCIAL ============ -->
+<section class="sec"><div class="wrap">
+  <div class="head">
+    <div class="ov"><span class="num">06</span>Mobile and social</div>
+    <h2>Same voice on every screen</h2>
+    <p class="lead">Most patients will arrive on a phone, from WhatsApp or Instagram. The booking button stays in reach at all times.</p>
+  </div>
+  <div class="devices">
+    <div class="phone">
+      <div class="campstrip" style="font-size:12px"><svg width="10" height="13" style="color:var(--p500)"><use href="#ribbon"/></svg>Pink October · free breast checks →</div>
+      <div class="nav"><div class="lockup"><div class="mark" style="width:36px;height:36px;font-size:14px">ZR<i></i></div><div class="nm" style="font-size:17px">Dr. Zeb <span>Riaz</span></div></div><span style="font-size:22px;color:var(--b900)">☰</span></div>
+      <div class="m-hero">
+        <div class="portrait" style="min-height:220px;margin-bottom:10px"><div class="ph"><div class="sil" style="width:44%"></div><em>Portrait</em></div></div>
+        <div class="card">
+          <span class="status" style="font-size:12px;padding:6px 12px"><span class="live"></span>Open today · 5 – 8 PM</span>
+          <div class="ov" style="margin-top:14px;font-size:11px;display:flex">Gynaecologist &amp; obstetrician</div>
+          <h2>Dr. Zeb <span>Riaz</span></h2>
+          <div class="ur" style="font-size:24px;color:var(--b900);text-align:left">ڈاکٹر زیب ریاض</div>
+          <p class="note" style="margin:6px 0 0">MBBS, FCPS, MRCOG · CEO, Dua Hospital</p>
+        </div>
+      </div>
+      <div class="dock"><span style="background:var(--b600);color:#fff">Book</span><span style="background:var(--r100);color:var(--r700)">Timings</span></div>
+    </div>
+    <div style="display:grid;gap:16px">
+      <div class="post" style="background:var(--b600);color:#fff">
+        <div class="ov" style="color:var(--r200)">Pregnancy tip</div>
+        <h4 style="color:#fff">Your first scan: what to expect</h4>
+        <div class="ft"><div class="mark w" style="width:28px;height:28px;font-size:11px">ZR<i></i></div>Dr. Zeb Riaz · Dua Hospital</div>
+      </div>
+      <div class="lbl" style="text-align:center">Everyday post · Blue</div>
+    </div>
+    <div style="display:grid;gap:16px">
+      <div class="post" style="background:var(--p50);color:var(--p900)">
+        <svg style="width:40px;height:50px;color:var(--p500)"><use href="#ribbon"/></svg>
+        <h4 style="color:var(--p900)">Early checks save lives.</h4>
+        <div class="ft"><div class="mark" style="width:28px;height:28px;font-size:11px">ZR<i></i></div>Free breast checks · October</div>
+      </div>
+      <div class="lbl" style="text-align:center">Pink October post</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ 07 VOICE + IMAGERY ============ -->
+<section class="sec"><div class="wrap">
+  <div class="head">
+    <div class="ov"><span class="num">07</span>Imagery and voice</div>
+    <h2>Warm, private, never fearful</h2>
+    <p class="lead">Inherited from the Dua guidelines, tuned for women's health.</p>
+  </div>
+  <div class="grid dd-g">
+    <div class="dd ok">
+      <h4><span class="dot-ok">✓</span>Do</h4>
+      <ul>
+        <li>Portrait at eye level, soft smile, white coat, plain warm background.</li>
+        <li>Mothers, newborns and families, with written consent.</li>
+        <li>Short, kind sentences. Always end with a next step.</li>
+        <li>Talk about privacy: female doctor, one-to-one room.</li>
+      </ul>
+      <div class="quote" style="background:var(--r50);color:var(--r800)">"Most period pain can be treated. A short visit helps you understand yours."</div>
+    </div>
+    <div class="dd no">
+      <h4><span class="dot-no">✕</span>Don't</h4>
+      <ul>
+        <li>Stock models, ultrasounds of identifiable patients, or anything graphic.</li>
+        <li>Fear-led breast cancer messages or guaranteed outcomes.</li>
+        <li>Pink everywhere: rose is an accent, ribbon pink is seasonal.</li>
+        <li>Two primary buttons side by side, or rose as the main button.</li>
+      </ul>
+      <div class="quote" style="background:#fff;color:#C62828">"Don't ignore this lump or it could KILL you! Book NOW!!"</div>
+    </div>
+  </div>
+</div></section>
+
+<footer>Dr. Zeb Riaz brand board · Draft v0.1 · All names, numbers and facts are placeholders until confirmed.</footer>
+</body>
+</html>
