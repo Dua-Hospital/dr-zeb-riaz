@@ -15,6 +15,7 @@ import { Reveal } from './nav/Reveal';
 import { SmoothNav } from './nav/SmoothNav';
 import { Reviews } from './Reviews';
 import { Care } from './Care';
+import { PinkOctober } from './live/PinkOctober';
 
 /** The whole page for one locale. */
 export function Page({ locale }: { locale: Locale }) {
@@ -35,6 +36,7 @@ export function Page({ locale }: { locale: Locale }) {
         <Hero c={c} locale={locale} />
         <About c={c} />
         <Care c={c} locale={locale} />
+        <PinkOctober locale={locale} />
         <Clinics c={c} locale={locale} />
         <Booking c={c} locale={locale} />
         <Reviews c={c} />

@@ -8,9 +8,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Project instructions — Dr. Hasan Aziz site
+# Project instructions — Dr. Zeb Riaz site
 
-A bilingual one-page site for a consultant physician in Multan: English at `/`, Urdu at `/ur/`. Fully static export, no backend, WhatsApp-only booking. Read `docs/design-guide.md` before any UI change and the spec in `docs/superpowers/specs/` before changing structure, copy or behaviour.
+A bilingual one-page site for Dr. Zeb Riaz, consultant gynaecologist and obstetrician, Owner & CEO of Dua Hospital, Multan: English at `/`, Urdu at `/ur/`. Fully static export, no backend, WhatsApp-only booking. Read `docs/design-guide.md` before any UI change and the spec in `docs/superpowers/specs/` before changing structure, copy or behaviour.
 
 ## Commands
 
@@ -26,9 +26,11 @@ Node 22.18+ is required (native TypeScript type-stripping). Run `npm test` after
 
 - **No new dependencies.** No Tailwind, component library, icon font, animation library or test framework.
 - **All copy and data live in `lib/content.ts`**, for both `en` and `ur`, with identical shape. Components hold no literal copy: add the string to `SiteContent` and both dictionaries.
-- **New or changed Urdu strings also go in `docs/urdu-review.md`.** Urdu uses Gulzar only, Western digits, `MBBS`/`FCPS` in Latin script, and Urdu letterforms (never Arabic `ه` `ي` `ك`).
+- **New or changed Urdu strings also go in `docs/urdu-review.md`.** Urdu uses Gulzar only, Western digits, `MBBS`/`FCPS`/`MRCOG` in Latin script, and Urdu letterforms (never Arabic `ه` `ي` `ك`).
 - **Server components by default.** Add `'use client'` only for state, effects or browser APIs. `SiteContent` contains functions, so client islands take `locale` and call `getContent(locale)` themselves.
-- **Exported HTML must never contain a live clinic status** — only the neutral "Open 7 days · see timings". Status is computed client-side in Asia/Karachi time through `lib/clinic-status.ts`.
+- **Exported HTML must never contain a live clinic status, a season highlight or the Pink October band** — only the neutral "Mon – Sat · see timings" and both seasons' hours. Status, season and the October band are computed client-side in Asia/Karachi time (`lib/clinic-status.ts`, `lib/campaign.ts`).
+- **No superlatives or cure claims** in either language; a content test blocks them. Authority comes from qualifications, experience and expertise; the CEO role is a plain fact.
+- **Care items marked `pending: true` stay hidden** until the client confirms them; never remove the flag without confirmation recorded in `docs/client-data.md`.
 - **Booking goes through `bookingHref()`** in `lib/links.ts` (WhatsApp, new tab, `rel="noopener"`). No `tel:` links and no "Call" text except the 1122 emergency line.
 - **`REVIEWS` stays empty until real, permitted reviews exist.** The section, its nav link and its footer link hide themselves while the array is empty; never add sample quotes.
 - **Static export only:** no server actions, route handlers, ISR, middleware or request-time APIs.
@@ -39,10 +41,10 @@ Node 22.18+ is required (native TypeScript type-stripping). Run `npm test` after
 - Value imports inside `lib/` use explicit `.ts` extensions so `node --test` can load them; type-only imports use `import type`.
 - `app/globals.css` is one file with a block per section — extend it rather than adding a stylesheet.
 - Motion is CSS keyframes plus four small JS islands (`Reveal`, `SmoothNav`, `BackToTop`, `ChatDemo`); keep the `prefers-reduced-motion` behaviour in spec §7.6.
-- Images use `next/image` with fixed `width`/`height` and `unoptimized` (static export). The header logo and favicon are the "HA" monogram (`public/brand/dr-hasan-aziz-mark.svg`, `app/icon.svg`); no official doctor logo exists in the brand file yet.
+- Images use `next/image` with fixed `width`/`height` and `unoptimized` (static export). Logos: `public/brand/zeb-mark-*.svg` (approved Zeb mark), `public/brand/dua-hospital-logo.svg` (unchanged Dua master logo, footer endorsement), favicon `app/icon.svg`.
 
 ## Where things are
 
-- `lib/content.ts` copy and data · `lib/clinic-status.ts` status maths · `lib/links.ts` booking and directions · `lib/schema.ts` JSON-LD · `lib/scroll.ts` scroll maths · `lib/site.ts` site URL and WhatsApp number.
+- `lib/content.ts` copy and data · `lib/clinic-status.ts` time, seasons and status maths · `lib/campaign.ts` Pink October · `lib/links.ts` booking and directions · `lib/schema.ts` JSON-LD · `lib/scroll.ts` scroll maths · `lib/site.ts` site URL and WhatsApp number.
 - `components/Page.tsx` composes the sections; `components/live/*` and `components/nav/*` are the client islands.
-- Docs: `README.md`, `docs/design-guide.md`, `docs/superpowers/specs/`, `docs/superpowers/plans/`, `docs/design/mockup-v3.html`, `docs/urdu-review.md`.
+- Docs: `README.md`, `docs/design-guide.md`, `docs/client-data.md`, `docs/superpowers/specs/`, `docs/superpowers/plans/`, `docs/design/` (identity, brand board, logo files), `docs/urdu-review.md`.
