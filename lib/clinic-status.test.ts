@@ -1,56 +1,78 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  activeSeason,
   clinicState,
-  heroStatus,
-  nextWorkingDay,
-  karachiParts,
-  formatDuration,
   formatClock,
+  formatDuration,
+  heroStatus,
+  hoursFor,
+  karachiParts,
+  nextWorkingDay,
   trackPercent,
 } from './clinic-status.ts';
 
-const ALL_BUT_SUN = [false, true, true, true, true, true, true] as const;
-const HAYAT = { id: 'hayat', openMin: 660, closeMin: 1140, days: ALL_BUT_SUN } as const;
-const DUA = { id: 'dua', openMin: 1140, closeMin: 1320, days: ALL_BUT_SUN } as const;
-const BOTH = [HAYAT, DUA];
-const MON = 1, SAT = 6, SUN = 0;
+const DUA = {
+  id: 'dua',
+  days: [false, true, true, true, true, true, true],
+  seasons: { winter: { openMin: 1020, closeMin: 1260 }, summer: { openMin: 1080, closeMin: 1320 } },
+} as const;
+const SUN = 0, MON = 1, SAT = 6;
 
-test('clinicState boundaries', () => {
-  assert.deepEqual(clinicState(MON, 659, HAYAT), { kind: 'later', minsUntilOpen: 1 });
-  assert.deepEqual(clinicState(MON, 660, HAYAT), { kind: 'open', closeMin: 1140 });
-  assert.deepEqual(clinicState(MON, 1139, HAYAT), { kind: 'open', closeMin: 1140 });
-  assert.deepEqual(clinicState(MON, 1140, HAYAT), { kind: 'done' });
-  assert.deepEqual(clinicState(MON, 1139, DUA), { kind: 'later', minsUntilOpen: 1 });
-  assert.deepEqual(clinicState(MON, 1140, DUA), { kind: 'open', closeMin: 1320 });
-  assert.deepEqual(clinicState(MON, 1319, DUA), { kind: 'open', closeMin: 1320 });
-  assert.deepEqual(clinicState(MON, 1320, DUA), { kind: 'done' });
+test('karachiParts returns the Pakistan day, minutes and month', () => {
+  assert.deepEqual(karachiParts(new Date('2026-11-09T06:00:00Z')), { day: MON, minutes: 660, month: 11 });
+  // 31 Oct 19:30 UTC is already Sunday 1 Nov 00:30 in Multan.
+  assert.deepEqual(karachiParts(new Date('2026-10-31T19:30:00Z')), { day: SUN, minutes: 30, month: 11 });
 });
 
-test('clinicState sunday', () => {
-  assert.deepEqual(clinicState(SUN, 700, HAYAT), { kind: 'closed-today' });
-  assert.deepEqual(clinicState(SUN, 700, DUA), { kind: 'closed-today' });
+test('activeSeason with the default months', () => {
+  assert.deepEqual(
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => activeSeason(m)),
+    ['winter', 'winter', 'winter', 'summer', 'summer', 'summer', 'summer', 'summer', 'summer', 'summer', 'winter', 'winter'],
+  );
 });
 
-test('heroStatus order', () => {
-  assert.deepEqual(heroStatus(SUN, 1200, BOTH), { kind: 'none-today', nextDay: MON });
-  assert.deepEqual(heroStatus(MON, 700, BOTH), { kind: 'open', clinic: 'hayat', closeMin: 1140 });
-  assert.deepEqual(heroStatus(MON, 1200, BOTH), { kind: 'open', clinic: 'dua', closeMin: 1320 });
-  assert.deepEqual(heroStatus(MON, 600, BOTH), { kind: 'next', clinic: 'hayat', minsUntilOpen: 60 });
-  assert.deepEqual(heroStatus(MON, 1330, BOTH), { kind: 'closed', nextDay: 2 });
-  assert.deepEqual(heroStatus(SAT, 1330, BOTH), { kind: 'closed', nextDay: MON });
+test('activeSeason with custom months', () => {
+  assert.equal(activeSeason(4, [10, 11, 12, 1, 2, 3, 4]), 'winter');
+  assert.equal(activeSeason(5, [10, 11, 12, 1, 2, 3, 4]), 'summer');
 });
 
-test('heroStatus page left open across a boundary', () => {
-  assert.deepEqual(heroStatus(SAT, 1319, BOTH), { kind: 'open', clinic: 'dua', closeMin: 1320 });
-  assert.deepEqual(heroStatus(SAT, 1320, BOTH), { kind: 'closed', nextDay: MON });
-  assert.deepEqual(heroStatus(SAT, 1439, BOTH), { kind: 'closed', nextDay: MON });
-  assert.deepEqual(heroStatus(SUN, 0, BOTH), { kind: 'none-today', nextDay: MON });
+test('hoursFor', () => {
+  assert.deepEqual(hoursFor(DUA, 'winter'), { id: 'dua', days: DUA.days, openMin: 1020, closeMin: 1260 });
+  assert.deepEqual(hoursFor(DUA, 'summer'), { id: 'dua', days: DUA.days, openMin: 1080, closeMin: 1320 });
 });
 
-test('karachiParts from UTC', () => {
-  assert.deepEqual(karachiParts(new Date('2026-11-09T06:00:00Z')), { day: 1, minutes: 660 });
-  assert.deepEqual(karachiParts(new Date('2026-11-07T20:30:00Z')), { day: 0, minutes: 90 });
+test('winter boundaries (5–9 PM)', () => {
+  const w = hoursFor(DUA, 'winter');
+  assert.deepEqual(clinicState(MON, 1019, w), { kind: 'later', minsUntilOpen: 1 });
+  assert.deepEqual(clinicState(MON, 1020, w), { kind: 'open', closeMin: 1260 });
+  assert.deepEqual(clinicState(MON, 1259, w), { kind: 'open', closeMin: 1260 });
+  assert.deepEqual(clinicState(MON, 1260, w), { kind: 'done' });
+});
+
+test('summer boundaries (6–10 PM)', () => {
+  const s = hoursFor(DUA, 'summer');
+  assert.deepEqual(clinicState(MON, 1079, s), { kind: 'later', minsUntilOpen: 1 });
+  assert.deepEqual(clinicState(MON, 1080, s), { kind: 'open', closeMin: 1320 });
+  assert.deepEqual(clinicState(MON, 1319, s), { kind: 'open', closeMin: 1320 });
+  assert.deepEqual(clinicState(MON, 1320, s), { kind: 'done' });
+});
+
+test('Sunday and Saturday night', () => {
+  const w = hoursFor(DUA, 'winter');
+  assert.deepEqual(clinicState(SUN, 1100, w), { kind: 'closed-today' });
+  assert.deepEqual(heroStatus(SUN, 1100, [w]), { kind: 'none-today', nextDay: MON });
+  assert.deepEqual(heroStatus(SAT, 1350, [w]), { kind: 'closed', nextDay: MON });
+  assert.deepEqual(heroStatus(MON, 1000, [w]), { kind: 'next', clinic: 'dua', minsUntilOpen: 20 });
+  assert.equal(nextWorkingDay(SAT, [w]), MON);
+});
+
+test('track spans 4 PM to 11 PM', () => {
+  assert.equal(trackPercent(960), 0);
+  assert.equal(trackPercent(1380), 100);
+  assert.equal(trackPercent(1170), 50);
+  assert.equal(trackPercent(300), 0);
+  assert.equal(trackPercent(1430), 100);
 });
 
 test('formatDuration', () => {
@@ -62,51 +84,8 @@ test('formatDuration', () => {
 });
 
 test('formatClock', () => {
-  assert.equal(formatClock(660), '11 AM');
-  assert.equal(formatClock(1140), '7 PM');
+  assert.equal(formatClock(1020), '5 PM');
+  assert.equal(formatClock(1320), '10 PM');
   assert.equal(formatClock(1170), '7:30 PM');
   assert.equal(formatClock(720), '12 PM');
-});
-
-test('trackPercent', () => {
-  assert.equal(trackPercent(660), 0); // 11 AM
-  assert.equal(trackPercent(1350), 100); // 10:30 PM
-  assert.equal(trackPercent(1005), 50);
-  assert.equal(trackPercent(300), 0);
-  assert.equal(trackPercent(1430), 100);
-  // Clinic boundaries land where the tick labels are drawn.
-  assert.ok(Math.abs(trackPercent(720) - (60 / 690) * 100) < 1e-9); // 12 PM
-  assert.ok(Math.abs(trackPercent(1290) - (630 / 690) * 100) < 1e-9); // 9:30 PM
-});
-
-// The real schedule (Nov 2026): Hayat Sat–Thu 12–5 PM (off Friday), Dua Mon–Sat 8–9:30 PM (off Sunday).
-const HAYAT_REAL = { id: 'hayat', openMin: 720, closeMin: 1020, days: [true, true, true, true, true, false, true] } as const;
-const DUA_REAL = { id: 'dua', openMin: 1200, closeMin: 1290, days: [false, true, true, true, true, true, true] } as const;
-const REAL = [HAYAT_REAL, DUA_REAL];
-const FRI = 5;
-
-test('real schedule: a clinic works every day', () => {
-  // Sunday: only Hayat.
-  assert.deepEqual(heroStatus(SUN, 800, REAL), { kind: 'open', clinic: 'hayat', closeMin: 1020 });
-  assert.deepEqual(clinicState(SUN, 800, DUA_REAL), { kind: 'closed-today' });
-  assert.deepEqual(heroStatus(SUN, 1100, REAL), { kind: 'closed', nextDay: MON });
-  // Friday: Hayat off, Dua evening only.
-  assert.deepEqual(clinicState(FRI, 800, HAYAT_REAL), { kind: 'closed-today' });
-  assert.deepEqual(heroStatus(FRI, 800, REAL), { kind: 'next', clinic: 'dua', minsUntilOpen: 400 });
-  assert.deepEqual(heroStatus(FRI, 1289, REAL), { kind: 'open', clinic: 'dua', closeMin: 1290 });
-  // Saturday night → Sunday (Hayat), which is tomorrow.
-  assert.deepEqual(heroStatus(SAT, 1290, REAL), { kind: 'closed', nextDay: SUN });
-  // Boundaries.
-  assert.deepEqual(clinicState(MON, 719, HAYAT_REAL), { kind: 'later', minsUntilOpen: 1 });
-  assert.deepEqual(clinicState(MON, 1019, HAYAT_REAL), { kind: 'open', closeMin: 1020 });
-  assert.deepEqual(clinicState(MON, 1020, HAYAT_REAL), { kind: 'done' });
-  assert.deepEqual(clinicState(MON, 1199, DUA_REAL), { kind: 'later', minsUntilOpen: 1 });
-  assert.deepEqual(clinicState(MON, 1290, DUA_REAL), { kind: 'done' });
-});
-
-test('nextWorkingDay', () => {
-  assert.equal(nextWorkingDay(MON, BOTH), 2);
-  assert.equal(nextWorkingDay(SAT, BOTH), MON);
-  assert.equal(nextWorkingDay(SAT, REAL), SUN);
-  assert.equal(nextWorkingDay(3, []), 3);
 });

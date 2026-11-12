@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { karachiParts } from '@/lib/clinic-status';
 
 /**
- * Pakistan-time day (0 = Sunday) and minutes since midnight, refreshed every 60s.
+ * Pakistan-time day (0 = Sunday), minutes since midnight and month (1–12), refreshed every 60s.
  * `null` during SSR and the first client render, so the static HTML stays neutral
  * and hydration matches.
  */
-export function useKarachiNow(): { day: number; minutes: number } | null {
-  const [now, setNow] = useState<{ day: number; minutes: number } | null>(null);
+export function useKarachiNow(): { day: number; minutes: number; month: number } | null {
+  const [now, setNow] = useState<{ day: number; minutes: number; month: number } | null>(null);
   useEffect(() => {
     const tick = () => setNow(karachiParts(new Date()));
     tick();
