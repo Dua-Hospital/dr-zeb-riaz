@@ -1,4 +1,4 @@
-import { CLINICS, DOCTOR, TREATMENTS, getContent } from './content.ts';
+import { CLINICS, DOCTOR, getContent, visibleCare } from './content.ts';
 import { SITE_URL } from './site.ts';
 import type { Locale } from './site.ts';
 
@@ -19,15 +19,32 @@ function hhmm(min: number): string {
   return `${h}:${m}`;
 }
 
+const pad = (n: number) => String(n).padStart(2, '0');
+const prevMonth = (m: number) => (m === 1 ? 12 : m - 1);
+const nextMonth = (m: number) => (m === 12 ? 1 : m + 1);
+const lastDay = (m: number) => new Date(2001, m, 0).getDate(); // a non-leap year: Feb → 28
+
+/** Schema.org recurring date range ("--MM-DD") for winter and for summer, from the winter months. */
+function seasonRanges(winterMonths: readonly number[]) {
+  const start = winterMonths.find((m) => !winterMonths.includes(prevMonth(m))) ?? 11;
+  const end = winterMonths.find((m) => !winterMonths.includes(nextMonth(m))) ?? 3;
+  const sStart = nextMonth(end);
+  const sEnd = prevMonth(start);
+  return {
+    winter: { validFrom: `--${pad(start)}-01`, validThrough: `--${pad(end)}-${pad(lastDay(end))}` },
+    summer: { validFrom: `--${pad(sStart)}-01`, validThrough: `--${pad(sEnd)}-${pad(lastDay(sEnd))}` },
+  };
+}
+
 /**
  * Structured data (JSON-LD) for the page: one Physician and one
- * MedicalClinic per clinic. No telephone: booking is WhatsApp only.
+ * MedicalClinic (Dua Hospital) with winter and summer hours. No telephone: booking is WhatsApp only.
  */
 export function buildPageSchema(locale: Locale) {
   const isUrdu = locale === 'ur';
   const content = getContent(locale);
   const pageUrl = `${SITE_URL}${isUrdu ? '/ur/' : '/'}`;
-  const services = TREATMENTS.map((t) => ({
+  const services = visibleCare().map((t) => ({
     '@type': 'MedicalTherapy',
     name: isUrdu ? t.nameUr : t.name,
   }));
@@ -39,9 +56,9 @@ export function buildPageSchema(locale: Locale) {
       name: isUrdu ? c.nameUr : c.name,
       alternateName: isUrdu ? c.name : c.nameUr,
       url: pageUrl,
-      medicalSpecialty: 'InternalMedicine',
+      medicalSpecialty: ['Obstetric', 'Gynecologic'],
     };
-    if (c.address) {
+    {
       node.address = {
         '@type': 'PostalAddress',
         streetAddress: isUrdu ? c.address.ur : c.address.en,
@@ -50,14 +67,14 @@ export function buildPageSchema(locale: Locale) {
         addressCountry: 'PK',
       };
     }
-    node.openingHoursSpecification = [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: DAY_NAMES.filter((_, i) => c.days[i]),
-        opens: hhmm(c.openMin),
-        closes: hhmm(c.closeMin),
-      },
-    ];
+    const ranges = seasonRanges(c.winterMonths);
+    node.openingHoursSpecification = (['winter', 'summer'] as const).map((season) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: DAY_NAMES.filter((_, i) => c.days[i]),
+      opens: hhmm(c.seasons[season].openMin),
+      closes: hhmm(c.seasons[season].closeMin),
+      ...ranges[season],
+    }));
     node.availableService = services;
     return node;
   });
@@ -80,8 +97,8 @@ export function buildPageSchema(locale: Locale) {
         alternateName: DOCTOR.nameUr,
         description: content.meta.description,
         url: pageUrl,
-        medicalSpecialty: 'InternalMedicine',
-        qualification: ['MBBS', 'FCPS (Medicine)'],
+        medicalSpecialty: ['Obstetric', 'Gynecologic'],
+        qualification: ['MBBS', 'FCPS (Obstetrics & Gynaecology)', 'MRCOG (UK)'],
         knowsLanguage: ['en', 'ur'],
         availableService: services,
         worksFor: clinics.map((c) => ({ '@id': c['@id'] })),
