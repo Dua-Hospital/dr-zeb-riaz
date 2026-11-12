@@ -1,11 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { CLINICS, REVIEWS, TREATMENTS, TREATMENT_GROUPS, getContent } from './content.ts';
+import { CARE, CARE_GROUPS, CLINICS, REVIEWS, getContent, visibleCare, visibleGroups } from './content.ts';
 
-// Every string in a value; functions are called with a sample argument so their text is checked too.
+// Every string in a value; functions are called with sample arguments so their text is checked too.
 function leaves(value: unknown): string[] {
   if (typeof value === 'string') return [value];
-  if (typeof value === 'function') return [String(value('X'))];
+  if (typeof value === 'function') return [String(value('X', 'Y'))];
   if (Array.isArray(value)) return value.flatMap(leaves);
   if (value && typeof value === 'object') return Object.values(value).flatMap(leaves);
   return [];
@@ -21,61 +21,81 @@ function shape(value: unknown): unknown {
 
 const en = getContent('en');
 const ur = getContent('ur');
-const all = [en, ur, CLINICS, TREATMENTS];
+const all = [en, ur, CLINICS, CARE];
 const allText = [JSON.stringify(all), ...leaves(all)].join('\n');
 
-test('21 treatments', () => {
-  assert.equal(TREATMENTS.length, 21);
-  assert.deepEqual(TREATMENT_GROUPS, ['day', 'long', 'heart', 'stomach', 'chest']);
+test('15 care items in 5 groups', () => {
+  assert.deepEqual(CARE_GROUPS, ['fertility', 'pregnancy', 'periods', 'women', 'breast']);
+  assert.deepEqual(CARE.map((t) => t.name), [
+    'Female infertility', 'Male infertility & low sperm count', 'Fertility medicines', 'IUI', 'IVF',
+    'Pregnancy check-ups', 'Pregnancy complications', 'Normal delivery & C-section',
+    'Irregular periods', 'Period pain', 'PCOS',
+    'Uterine prolapse', 'Leucorrhoea (discharge)', 'Urine infection',
+    'Breast checks',
+  ]);
   const counts: Record<string, number> = {};
-  for (const t of TREATMENTS) counts[t.group] = (counts[t.group] ?? 0) + 1;
-  assert.deepEqual(counts, { day: 5, long: 6, heart: 3, stomach: 4, chest: 3 });
-  assert.deepEqual(
-    TREATMENTS.map((t) => t.name),
-    [
-      'Fever', 'Dengue', 'Allergy', 'Headache', 'Back & joint pain',
-      'Sugar (diabetes)', 'Blood pressure', 'Low blood (anaemia)', 'Obesity', 'Kidney stones', 'Kidney & bladder',
-      'Heart disease', 'Stroke & paralysis', 'Fits (epilepsy)',
-      'Acidity', 'Ulcer', 'Jaundice', 'Hepatitis',
-      'Cough', 'Asthma', 'TB',
-    ],
-  );
-  for (const t of TREATMENTS) {
-    assert.ok(t.nameUr && t.blurb && t.blurbUr, `${t.name} has all text`);
-  }
+  for (const t of CARE) counts[t.group] = (counts[t.group] ?? 0) + 1;
+  assert.deepEqual(counts, { fertility: 5, pregnancy: 3, periods: 3, women: 3, breast: 1 });
+  assert.deepEqual(CARE.filter((t) => t.pending).map((t) => t.name), ['PCOS', 'Breast checks']);
+  for (const t of CARE) assert.ok(t.nameUr && t.blurb && t.blurbUr, `${t.name} has all text`);
 });
 
-test('clinics', () => {
-  assert.deepEqual(CLINICS.map((c) => c.id), ['hayat', 'dua']);
-  const [hayat, dua] = CLINICS;
-  assert.deepEqual([...hayat.days], [true, true, true, true, true, false, true]); // off Friday
-  assert.deepEqual([...dua.days], [false, true, true, true, true, true, true]); // off Sunday
-  assert.deepEqual([hayat.openMin, hayat.closeMin], [720, 1020]);
-  assert.deepEqual([dua.openMin, dua.closeMin], [1200, 1290]);
-  assert.equal(hayat.hoursText, '12:00 PM – 5:00 PM');
-  assert.equal(dua.hoursText, '8:00 PM – 9:30 PM');
-  for (let d = 0; d < 7; d++) assert.ok(CLINICS.some((c) => c.days[d]), `a clinic works on day ${d}`);
-  assert.ok(hayat.address?.en.includes('Dost Plaza'));
-  assert.ok(dua.address?.en.includes('Sher Shah Road'));
-  assert.ok(hayat.mapsQuery.includes('Dost Plaza'));
+test('pending items and empty groups are hidden', () => {
+  assert.equal(visibleCare().length, 13);
+  assert.ok(visibleCare().every((t) => !t.pending));
+  assert.deepEqual(visibleGroups(), ['fertility', 'pregnancy', 'periods', 'women']);
+  assert.equal(en.hero.seeAll(String(visibleCare().length)), 'See all 13 →');
+  assert.ok(ur.hero.seeAll('13').includes('13'));
+});
+
+test('one clinic with seasonal hours', () => {
+  assert.equal(CLINICS.length, 1);
+  const [dua] = CLINICS;
+  assert.equal(dua.id, 'dua');
+  assert.deepEqual([...dua.days], [false, true, true, true, true, true, true]);
+  assert.deepEqual(dua.seasons, { winter: { openMin: 1020, closeMin: 1260 }, summer: { openMin: 1080, closeMin: 1320 } });
+  assert.deepEqual(dua.hoursText, { winter: '5:00 PM – 9:00 PM', summer: '6:00 PM – 10:00 PM' });
+  assert.deepEqual([...dua.winterMonths], [11, 12, 1, 2, 3]);
+  assert.ok(dua.address.en.includes('Bank Plaza') && dua.address.en.includes('Sher Shah Road'));
   assert.equal(dua.mapsQuery, 'Dua Hospital Bank Plaza Sher Shah Road Garden Town Multan');
 });
 
-test('reviews ship empty', () => {
-  assert.equal(REVIEWS.length, 0);
+test('authority copy', () => {
+  assert.equal(en.about.heading, 'Trained in Pakistan and the UK. Specialised in fertility and pregnancy.');
+  assert.deepEqual(en.portrait.creds.map((c) => c.title), ['MBBS', 'FCPS', 'MRCOG (UK)', 'Owner & CEO']);
+  assert.deepEqual(en.about.facts.map((f) => f.value), ['MRCOG (UK)', 'FCPS']);
+  assert.ok(!/leads Dua|sees you herself/i.test(JSON.stringify(en.about)));
 });
 
-test('no stale data', () => {
-  for (const stale of ['Prime', 'Shir', 'tel:', '3336489392', 'مزیدار', 'چیف فزیشن', 'The doctor']) {
+test('hero copy', () => {
+  assert.equal(en.hero.overline, 'Consultant Gynaecologist & Obstetrician');
+  assert.deepEqual(en.hero.lineStrong, ['Pregnancy. Fertility.', "Women's health."]);
+  assert.equal(en.hero.lineRest, "One specialist, from trying to conceive to your baby's first week.");
+});
+
+test('no superlatives or cure claims', () => {
+  for (const bad of [/\bbest\b/i, /\bno\.? ?1\b/i, /guarantee/i, /\bcure/i, /permanent/i, /مستقل حل/, /بہترین/]) {
+    assert.ok(!bad.test(allText), `found ${bad}`);
+  }
+});
+
+test('no template leftovers', () => {
+  for (const stale of ['Hasan', 'حسن عزیز', 'Hayat', 'حیات', '3336489392', 'Consultant Physician', 'کنسلٹنٹ فزیشن', 'tel:']) {
     assert.ok(!allText.includes(stale), `found stale text: ${stale}`);
   }
-  // The only call to action that mentions calling is the 1122 emergency line.
+});
+
+test('the only call is 1122', () => {
   const calls = [
     ...leaves(en).filter((s) => /\bcall\b/i.test(s)),
     ...leaves(ur).filter((s) => s.includes('کال کر')),
   ];
   assert.ok(calls.length > 0);
   for (const s of calls) assert.ok(s.includes('1122'), `call without 1122: ${s}`);
+});
+
+test('reviews ship empty', () => {
+  assert.equal(REVIEWS.length, 0);
 });
 
 test('urdu uses Urdu letters, not Arabic ones', () => {
@@ -91,26 +111,20 @@ test('en and ur have the same shape', () => {
   assert.equal(ur.dir, 'rtl');
 });
 
-test('About Me label', () => {
-  assert.equal(en.nav.about, 'About Me');
-  assert.equal(en.about.overline, 'About Me');
-});
-
-test('neutral status', () => {
-  assert.equal(en.status.neutral, 'Open 7 days · see timings');
-});
-
-test('day-name status strings', () => {
+test('status and season text', () => {
+  assert.equal(en.status.neutral, 'Mon – Sat · see timings');
+  assert.equal(en.clinics.otherSeason.summer('6:00 PM – 10:00 PM'), 'Summer: 6:00 PM – 10:00 PM');
+  assert.equal(en.clinics.otherSeason.winter('5:00 PM – 9:00 PM'), 'Winter: 5:00 PM – 9:00 PM');
+  assert.equal(en.status.opensAtIn('5 PM', '2h 14m'), 'Opens at 5 PM · in 2h 14m');
+  assert.equal(en.status.seeing, 'Seeing patients now');
+  assert.equal(en.status.until('9 PM'), 'until 9 PM');
   assert.equal(en.status.bookOn('Monday'), 'Book now for Monday');
-  assert.ok(en.status.noClinicNote('Monday').includes('Monday'));
-  assert.ok(ur.status.bookOn('پیر').includes('پیر'));
-  assert.ok(ur.status.noClinicNote('پیر').includes('پیر'));
+  assert.ok(ur.status.until('9 PM').includes('9 PM'));
+  assert.ok(ur.status.opensAtIn('5 PM', '2 گھنٹے').includes('5 PM'));
+  assert.ok(ur.clinics.otherSeason.summer('6:00 PM – 10:00 PM').includes('6:00 PM'));
 });
 
-test('status strings take their variables', () => {
-  assert.equal(en.status.until('7 PM'), 'until 7 PM');
-  assert.equal(en.status.opensIn('2h 14m'), 'opens in 2h 14m');
-  assert.equal(en.status.later('2h 14m'), 'Opens in 2h 14m');
-  assert.ok(ur.status.until('7 PM').includes('7 PM'));
-  assert.ok(ur.status.opensIn('2 گھنٹے').includes('2 گھنٹے'));
+test('pink october copy', () => {
+  assert.equal(en.pinkOctober.heading, 'Early checks save lives.');
+  assert.equal(en.pinkOctober.cta, 'Book a breast check');
 });
