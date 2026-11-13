@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { CLINICS, type SiteContent } from '@/lib/content';
 import { bookingHref, directionsHref } from '@/lib/links';
-import type { Locale } from '@/lib/site';
+import { DUA_HOSPITAL_URL, type Locale } from '@/lib/site';
 import { Icon } from './icons';
 import { ClinicBadge } from './live/ClinicBadge';
 import { SeasonHours } from './live/SeasonHours';
@@ -37,6 +37,11 @@ export function Clinics({ c, locale }: { c: SiteContent; locale: Locale }) {
               >
                 <div className="cl-map">
                   <span className="label">{clinic.label[locale]}</span>
+                  {/* Dua Hospital's website, in the map's lower corner. */}
+                  <a className="site" href={DUA_HOSPITAL_URL} target="_blank" rel="noopener" aria-label={c.footer.hospitalSiteLabel}>
+                    <Icon name="globe" />
+                    <bdi dir="ltr">{c.footer.hospitalSite}</bdi>
+                  </a>
                   <svg className="road" preserveAspectRatio="none" viewBox="0 0 600 140" aria-hidden="true">
                     {i === 0 ? (
                       <>

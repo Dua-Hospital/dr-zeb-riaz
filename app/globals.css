@@ -277,6 +277,9 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .cl-map .pin::after{content:"";width:14px;height:14px;border-radius:50%;background:#fff}
 .cl-map .shadow{position:absolute;left:calc(58% + 2px);top:calc(26% + 42px);width:40px;height:12px;border-radius:50%;background:rgba(7,78,162,.22);animation:shadow 2.4s ease-in-out infinite}
 .cl-map .label{position:absolute;z-index:2;inset-inline-start:16px;top:14px;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--b700);background:#fff;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.cl-map .site{position:absolute;z-index:2;inset-inline-start:16px;bottom:14px;display:inline-flex;align-items:center;gap:7px;font-family:var(--font-figtree),system-ui,sans-serif;font-size:14px;line-height:20px;font-weight:600;color:var(--b700);background:#fff;padding:6px 14px;border-radius:999px;border:1px solid var(--line);transition:color .2s,border-color .2s}
+.cl-map .site:hover{color:var(--b600);border-color:var(--b200)}
+.cl-map .site svg{width:16px;height:16px}
 @keyframes drop{from{transform:translateY(-30px) rotate(-45deg);opacity:0}}
 @keyframes shadow{50%{transform:scale(1.4);opacity:.45}}
 .cl-body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:18px;flex:1}
