@@ -1,6 +1,6 @@
 import { CLINICS, DOCTOR, SOCIALS, SOCIAL_NAMES, SOCIAL_NETWORKS, type SiteContent } from '@/lib/content';
 import { bookingHref, directionsHref } from '@/lib/links';
-import type { Locale } from '@/lib/site';
+import { DUA_HOSPITAL_URL, type Locale } from '@/lib/site';
 import { Icon } from './icons';
 import { navItems } from './nav/items';
 
@@ -76,13 +76,23 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
             <h4>{f.clinicsHeading}</h4>
             {CLINICS.map((clinic) => (
               <div className="ft-clinic" key={clinic.id}>
-                <b>{ur ? clinic.nameUr : clinic.name}</b>
+                {/* Dua Hospital's logo beside its name, its website beside Directions. */}
+                <div className="ft-clinic-name">
+                  <img src="/brand/dua-hospital-logo.svg" alt="" width={36} height={36} />
+                  <b>{ur ? clinic.nameUr : clinic.name}</b>
+                </div>
                 <span>{c.clinics.otherSeason.winter(clinic.hoursText.winter)}</span>
                 <span>{c.clinics.otherSeason.summer(clinic.hoursText.summer)}</span>
-                <a href={directionsHref(clinic.mapsQuery)} target="_blank" rel="noopener">
-                  <Icon name="nav" />
-                  {c.clinics.directions}
-                </a>
+                <div className="ft-clinic-links">
+                  <a href={directionsHref(clinic.mapsQuery)} target="_blank" rel="noopener">
+                    <Icon name="nav" />
+                    {c.clinics.directions}
+                  </a>
+                  <a href={DUA_HOSPITAL_URL} target="_blank" rel="noopener" aria-label={f.hospitalSiteLabel}>
+                    <Icon name="globe" />
+                    <bdi dir="ltr">{f.hospitalSite}</bdi>
+                  </a>
+                </div>
                 {/* Dua Hospital's own accounts sit under its entry, as on Dr Hasan's site. */}
                 <Socials who={f.follow.hospital} urls={SOCIALS.hospital} label={f.socialLabel} />
               </div>
@@ -108,11 +118,9 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
             </div>
           </div>
         </div>
+        {/* As on Dr Hasan's site: the copyright on its own. */}
         <div className="ft-bottom">
-          <span className="ft-dua">
-            <img src="/brand/dua-hospital-logo.svg" alt="Dua Hospital" width={44} height={44} />
-            {f.copyright}
-          </span>
+          <span>{f.copyright}</span>
         </div>
       </div>
     </footer>

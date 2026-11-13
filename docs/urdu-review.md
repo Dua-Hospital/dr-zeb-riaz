@@ -222,7 +222,7 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 ## final
 
 - `final.heading`: جب آپ تیار ہوں۔ اپوائنٹمنٹ لیں۔
-- `final.sub`: ڈاکٹر زیب ریاض · کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی · دعا ہسپتال، پیر تا ہفتہ
+- `final.sub`: ڈاکٹر زیب ریاض · کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی · مالک و سی ای او، دعا ہسپتال · پیر تا ہفتہ
 - `final.cta`: واٹس ایپ پر اپوائنٹمنٹ لیں
 
 ## footer
@@ -239,6 +239,7 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 - `footer.follow.doctor`: ڈاکٹر زیب کو فالو کریں
 - `footer.follow.hospital`: دعا ہسپتال
 - `footer.socialLabel`: ڈاکٹر زیب ریاض — Instagram (screen-reader name of each social link; the network name stays in English)
+- `footer.hospitalSiteLabel`: دعا ہسپتال کی ویب سائٹ، duahospital.pk (screen-reader name of the footer link to Dua Hospital's website)
 
 ## dock
 

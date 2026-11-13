@@ -387,8 +387,6 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
 .ft-lockup img{width:72px;height:72px;flex:none}
 .ft-lockup small{display:block;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--r200)}
 .ft-clinic span{display:block}
-.ft-dua{display:inline-flex;align-items:center;justify-content:center;gap:12px;text-align:center;flex-wrap:wrap}
-.ft-dua img{width:44px;height:44px;background:#fff;border-radius:10px;padding:4px;flex:none}
 .ft-brand p{margin:6px 0 2px;color:var(--b200)}
 .ft-brand .ur{font-size:20px;color:#fff;display:block;margin-bottom:18px;text-align:left}
 .ft-brand .btn{background:#fff;color:var(--b800);box-shadow:none;--h:48px;font-size:15px}
@@ -398,6 +396,9 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
 .ft-links a .n{font-size:12px;font-weight:700;color:var(--r300);font-variant-numeric:tabular-nums;width:20px}
 .ft-clinic{padding:0 0 14px;margin-bottom:14px;border-bottom:1px solid rgba(191,209,231,.14)}
 .ft-clinic b{display:block;color:#fff;font-size:16px}
+.ft-clinic-name{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.ft-clinic-name img{width:36px;height:36px;background:#fff;border-radius:9px;padding:3px;flex:none}
+.ft-clinic-links{display:flex;flex-wrap:wrap;gap:4px 18px}
 .ft-clinic span{display:block}
 .ft-clinic a{display:inline-flex;align-items:center;gap:6px;color:var(--b300);font-weight:600;font-size:14px;margin-top:2px}
 .ft-clinic a:hover{color:#fff}
@@ -405,7 +406,8 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
 .ft-note{font-size:14px;color:var(--b300)}
 .ft-emerg{margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(198,40,40,.16);border:1px solid rgba(245,194,194,.25);color:#FBD5D5;font-size:14px;line-height:20px}
 .ft-emerg b{color:#fff}
-.ft-bottom{border-top:1px solid rgba(191,209,231,.18);margin-top:48px;padding-top:22px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px}
+/* padding-inline-end keeps the row clear of the fixed back-to-top button (56px, 24px from the right; from the left on /ur/). */
+.ft-bottom{border-top:1px solid rgba(191,209,231,.18);margin-top:48px;padding-top:22px;padding-inline-end:64px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px}
 /* Social links: Dr. Zeb's under the WhatsApp button, Dua Hospital's under its clinic entry. */
 .ft-follow{margin-top:24px}
 .ft-follow h4{margin-bottom:10px}

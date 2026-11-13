@@ -4,4 +4,7 @@ export const SITE_URL =
 
 export const WHATSAPP_NUMBER = '923358028888';
 
+/** Dua Hospital's own website, linked from the footer (client-supplied 2026-11-14). */
+export const DUA_HOSPITAL_URL = 'https://duahospital.pk';
+
 export type Locale = 'en' | 'ur';

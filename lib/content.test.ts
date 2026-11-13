@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { CARE, CARE_GROUPS, CLINICS, REVIEWS, SOCIALS, SOCIAL_NETWORKS, getContent, visibleCare, visibleGroups } from './content.ts';
+import { DUA_HOSPITAL_URL } from './site.ts';
 
 // Every string in a value; functions are called with sample arguments so their text is checked too.
 function leaves(value: unknown): string[] {
@@ -138,7 +139,10 @@ test('full day names for booking prompts', () => {
 test('profession leads; Owner & CEO is the secondary fact', () => {
   assert.equal(en.nav.role, 'Consultant Gynaecologist & Obstetrician');
   assert.equal(ur.nav.role, ur.hero.overline);
-  assert.equal(en.final.sub, 'Dr. Zeb Riaz · Consultant Gynaecologist & Obstetrician · Dua Hospital, Monday to Saturday');
+  // The booking band names her profession first, then her role at Dua Hospital.
+  // A no-break space before each '·' keeps the dot on the line it follows when the line wraps.
+  assert.equal(en.final.sub, 'Dr. Zeb Riaz · Consultant Gynaecologist & Obstetrician · Owner & CEO, Dua Hospital · Monday to Saturday');
+  assert.equal(ur.final.sub, 'ڈاکٹر زیب ریاض · کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی · مالک و سی ای او، دعا ہسپتال · پیر تا ہفتہ');
   const current = en.about.quals.at(-1)!;
   assert.equal(current.title, 'Consultant Gynaecologist & Obstetrician');
   assert.equal(current.where, 'Owner & CEO · Dua Hospital, Multan');
@@ -193,4 +197,11 @@ test('social accounts for Dr. Zeb and Dua Hospital, in one fixed order', () => {
     assert.match(l.footer.socialLabel('X', 'Y'), /X/);
     assert.match(l.footer.socialLabel('X', 'Y'), /Y/);
   }
+});
+
+test('footer links to the Dua Hospital website', () => {
+  assert.equal(DUA_HOSPITAL_URL, 'https://duahospital.pk');
+  for (const l of [en, ur]) assert.equal(l.footer.hospitalSite, 'duahospital.pk');
+  assert.match(en.footer.hospitalSiteLabel, /Dua Hospital/);
+  assert.match(ur.footer.hospitalSiteLabel, /دعا ہسپتال/);
 });

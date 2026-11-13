@@ -81,7 +81,7 @@ The flyers show older timings (6–10, 7–9:30, 7–10 PM). The user's timings 
 
 ## Social accounts (supplied 2026-11-13)
 
-Shown in the footer (Dr. Zeb under the WhatsApp button, Dua Hospital under its clinic entry) and in the JSON-LD `sameAs`. Source: `SOCIALS` in `lib/content.ts`.
+Shown in the footer (Dr. Zeb under the WhatsApp button, Dua Hospital under its clinic entry, which also shows its logo and a link to https://duahospital.pk) and in the JSON-LD `sameAs`. Source: `SOCIALS` in `lib/content.ts`.
 
 | | Dr. Zeb Riaz | Dua Hospital |
 |---|---|---|

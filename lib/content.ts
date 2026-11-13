@@ -236,6 +236,8 @@ export interface SiteContent {
     copyright: string;
     follow: { doctor: string; hospital: string }; // doctor: heading over her social row; hospital: owner name in the Dua links' labels
     socialLabel: (who: string, network: string) => string; // accessible name of each social link
+    hospitalSite: string; // the Dua Hospital website as shown in the footer's bottom row
+    hospitalSiteLabel: string; // its accessible name
   };
   dock: { timings: string; book: string };
   days: string[]; // Mon..Sun, short (week strip)
@@ -416,7 +418,7 @@ const en: SiteContent = {
   },
   final: {
     heading: 'Ready when you are. Book your visit.',
-    sub: 'Dr. Zeb Riaz · Consultant Gynaecologist & Obstetrician · Dua Hospital, Monday to Saturday',
+    sub: 'Dr. Zeb Riaz · Consultant Gynaecologist & Obstetrician · Owner & CEO, Dua Hospital · Monday to Saturday',
     cta: 'Book on WhatsApp',
   },
   footer: {
@@ -431,6 +433,8 @@ const en: SiteContent = {
     copyright: '© 2026 Dr. Zeb Riaz · Owner & CEO, Dua Hospital, Multan',
     follow: { doctor: 'Follow Dr. Zeb', hospital: 'Dua Hospital' },
     socialLabel: (who, network) => `${who} on ${network}`,
+    hospitalSite: 'duahospital.pk',
+    hospitalSiteLabel: 'Dua Hospital website, duahospital.pk',
   },
   dock: { timings: 'Timings', book: 'Book on WhatsApp' },
   days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -615,7 +619,7 @@ const ur: SiteContent = {
   },
   final: {
     heading: 'جب آپ تیار ہوں۔ اپوائنٹمنٹ لیں۔',
-    sub: 'ڈاکٹر زیب ریاض · کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی · دعا ہسپتال، پیر تا ہفتہ',
+    sub: 'ڈاکٹر زیب ریاض · کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی · مالک و سی ای او، دعا ہسپتال · پیر تا ہفتہ',
     cta: BOOK_UR,
   },
   footer: {
@@ -630,6 +634,8 @@ const ur: SiteContent = {
     copyright: '© 2026 ڈاکٹر زیب ریاض · مالک و سی ای او، دعا ہسپتال، ملتان',
     follow: { doctor: 'ڈاکٹر زیب کو فالو کریں', hospital: 'دعا ہسپتال' },
     socialLabel: (who, network) => `${who} — ⁦${network}⁩`,
+    hospitalSite: 'duahospital.pk',
+    hospitalSiteLabel: 'دعا ہسپتال کی ویب سائٹ، duahospital.pk',
   },
   dock: { timings: 'اوقات', book: BOOK_UR },
   days: ['پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ', 'اتوار'],
