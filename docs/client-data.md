@@ -89,3 +89,7 @@ Shown in the footer (Dr. Zeb under the WhatsApp button, Dua Hospital beside its 
 | Instagram | https://www.instagram.com/drzebriaz/ | https://www.instagram.com/duahospitalmultan/ |
 | YouTube | https://www.youtube.com/@drzebriaz | https://www.youtube.com/@duahospitalmultan |
 | TikTok | https://www.tiktok.com/@drzebriaz | https://www.tiktok.com/@duahospitalmultan |
+
+## Domain (confirmed 2026-11-14)
+
+`drzebriaz.com` is the production domain (`SITE_URL` in `lib/site.ts`). Both `drzebriaz.com` and `www.drzebriaz.com` are added to the Vercel project `dr-zeb-riaz`. DNS is at the registrar (Hostinger parking nameservers): point `drzebriaz.com` with `A 76.76.21.21` and `www` with `CNAME cname.vercel-dns.com`.

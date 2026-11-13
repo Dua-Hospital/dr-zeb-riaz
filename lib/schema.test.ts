@@ -86,3 +86,9 @@ test('physician and hospital link their social accounts with sameAs', () => {
     assert.ok(clinics[0].sameAs.every((u: string) => u.includes('duahospitalmultan')));
   }
 });
+
+test('page URLs use the production domain drzebriaz.com', () => {
+  const { physicians } = parts('en');
+  assert.equal(physicians[0].url, 'https://drzebriaz.com/');
+  assert.equal(parts('ur').physicians[0].url, 'https://drzebriaz.com/ur/');
+});

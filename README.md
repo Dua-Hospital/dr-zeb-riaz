@@ -85,7 +85,7 @@ Design sources: Figma "Dr Zeb Riaz — Branding" (`asnsGHyc0oMusfqvKTnzGt`), `do
 2. Confirm Dua Hospital's current address and get a Google Maps link.
 3. Confirm the winter/summer switch dates (`WINTER_MONTHS`).
 4. Native-speaker review of every Urdu string in `docs/urdu-review.md`.
-5. Set the production domain in `lib/site.ts` (`SITE_URL`, currently a placeholder).
+5. Production domain: `https://drzebriaz.com` (`SITE_URL` in `lib/site.ts`), served by Vercel.
 
 Content to confirm (hidden or "to confirm" until then): infertility training wording, whether IUI/IVF are done at Dua Hospital, PCOS and breast checks, fee and walk-in policy, real reviews, years of experience.
 
