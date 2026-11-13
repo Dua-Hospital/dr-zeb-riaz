@@ -56,7 +56,7 @@ Colour usage:
 
 Unchanged from the template: **Figtree** (English) and **Gulzar** (Urdu, `.ur`, RTL, line-height 2). Hero name `clamp(46px, 4.2vw + 14px, 76px)` with the surname in `--b600`.
 
-Urdu rules: Gulzar only, never mixed with Figtree on one line; Western digits; MBBS/FCPS/MRCOG in Latin; Urdu letterforms (`ہ ی ک`). Add every new or changed Urdu string to `docs/urdu-review.md`. Gulzar's letters sit about 0.33em above the middle of their line, so Urdu pills and badges get extra top padding (and their dots and icons a matching `translate` up) to look centred; small Urdu lines under a label need line-height 1.9, never a fixed 17px. Care cards show the name in the other language under the title: Urdu under English on `/`, and the English name (Figtree, Blue 600, 15px) under the Urdu title on `/ur/`, as on Dr Hasan's site.
+Urdu rules: Gulzar only, never mixed with Figtree on one line; Western digits; MBBS/FCPS/MRCOG in Latin; Urdu letterforms (`ہ ی ک`). Add every new or changed Urdu string to `docs/urdu-review.md`. Gulzar's letters sit about 0.33em above the middle of their line, so Urdu pills and badges get extra top padding (and their dots and icons a matching `translate` up) to look centred. The header (nav links, WhatsApp button and language switch) keeps Dr Hasan's symmetric spacing with no nudge: a nudge that squeezes a fixed-height pill makes the text overflow, and browsers centre overflowing text differently; small Urdu lines under a label need line-height 1.9, never a fixed 17px. Care cards show the name in the other language under the title: Urdu under English on `/`, and the English name (Figtree, Blue 600, 15px) under the Urdu title on `/ur/`, as on Dr Hasan's site.
 
 ## Sections and IDs
 

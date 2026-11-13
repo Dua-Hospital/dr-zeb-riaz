@@ -234,7 +234,7 @@ export interface SiteContent {
     urduLink: string; // the link to the other language's page
     emergency: Titled;
     copyright: string;
-    follow: { doctor: string; hospital: string }; // headings over the two rows of social links
+    follow: { doctor: string; hospital: string }; // doctor: heading over her social row; hospital: owner name in the Dua links' labels
     socialLabel: (who: string, network: string) => string; // accessible name of each social link
   };
   dock: { timings: string; book: string };

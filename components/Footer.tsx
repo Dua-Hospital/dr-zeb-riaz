@@ -83,6 +83,8 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
                   <Icon name="nav" />
                   {c.clinics.directions}
                 </a>
+                {/* Dua Hospital's own accounts sit under its entry, as on Dr Hasan's site. */}
+                <Socials who={f.follow.hospital} urls={SOCIALS.hospital} label={f.socialLabel} />
               </div>
             ))}
             <div className="ft-note">{c.hero.note}</div>
@@ -110,10 +112,6 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
           <span className="ft-dua">
             <img src="/brand/dua-hospital-logo.svg" alt="Dua Hospital" width={44} height={44} />
             {f.copyright}
-          </span>
-          <span className="ft-dua-social">
-            <span>{f.follow.hospital}</span>
-            <Socials who={f.follow.hospital} urls={SOCIALS.hospital} label={f.socialLabel} />
           </span>
         </div>
       </div>
