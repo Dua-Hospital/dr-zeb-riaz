@@ -257,7 +257,7 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .tx:hover .ic{transform:rotate(-8deg);background:var(--b600);color:#fff}
 .tx .ic svg{width:22px;height:22px}
 .tx b{font-size:17px;line-height:22px;color:var(--b900);align-self:end}
-.tx .ur{font-size:17px;line-height:1.6;color:var(--b600);direction:rtl;text-align:left;margin-top:8px;align-self:start}
+.tx .ur{font-size:17px;line-height:1.6;color:var(--b600);direction:rtl;text-align:left;margin-top:12px;align-self:start}
 .tx .en{font-family:var(--font-figtree),system-ui,sans-serif;font-size:15px;line-height:22px;font-weight:600;color:var(--b600);text-align:right;margin-top:4px;align-self:start}
 .tx p{grid-column:1/-1;grid-row:3;align-self:start;font-size:14.5px;line-height:22px;color:var(--n500);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
 .tx.hide{display:none}
