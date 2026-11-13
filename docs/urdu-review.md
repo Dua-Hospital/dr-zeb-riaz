@@ -4,7 +4,7 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 
 ## meta
 
-- `meta.title`: ڈاکٹر زیب ریاض — گائناکالوجسٹ، ملتان | دعا ہسپتال
+- `meta.title`: ڈاکٹر زیب ریاض — گائناکالوجسٹ اور ماہرِ زچگی، ملتان | دعا ہسپتال
 - `meta.description`: ڈاکٹر زیب ریاض (MBBS، FCPS گائنی، MRCOG برطانیہ)، کنسلٹنٹ گائناکالوجسٹ، دعا ہسپتال ملتان۔ بانجھ پن، IUI اور IVF، حمل کی دیکھ بھال، نارمل ڈیلیوری اور سی سیکشن، ماہواری کے مسائل۔ پیر تا ہفتہ۔ اپوائنٹمنٹ واٹس ایپ پر۔
 - `meta.keywords[0]`: ڈاکٹر زیب ریاض
 - `meta.keywords[1]`: لیڈی ڈاکٹر ملتان
@@ -33,8 +33,8 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 - `nav.faq`: سوالات
 - `nav.cta`: واٹس ایپ پر اپوائنٹمنٹ لیں
 - `nav.menu`: مینو
-- `nav.subtitle`: کنسلٹنٹ گائناکالوجسٹ · MBBS، FCPS، MRCOG
-- `nav.endorse`: مالک و سی ای او · دعا ہسپتال
+- `nav.subtitle`: کنسلٹنٹ گائناکالوجسٹ · MBBS، FCPS، MRCOG (UK)
+- `nav.role`: کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی
 
 ## status
 
@@ -55,7 +55,8 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 ## hero
 
 - `hero.overline`: کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی
-- `hero.urLine`: کنسلٹنٹ گائناکالوجسٹ · ملتان
+- `hero.echo` on the Urdu page is now English: "Dr. Zeb Riaz · Consultant Gynaecologist & Obstetrician"
+- `hero.echo` on the English page: ڈاکٹر زیب ریاض · کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی
 - `hero.lineStrong[0]`: حمل۔ اولاد کی خواہش۔
 - `hero.lineStrong[1]`: خواتین کی صحت۔
 - `hero.lineRest`: اولاد کی کوشش سے لے کر بچے کے پہلے ہفتے تک، ایک ہی ماہر۔
@@ -78,7 +79,7 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 - `portrait.sideTitle`: دعا ہسپتال میں کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی
 - `portrait.sideSub`: اولاد، حمل اور خواتین کی صحت۔
 - `portrait.creds[0].where`: آرمی میڈیکل کالج
-- `portrait.creds[1].where`: گائنی، CPSP
+- `portrait.creds[1].where`: گائنی و زچگی، CPSP
 - `portrait.creds[2].where`: رائل کالج، برطانیہ
 - `portrait.creds[3].title`: مالک و سی ای او
 - `portrait.creds[3].where`: دعا ہسپتال
@@ -111,7 +112,7 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 - `about.qualHeading`: تعلیم
 - `about.quals[0].chip`: ڈگری
 - `about.quals[0].where`: آرمی میڈیکل کالج، راولپنڈی
-- `about.quals[1].title`: FCPS (گائنی)
+- `about.quals[1].title`: FCPS (گائنی و زچگی)
 - `about.quals[1].chip`: سپیشلسٹ
 - `about.quals[1].where`: کالج آف فزیشنز اینڈ سرجنز پاکستان
 - `about.quals[2].chip`: برطانیہ
@@ -119,9 +120,9 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 - `about.quals[3].title`: بانجھ پن کی تربیت
 - `about.quals[3].chip`: اولاد
 - `about.quals[3].where`: آسٹریلین انفرٹیلیٹی IVF اینڈ جینیٹکس
-- `about.quals[4].title`: مالک و سی ای او
+- `about.quals[4].title`: کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی
 - `about.quals[4].chip`: موجودہ
-- `about.quals[4].where`: دعا ہسپتال، ملتان
+- `about.quals[4].where`: مالک و سی ای او · دعا ہسپتال، ملتان
 - `about.visitHeading`: آپ کا معائنہ، قدم بہ قدم
 - `about.visit[0].stage`: پہلے
 - `about.visit[0].title`: واٹس ایپ پر اپوائنٹمنٹ لیں
@@ -161,7 +162,7 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 ## clinics
 
 - `clinics.overline`: کلینک اور اوقات
-- `clinics.heading`: ایک ہسپتال۔ اتوار کے سوا ہر شام۔
+- `clinics.heading`: دعا ہسپتال میں شام کا کلینک، ہفتے میں چھ دن۔
 - `clinics.lead`: ڈاکٹر زیب دعا ہسپتال میں پیر تا ہفتہ مریض دیکھتی ہیں۔
 - `clinics.seasonLabel.winter`: سردیوں کے اوقات
 - `clinics.seasonLabel.summer`: گرمیوں کے اوقات
@@ -184,7 +185,7 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 - `book.steps[2].body`: اپنے وقت پر آئیں اور پیغام دکھا دیں۔
 - `book.cta`: واٹس ایپ پر اپوائنٹمنٹ لیں
 - `book.chat.name`: ڈاکٹر زیب ریاض
-- `book.chat.status`: عام طور پر ایک گھنٹے میں جواب دیتے ہیں
+- `book.chat.status`: عام طور پر ایک گھنٹے میں جواب دیتی ہیں
 - `book.chat.me1`: السلام علیکم۔ مجھے ڈاکٹر زیب ریاض سے اپوائنٹمنٹ چاہیے۔
 - `book.chat.me2`: نام: عائشہ · مسئلہ: حمل کا معائنہ
 - `book.chat.them.pre`: وعلیکم السلام۔ آپ کا وقت 
@@ -221,13 +222,13 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 ## final
 
 - `final.heading`: جب آپ تیار ہوں۔ اپوائنٹمنٹ لیں۔
-- `final.sub`: ڈاکٹر زیب ریاض · مالک و سی ای او، دعا ہسپتال · پیر تا ہفتہ
+- `final.sub`: ڈاکٹر زیب ریاض · کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی · دعا ہسپتال، پیر تا ہفتہ
 - `final.cta`: واٹس ایپ پر اپوائنٹمنٹ لیں
 
 ## footer
 
-- `footer.tagline1`: کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی
-- `footer.tagline2`: MBBS، FCPS (گائنی)، MRCOG (UK)
+- `footer.tagline1`: مالک و سی ای او، دعا ہسپتال، ملتان
+- `footer.tagline2`: MBBS، FCPS (گائنی و زچگی)، MRCOG (UK) (each degree wrapped in invisible left-to-right isolates so the order holds)
 - `footer.onPage`: اس صفحے پر
 - `footer.clinicsHeading`: کلینک
 - `footer.help`: مدد
@@ -235,6 +236,9 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 - `footer.emergency.title`: ایمرجنسی؟
 - `footer.emergency.body`: 1122 پر کال کریں یا قریبی ایمرجنسی میں جائیں۔
 - `footer.copyright`: © 2026 ڈاکٹر زیب ریاض · مالک و سی ای او، دعا ہسپتال، ملتان
+- `footer.follow.doctor`: ڈاکٹر زیب کو فالو کریں
+- `footer.follow.hospital`: دعا ہسپتال
+- `footer.socialLabel`: ڈاکٹر زیب ریاض — Instagram (screen-reader name of each social link; the network name stays in English)
 
 ## dock
 
@@ -254,17 +258,17 @@ Every Urdu string on the site, generated from `lib/content.ts` and `lib/links.ts
 ## Care (names from her flyers)
 
 - Female infertility: زنانہ بانجھ پن — حمل نہ ٹھہرنے کی صورت میں ٹیسٹ اور علاج۔
-- Male infertility & low sperm count: مردانہ بانجھ پن اور جراثیم کی کمی — شوہر کے ٹیسٹ اور علاج بھی۔
-- Fertility medicines: ادویات سے بانجھ پن کا علاج — بیضہ بننے میں مدد کی دوائیں، الٹراساؤنڈ کے ساتھ۔
+- Male infertility & low sperm count: مردانہ بانجھ پن اور سپرم کی کمی — شوہر کے ٹیسٹ اور علاج بھی۔
+- Fertility medicines: بانجھ پن کی دوائیں — بیضہ بننے میں مدد کی دوائیں، الٹراساؤنڈ کے ساتھ۔
 - IUI: IUI — ایک آسان طریقہ جو حمل ٹھہرنے میں مدد کر سکتا ہے۔
 - IVF: IVF — ماہر ٹیم کے ساتھ IVF میں رہنمائی اور دیکھ بھال۔
-- Pregnancy check-ups: حمل کے دوران معائنہ — حمل کے دوران باقاعدہ معائنہ، الٹراساؤنڈ اور ٹیسٹ۔
+- Pregnancy check-ups: حمل کا چیک اپ — حمل کے دوران باقاعدہ معائنہ، الٹراساؤنڈ اور ٹیسٹ۔
 - Pregnancy complications: حمل کی پیچیدگیاں — حمل میں خون آنا، بلڈ پریشر، شوگر اور دیگر مسائل۔
 - Normal delivery & C-section: نارمل ڈیلیوری اور سی سیکشن — دعا ہسپتال میں نارمل یا آپریشن سے ڈیلیوری۔
 - Irregular periods: ماہواری کی بے قاعدگی — ماہواری کا جلدی، دیر سے یا بالکل نہ آنا۔
 - Period pain: ماہواری میں درد — تکلیف دہ یا زیادہ ماہواری، اور اس کی وجہ کی تشخیص۔
 - PCOS (hidden until confirmed): PCOS — بے قاعدہ ماہواری، وزن اور ہارمون کے مسائل۔
-- Uterine prolapse: بچہ دانی میں سستی — کمزور یا نیچے سرکی ہوئی بچہ دانی کا علاج۔
+- Uterine prolapse: بچہ دانی کا نیچے آنا — کمزور یا نیچے سرکی ہوئی بچہ دانی کا علاج۔
 - Leucorrhoea (discharge): لیکوریا — غیر معمولی رطوبت، انفیکشن اور ان کا علاج۔
 - Urine infection: پیشاب کا انفیکشن — پیشاب میں جلن، بار بار پیشاب اور بار بار انفیکشن۔
 - Breast checks (hidden until confirmed): چھاتی کا معائنہ — چھاتی کا معائنہ اور سکریننگ کے بارے میں مشورہ۔

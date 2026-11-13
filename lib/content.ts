@@ -6,11 +6,33 @@ import type { Locale } from './site.ts';
 // Facts come from docs/client-data.md. Urdu strings are awaiting native review: see docs/urdu-review.md.
 
 export type IconName = 'egg'|'sperm'|'pill'|'flask'|'dish'|'pregnant'|'baby'|'drop'|'uterus'|'shield'|'ribbon'|'bladder'
-  |'wa'|'arrow'|'chev'|'menu'|'close'|'check'|'award'|'cap'|'pin'|'chat'|'nav'|'cal'|'plus'|'alert'|'clock'|'file'|'steth'|'list'|'star'|'globe';
+  |'wa'|'arrow'|'chev'|'menu'|'close'|'check'|'award'|'cap'|'pin'|'chat'|'nav'|'cal'|'plus'|'alert'|'clock'|'file'|'steth'|'list'|'star'|'globe'
+  |'facebook'|'instagram'|'youtube'|'tiktok';
 
 type Both = { en: string; ur: string };
 
 export const DOCTOR = { name: 'Dr. Zeb Riaz', nameUr: 'ڈاکٹر زیب ریاض' } as const;
+
+/** Social accounts, in the order the footer shows them (supplied by the client, 2026-11-13). */
+export const SOCIAL_NETWORKS = ['facebook', 'instagram', 'youtube', 'tiktok'] as const;
+export type SocialNetwork = (typeof SOCIAL_NETWORKS)[number];
+export const SOCIAL_NAMES: Record<SocialNetwork, string> = {
+  facebook: 'Facebook', instagram: 'Instagram', youtube: 'YouTube', tiktok: 'TikTok',
+};
+export const SOCIALS: Record<'doctor' | 'hospital', Record<SocialNetwork, string>> = {
+  doctor: {
+    facebook: 'https://www.facebook.com/drzebriaz',
+    instagram: 'https://www.instagram.com/drzebriaz/',
+    youtube: 'https://www.youtube.com/@drzebriaz',
+    tiktok: 'https://www.tiktok.com/@drzebriaz',
+  },
+  hospital: {
+    facebook: 'https://www.facebook.com/duahospitalmultan',
+    instagram: 'https://www.instagram.com/duahospitalmultan/',
+    youtube: 'https://www.youtube.com/@duahospitalmultan',
+    tiktok: 'https://www.tiktok.com/@duahospitalmultan',
+  },
+};
 
 /* ------------------------------------------------------------------ */
 /*  Clinic: Dua Hospital only, with winter and summer hours (spec Z7, Z8) */
@@ -74,17 +96,17 @@ const tx = (icon: IconName, name: string, nameUr: string, blurb: string, blurbUr
 
 export const CARE: readonly Treatment[] = [
   tx('egg', 'Female infertility', 'زنانہ بانجھ پن', 'Tests and treatment when pregnancy is not happening.', 'حمل نہ ٹھہرنے کی صورت میں ٹیسٹ اور علاج۔', 'fertility'),
-  tx('sperm', 'Male infertility & low sperm count', 'مردانہ بانجھ پن اور جراثیم کی کمی', 'Semen tests and treatment for the husband too.', 'شوہر کے ٹیسٹ اور علاج بھی۔', 'fertility'),
-  tx('pill', 'Fertility medicines', 'ادویات سے بانجھ پن کا علاج', 'Medicines that help ovulation, with scan follow-up.', 'بیضہ بننے میں مدد کی دوائیں، الٹراساؤنڈ کے ساتھ۔', 'fertility'),
+  tx('sperm', 'Male infertility & low sperm count', 'مردانہ بانجھ پن اور سپرم کی کمی', 'Semen tests and treatment for the husband too.', 'شوہر کے ٹیسٹ اور علاج بھی۔', 'fertility'),
+  tx('pill', 'Fertility medicines', 'بانجھ پن کی دوائیں', 'Medicines that help ovulation, with scan follow-up.', 'بیضہ بننے میں مدد کی دوائیں، الٹراساؤنڈ کے ساتھ۔', 'fertility'),
   tx('flask', 'IUI', 'IUI', 'A simple procedure that can help couples conceive.', 'ایک آسان طریقہ جو حمل ٹھہرنے میں مدد کر سکتا ہے۔', 'fertility'),
   tx('dish', 'IVF', 'IVF', 'Guidance and care through IVF with a specialist team.', 'ماہر ٹیم کے ساتھ IVF میں رہنمائی اور دیکھ بھال۔', 'fertility'),
-  tx('pregnant', 'Pregnancy check-ups', 'حمل کے دوران معائنہ', 'Regular visits, scans and tests through pregnancy.', 'حمل کے دوران باقاعدہ معائنہ، الٹراساؤنڈ اور ٹیسٹ۔', 'pregnancy'),
+  tx('pregnant', 'Pregnancy check-ups', 'حمل کا چیک اپ', 'Regular visits, scans and tests through pregnancy.', 'حمل کے دوران باقاعدہ معائنہ، الٹراساؤنڈ اور ٹیسٹ۔', 'pregnancy'),
   tx('alert', 'Pregnancy complications', 'حمل کی پیچیدگیاں', 'Bleeding, high BP, sugar and other concerns in pregnancy.', 'حمل میں خون آنا، بلڈ پریشر، شوگر اور دیگر مسائل۔', 'pregnancy'),
   tx('baby', 'Normal delivery & C-section', 'نارمل ڈیلیوری اور سی سیکشن', 'Delivery at Dua Hospital, normal or by operation.', 'دعا ہسپتال میں نارمل یا آپریشن سے ڈیلیوری۔', 'pregnancy'),
   tx('cal', 'Irregular periods', 'ماہواری کی بے قاعدگی', 'Periods that come early, late or not at all.', 'ماہواری کا جلدی، دیر سے یا بالکل نہ آنا۔', 'periods'),
   tx('drop', 'Period pain', 'ماہواری میں درد', 'Painful or heavy periods, and finding the cause.', 'تکلیف دہ یا زیادہ ماہواری، اور اس کی وجہ کی تشخیص۔', 'periods'),
   tx('uterus', 'PCOS', 'PCOS', 'Irregular periods, weight and hormone problems.', 'بے قاعدہ ماہواری، وزن اور ہارمون کے مسائل۔', 'periods', true),
-  tx('uterus', 'Uterine prolapse', 'بچہ دانی میں سستی', 'A weak or dropped womb, with treatment options.', 'کمزور یا نیچے سرکی ہوئی بچہ دانی کا علاج۔', 'women'),
+  tx('uterus', 'Uterine prolapse', 'بچہ دانی کا نیچے آنا', 'A weak or dropped womb, with treatment options.', 'کمزور یا نیچے سرکی ہوئی بچہ دانی کا علاج۔', 'women'),
   tx('shield', 'Leucorrhoea (discharge)', 'لیکوریا', 'Unusual discharge, infections and their treatment.', 'غیر معمولی رطوبت، انفیکشن اور ان کا علاج۔', 'women'),
   tx('bladder', 'Urine infection', 'پیشاب کا انفیکشن', 'Burning, frequent urine and repeat infections.', 'پیشاب میں جلن، بار بار پیشاب اور بار بار انفیکشن۔', 'women'),
   tx('ribbon', 'Breast checks', 'چھاتی کا معائنہ', 'Breast examination and advice on screening.', 'چھاتی کا معائنہ اور سکریننگ کے بارے میں مشورہ۔', 'breast', true),
@@ -122,7 +144,7 @@ export interface SiteContent {
   langSwitch: { label: string; href: string };
   skipLink: string;
   toTop: string;
-  nav: { about: string; care: string; clinic: string; book: string; reviews: string; faq: string; cta: string; menu: string; subtitle: string; endorse: string };
+  nav: { about: string; care: string; clinic: string; book: string; reviews: string; faq: string; cta: string; menu: string; subtitle: string; role: string };
   status: {
     neutral: string;
     lead: string; // before the pill's detail: "· "
@@ -141,7 +163,8 @@ export interface SiteContent {
   };
   hero: {
     overline: string;
-    urLine: string;
+    /** The name and title in the other language: Urdu on the English page, English on the Urdu page. */
+    echo: string;
     lineStrong: [string, string];
     lineRest: string;
     chips: string[];
@@ -211,6 +234,8 @@ export interface SiteContent {
     urduLink: string; // the link to the other language's page
     emergency: Titled;
     copyright: string;
+    follow: { doctor: string; hospital: string }; // headings over the two rows of social links
+    socialLabel: (who: string, network: string) => string; // accessible name of each social link
   };
   dock: { timings: string; book: string };
   days: string[]; // Mon..Sun, short (week strip)
@@ -247,7 +272,7 @@ const en: SiteContent = {
     cta: 'Book on WhatsApp',
     menu: 'Menu',
     subtitle: 'Consultant Gynaecologist · MBBS, FCPS, MRCOG (UK)',
-    endorse: 'Owner & CEO · Dua Hospital',
+    role: 'Consultant Gynaecologist & Obstetrician',
   },
   status: {
     neutral: 'Mon – Sat · see timings',
@@ -267,11 +292,11 @@ const en: SiteContent = {
   },
   hero: {
     overline: 'Consultant Gynaecologist & Obstetrician',
-    urLine: 'ڈاکٹر زیب ریاض · کنسلٹنٹ گائناکالوجسٹ',
+    echo: 'ڈاکٹر زیب ریاض · کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی',
     lineStrong: ['Pregnancy. Fertility.', "Women's health."],
     lineRest: "One specialist, from trying to conceive to your baby's first week.",
     chips: ['Infertility', 'IUI & IVF', 'Pregnancy care', 'Normal & C-section', 'Irregular periods', 'Period pain'],
-    seeAll: (n) => `See all ${n} →`,
+    seeAll: (n) => `See all ${n}`,
     ctaBook: 'Book on WhatsApp',
     ctaTimings: 'Clinic timings',
     note: 'Monday to Saturday · Closed on Sunday',
@@ -313,7 +338,7 @@ const en: SiteContent = {
       { title: 'FCPS (Obstetrics & Gynaecology)', chip: 'Specialist', where: 'College of Physicians & Surgeons Pakistan' },
       { title: 'MRCOG', chip: 'UK', where: 'Royal College of Obstetricians & Gynaecologists, UK' },
       { title: 'Infertility training', chip: 'Fertility', where: 'Australian Infertility IVF and Genetics' },
-      { title: 'Owner & CEO', chip: 'Current', where: 'Dua Hospital, Multan' },
+      { title: 'Consultant Gynaecologist & Obstetrician', chip: 'Current', where: 'Owner & CEO · Dua Hospital, Multan' },
     ],
     visitHeading: 'Your visit, step by step',
     visit: [
@@ -342,7 +367,7 @@ const en: SiteContent = {
   },
   clinics: {
     overline: 'Clinic & timings',
-    heading: 'One hospital. Every evening but Sunday.',
+    heading: 'Evening clinic at Dua Hospital, six days a week.',
     lead: 'Dr. Zeb sees patients at Dua Hospital, Monday to Saturday.',
     seasonLabel: { winter: 'Winter hours', summer: 'Summer hours' },
     otherSeason: {
@@ -391,11 +416,11 @@ const en: SiteContent = {
   },
   final: {
     heading: 'Ready when you are. Book your visit.',
-    sub: 'Dr. Zeb Riaz · Owner & CEO, Dua Hospital · Monday to Saturday',
+    sub: 'Dr. Zeb Riaz · Consultant Gynaecologist & Obstetrician · Dua Hospital, Monday to Saturday',
     cta: 'Book on WhatsApp',
   },
   footer: {
-    tagline1: 'Consultant Gynaecologist & Obstetrician',
+    tagline1: 'Owner & CEO, Dua Hospital, Multan',
     tagline2: 'MBBS, FCPS (Obs & Gynae), MRCOG (UK)',
     onPage: 'On this page',
     clinicsHeading: 'Clinic',
@@ -404,6 +429,8 @@ const en: SiteContent = {
     urduLink: 'اردو میں دیکھیں',
     emergency: { title: 'Emergency?', body: 'Call 1122 or go to the nearest emergency.' },
     copyright: '© 2026 Dr. Zeb Riaz · Owner & CEO, Dua Hospital, Multan',
+    follow: { doctor: 'Follow Dr. Zeb', hospital: 'Dua Hospital' },
+    socialLabel: (who, network) => `${who} on ${network}`,
   },
   dock: { timings: 'Timings', book: 'Book on WhatsApp' },
   days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -415,7 +442,7 @@ const ABOUT_UR = 'تعارف';
 
 const ur: SiteContent = {
   meta: {
-    title: 'ڈاکٹر زیب ریاض — گائناکالوجسٹ، ملتان | دعا ہسپتال',
+    title: 'ڈاکٹر زیب ریاض — گائناکالوجسٹ اور ماہرِ زچگی، ملتان | دعا ہسپتال',
     description:
       'ڈاکٹر زیب ریاض (MBBS، FCPS گائنی، MRCOG برطانیہ)، کنسلٹنٹ گائناکالوجسٹ، دعا ہسپتال ملتان۔ بانجھ پن، IUI اور IVF، حمل کی دیکھ بھال، نارمل ڈیلیوری اور سی سیکشن، ماہواری کے مسائل۔ پیر تا ہفتہ۔ اپوائنٹمنٹ واٹس ایپ پر۔',
     keywords: [
@@ -442,8 +469,8 @@ const ur: SiteContent = {
     faq: 'سوالات',
     cta: BOOK_UR,
     menu: 'مینو',
-    subtitle: 'کنسلٹنٹ گائناکالوجسٹ · MBBS، FCPS، MRCOG',
-    endorse: 'مالک و سی ای او · دعا ہسپتال',
+    subtitle: 'کنسلٹنٹ گائناکالوجسٹ · MBBS، FCPS، MRCOG (UK)',
+    role: 'کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی',
   },
   status: {
     neutral: 'پیر تا ہفتہ · اوقات دیکھیں',
@@ -464,7 +491,7 @@ const ur: SiteContent = {
   },
   hero: {
     overline: 'کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی',
-    urLine: 'کنسلٹنٹ گائناکالوجسٹ · ملتان',
+    echo: 'Dr. Zeb Riaz · Consultant Gynaecologist & Obstetrician',
     lineStrong: ['حمل۔ اولاد کی خواہش۔', 'خواتین کی صحت۔'],
     lineRest: 'اولاد کی کوشش سے لے کر بچے کے پہلے ہفتے تک، ایک ہی ماہر۔',
     chips: ['بانجھ پن', 'IUI اور IVF', 'حمل کی دیکھ بھال', 'نارمل اور سی سیکشن', 'ماہواری کی بے قاعدگی', 'ماہواری میں درد'],
@@ -481,7 +508,7 @@ const ur: SiteContent = {
     sideSub: 'اولاد، حمل اور خواتین کی صحت۔',
     creds: [
       { title: 'MBBS', where: 'آرمی میڈیکل کالج' },
-      { title: 'FCPS', where: 'گائنی، CPSP' },
+      { title: 'FCPS', where: 'گائنی و زچگی، CPSP' },
       { title: 'MRCOG (UK)', where: 'رائل کالج، برطانیہ' },
       { title: 'مالک و سی ای او', where: 'دعا ہسپتال' },
     ],
@@ -507,10 +534,10 @@ const ur: SiteContent = {
     qualHeading: 'تعلیم',
     quals: [
       { title: 'MBBS', chip: 'ڈگری', where: 'آرمی میڈیکل کالج، راولپنڈی' },
-      { title: 'FCPS (گائنی)', chip: 'سپیشلسٹ', where: 'کالج آف فزیشنز اینڈ سرجنز پاکستان' },
+      { title: 'FCPS (گائنی و زچگی)', chip: 'سپیشلسٹ', where: 'کالج آف فزیشنز اینڈ سرجنز پاکستان' },
       { title: 'MRCOG', chip: 'برطانیہ', where: 'رائل کالج آف آبسٹیٹریشنز اینڈ گائناکالوجسٹس، برطانیہ' },
       { title: 'بانجھ پن کی تربیت', chip: 'اولاد', where: 'آسٹریلین انفرٹیلیٹی IVF اینڈ جینیٹکس' },
-      { title: 'مالک و سی ای او', chip: 'موجودہ', where: 'دعا ہسپتال، ملتان' },
+      { title: 'کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی', chip: 'موجودہ', where: 'مالک و سی ای او · دعا ہسپتال، ملتان' },
     ],
     visitHeading: 'آپ کا معائنہ، قدم بہ قدم',
     visit: [
@@ -539,7 +566,7 @@ const ur: SiteContent = {
   },
   clinics: {
     overline: 'کلینک اور اوقات',
-    heading: 'ایک ہسپتال۔ اتوار کے سوا ہر شام۔',
+    heading: 'دعا ہسپتال میں شام کا کلینک، ہفتے میں چھ دن۔',
     lead: 'ڈاکٹر زیب دعا ہسپتال میں پیر تا ہفتہ مریض دیکھتی ہیں۔',
     seasonLabel: { winter: 'سردیوں کے اوقات', summer: 'گرمیوں کے اوقات' },
     otherSeason: {
@@ -562,7 +589,7 @@ const ur: SiteContent = {
     cta: BOOK_UR,
     chat: {
       name: 'ڈاکٹر زیب ریاض',
-      status: 'عام طور پر ایک گھنٹے میں جواب دیتے ہیں',
+      status: 'عام طور پر ایک گھنٹے میں جواب دیتی ہیں',
       me1: 'السلام علیکم۔ مجھے ڈاکٹر زیب ریاض سے اپوائنٹمنٹ چاہیے۔',
       me2: 'نام: عائشہ · مسئلہ: حمل کا معائنہ',
       them: { pre: 'وعلیکم السلام۔ آپ کا وقت ', time: 'آج شام 6:30 بجے', post: ' دعا ہسپتال میں ہے۔ براہ کرم پرانی رپورٹیں ساتھ لائیں۔' },
@@ -588,12 +615,12 @@ const ur: SiteContent = {
   },
   final: {
     heading: 'جب آپ تیار ہوں۔ اپوائنٹمنٹ لیں۔',
-    sub: 'ڈاکٹر زیب ریاض · مالک و سی ای او، دعا ہسپتال · پیر تا ہفتہ',
+    sub: 'ڈاکٹر زیب ریاض · کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی · دعا ہسپتال، پیر تا ہفتہ',
     cta: BOOK_UR,
   },
   footer: {
-    tagline1: 'کنسلٹنٹ گائناکالوجسٹ اور ماہرِ زچگی',
-    tagline2: 'MBBS، FCPS (گائنی)، MRCOG (UK)',
+    tagline1: 'مالک و سی ای او، دعا ہسپتال، ملتان',
+    tagline2: '⁦MBBS⁩، ⁦FCPS⁩ (گائنی و زچگی)، ⁦MRCOG (UK)⁩',
     onPage: 'اس صفحے پر',
     clinicsHeading: 'کلینک',
     help: 'مدد',
@@ -601,6 +628,8 @@ const ur: SiteContent = {
     urduLink: 'View in English',
     emergency: { title: 'ایمرجنسی؟', body: '1122 پر کال کریں یا قریبی ایمرجنسی میں جائیں۔' },
     copyright: '© 2026 ڈاکٹر زیب ریاض · مالک و سی ای او، دعا ہسپتال، ملتان',
+    follow: { doctor: 'ڈاکٹر زیب کو فالو کریں', hospital: 'دعا ہسپتال' },
+    socialLabel: (who, network) => `${who} — ⁦${network}⁩`,
   },
   dock: { timings: 'اوقات', book: BOOK_UR },
   days: ['پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ', 'اتوار'],

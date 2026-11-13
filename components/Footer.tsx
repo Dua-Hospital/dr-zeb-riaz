@@ -1,8 +1,21 @@
-import { CLINICS, DOCTOR, type SiteContent } from '@/lib/content';
+import { CLINICS, DOCTOR, SOCIALS, SOCIAL_NAMES, SOCIAL_NETWORKS, type SiteContent } from '@/lib/content';
 import { bookingHref, directionsHref } from '@/lib/links';
 import type { Locale } from '@/lib/site';
 import { Icon } from './icons';
 import { navItems } from './nav/items';
+
+/** A row of social icon links (new tab). Only the icons show; each link's name says whose account and where. */
+function Socials({ who, urls, label }: { who: string; urls: Record<(typeof SOCIAL_NETWORKS)[number], string>; label: SiteContent['footer']['socialLabel'] }) {
+  return (
+    <div className="ft-social">
+      {SOCIAL_NETWORKS.map((n) => (
+        <a key={n} href={urls[n]} target="_blank" rel="noopener" aria-label={label(who, SOCIAL_NAMES[n])} title={SOCIAL_NAMES[n]}>
+          <Icon name={n} />
+        </a>
+      ))}
+    </div>
+  );
+}
 
 // Section numbers match the section overlines, so they stay fixed even when Reviews (05) is hidden.
 const NUMBERS: Record<string, string> = {
@@ -25,10 +38,10 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
         <div className="ft">
           <div className="ft-brand">
             <div className="ft-lockup">
-              <img src="/brand/zeb-mark-reversed.svg" alt="" width={52} height={52} />
+              <img src="/brand/zeb-mark-reversed.svg" alt="" width={72} height={72} />
               <div>
                 <div className="nm">{ur ? DOCTOR.nameUr : DOCTOR.name}</div>
-                <small>{c.nav.endorse}</small>
+                <small>{c.nav.role}</small>
               </div>
             </div>
             <p>
@@ -45,6 +58,10 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
               <Icon name="wa" />
               {c.nav.cta}
             </a>
+            <div className="ft-follow">
+              <h4>{f.follow.doctor}</h4>
+              <Socials who={ur ? DOCTOR.nameUr : DOCTOR.name} urls={SOCIALS.doctor} label={f.socialLabel} />
+            </div>
           </div>
           <nav className="ft-links" aria-label={f.onPage}>
             <h4>{f.onPage}</h4>
@@ -91,8 +108,12 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
         </div>
         <div className="ft-bottom">
           <span className="ft-dua">
-            <img src="/brand/dua-hospital-logo.svg" alt="Dua Hospital" width={28} height={28} />
+            <img src="/brand/dua-hospital-logo.svg" alt="Dua Hospital" width={44} height={44} />
             {f.copyright}
+          </span>
+          <span className="ft-dua-social">
+            <span>{f.follow.hospital}</span>
+            <Socials who={f.follow.hospital} urls={SOCIALS.hospital} label={f.socialLabel} />
           </span>
         </div>
       </div>

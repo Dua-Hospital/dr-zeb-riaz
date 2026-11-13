@@ -1,6 +1,6 @@
 import { activeSeason, karachiParts } from './clinic-status.ts';
 import type { SeasonId } from './clinic-status.ts';
-import { CLINICS, DOCTOR, getContent, visibleCare } from './content.ts';
+import { CLINICS, DOCTOR, getContent, visibleCare, SOCIALS, SOCIAL_NETWORKS } from './content.ts';
 import { SITE_URL } from './site.ts';
 import type { Locale } from './site.ts';
 
@@ -68,6 +68,7 @@ export function buildPageSchema(locale: Locale, now: Date = new Date()) {
       alternateName: isUrdu ? c.name : c.nameUr,
       url: pageUrl,
       medicalSpecialty: ['Obstetric', 'Gynecologic'],
+      sameAs: SOCIAL_NETWORKS.map((n) => SOCIALS.hospital[n]),
     };
     {
       node.address = {
@@ -111,6 +112,7 @@ export function buildPageSchema(locale: Locale, now: Date = new Date()) {
         medicalSpecialty: ['Obstetric', 'Gynecologic'],
         qualification: ['MBBS', 'FCPS (Obstetrics & Gynaecology)', 'MRCOG (UK)'],
         knowsLanguage: ['en', 'ur'],
+        sameAs: SOCIAL_NETWORKS.map((n) => SOCIALS.doctor[n]),
         availableService: services,
         worksFor: clinics.map((c) => ({ '@id': c['@id'] })),
       },

@@ -15,7 +15,7 @@ export function Header({ c, locale }: { c: SiteContent; locale: Locale }) {
           <img className="logo" src="/brand/zeb-mark-full.svg" alt="" width={48} height={48} />
           <span>
             {locale === 'ur' ? DOCTOR.nameUr : DOCTOR.name}
-            <small>{c.nav.endorse}</small>
+            <small>{c.nav.role}</small>
           </span>
         </a>
         <nav className="nav-links" aria-label={c.nav.menu}>

@@ -26,9 +26,9 @@ export function About({ c }: { c: SiteContent }) {
             <Image
               src="/images/dr-zeb-riaz-about.jpg"
               alt={DOCTOR.name}
-              width={1066}
-              height={1599}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 18%' }}
+              width={1536}
+              height={1024}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 30%' }}
             />
             <span className="about-photo-badge">
               <Icon name="steth" />

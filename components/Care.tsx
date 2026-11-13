@@ -42,7 +42,13 @@ export function Care({ c, locale }: { c: SiteContent; locale: Locale }) {
                 <Icon name={x.icon} />
               </span>
               <b>{ur ? x.nameUr : x.name}</b>
-              {!ur && (
+              {/* The name in the other language under the title, as on Dr Hasan's site:
+                  Urdu under English, English under Urdu. */}
+              {ur ? (
+                <span className="en" lang="en" dir="ltr">
+                  {x.name}
+                </span>
+              ) : (
                 <span className="ur" lang="ur">
                   {x.nameUr}
                 </span>

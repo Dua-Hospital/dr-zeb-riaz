@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { CARE, CARE_GROUPS, CLINICS, REVIEWS, getContent, visibleCare, visibleGroups } from './content.ts';
+import { CARE, CARE_GROUPS, CLINICS, REVIEWS, SOCIALS, SOCIAL_NETWORKS, getContent, visibleCare, visibleGroups } from './content.ts';
 
 // Every string in a value; functions are called with sample arguments so their text is checked too.
 function leaves(value: unknown): string[] {
@@ -44,7 +44,7 @@ test('pending items and empty groups are hidden', () => {
   assert.equal(visibleCare().length, 13);
   assert.ok(visibleCare().every((t) => !t.pending));
   assert.deepEqual(visibleGroups(), ['fertility', 'pregnancy', 'periods', 'women']);
-  assert.equal(en.hero.seeAll(String(visibleCare().length)), 'See all 13 →');
+  assert.equal(en.hero.seeAll(String(visibleCare().length)), 'See all 13'); // the arrow is an icon, not text
   assert.ok(ur.hero.seeAll('13').includes('13'));
 });
 
@@ -133,4 +133,64 @@ test('full day names for booking prompts', () => {
   assert.deepEqual(en.dayNames, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']);
   assert.equal(ur.dayNames.length, 7);
   assert.equal(en.status.bookOn(en.dayNames[0]), 'Book now for Monday');
+});
+
+test('profession leads; Owner & CEO is the secondary fact', () => {
+  assert.equal(en.nav.role, 'Consultant Gynaecologist & Obstetrician');
+  assert.equal(ur.nav.role, ur.hero.overline);
+  assert.equal(en.final.sub, 'Dr. Zeb Riaz · Consultant Gynaecologist & Obstetrician · Dua Hospital, Monday to Saturday');
+  const current = en.about.quals.at(-1)!;
+  assert.equal(current.title, 'Consultant Gynaecologist & Obstetrician');
+  assert.equal(current.where, 'Owner & CEO · Dua Hospital, Multan');
+  assert.ok(ur.about.quals.at(-1)!.where.includes('مالک و سی ای او'));
+  assert.equal(en.footer.tagline1, 'Owner & CEO, Dua Hospital, Multan');
+});
+
+test('clinic heading and matching EN/UR titles', () => {
+  assert.equal(en.clinics.heading, 'Evening clinic at Dua Hospital, six days a week.');
+  assert.ok(!/One hospital/.test(en.clinics.heading));
+  assert.ok(en.meta.title.includes('Gynaecologist & Obstetrician') && ur.meta.title.includes('ماہرِ زچگی'));
+  assert.equal(en.hero.echo, 'ڈاکٹر زیب ریاض · ' + ur.hero.overline);
+  assert.equal(ur.hero.echo, 'Dr. Zeb Riaz · ' + en.hero.overline, 'the Urdu page echoes the English title, as the English page echoes the Urdu one');
+});
+
+test('Urdu service names are the everyday words patients use', () => {
+  const ur = (name: string) => CARE.find((t) => t.name === name)!.nameUr;
+  assert.equal(ur('Male infertility & low sperm count'), 'مردانہ بانجھ پن اور سپرم کی کمی');
+  assert.equal(ur('Fertility medicines'), 'بانجھ پن کی دوائیں');
+  assert.equal(ur('Pregnancy check-ups'), 'حمل کا چیک اپ');
+  assert.equal(ur('Uterine prolapse'), 'بچہ دانی کا نیچے آنا');
+  assert.ok(!allText.includes('جراثیم'), 'جراثیم means germs, not sperm');
+});
+
+test('Urdu degree lists isolate each Latin degree so the order survives right-to-left', () => {
+  assert.equal(ur.footer.tagline2, '⁦MBBS⁩، ⁦FCPS⁩ (گائنی و زچگی)، ⁦MRCOG (UK)⁩');
+});
+
+test('Urdu verbs about Dr. Zeb use the feminine form', () => {
+  assert.equal(ur.book.chat.status, 'عام طور پر ایک گھنٹے میں جواب دیتی ہیں');
+  for (const s of leaves(ur)) {
+    assert.ok(!/جواب دیتے|علاج کرتے|دیکھ رہے ہیں|مریض دیکھتے/.test(s), `masculine verb about her: ${s}`);
+  }
+});
+
+test('social accounts for Dr. Zeb and Dua Hospital, in one fixed order', () => {
+  assert.deepEqual(SOCIAL_NETWORKS, ['facebook', 'instagram', 'youtube', 'tiktok']);
+  assert.deepEqual(SOCIALS.doctor, {
+    facebook: 'https://www.facebook.com/drzebriaz',
+    instagram: 'https://www.instagram.com/drzebriaz/',
+    youtube: 'https://www.youtube.com/@drzebriaz',
+    tiktok: 'https://www.tiktok.com/@drzebriaz',
+  });
+  assert.deepEqual(SOCIALS.hospital, {
+    facebook: 'https://www.facebook.com/duahospitalmultan',
+    instagram: 'https://www.instagram.com/duahospitalmultan/',
+    youtube: 'https://www.youtube.com/@duahospitalmultan',
+    tiktok: 'https://www.tiktok.com/@duahospitalmultan',
+  });
+  for (const l of [en, ur]) {
+    assert.ok(l.footer.follow.doctor && l.footer.follow.hospital);
+    assert.match(l.footer.socialLabel('X', 'Y'), /X/);
+    assert.match(l.footer.socialLabel('X', 'Y'), /Y/);
+  }
 });

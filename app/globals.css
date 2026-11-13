@@ -105,11 +105,35 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .q-bar span:not(.ic):not(.tag){display:block}
 .h-name{font-size:clamp(46px,4.2vw + 14px,76px);line-height:1;letter-spacing:-.05em;font-weight:800;color:var(--b900);margin:10px 0 0}
 .h-name span{color:var(--b600)}
-/* champagne rule under the name (replaces the template's ECG line): draws in once */
-.h-rule{display:block;width:80px;height:3px;border-radius:3px;background:var(--c500);margin:16px 0 4px;transform-origin:left;animation:rule .6s var(--ease) .3s both}
-[dir=rtl] .h-rule{transform-origin:right}
-@keyframes rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+/* Heartbeat under the name: a soft trace that stays, a bright pulse that runs along it,
+   ripples at the mother's beat and the baby's three, then the heart at the end beats twice.
+   One 3s loop; the pulse travels in the first 50% (1.5s) at constant speed, so each ripple's
+   moment is 50% x its share of the path (mother .262, baby .459/.528/.596). */
+.beat{display:block;width:100%;max-width:522px;height:46px;margin:10px 0 0;overflow:visible}
+.beat path{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.beat .base{opacity:.4}
+.beat .run{stroke-width:3;stroke-dasharray:.2 2;stroke-dashoffset:.2;filter:drop-shadow(0 0 3px rgb(184 71 111 / .45));animation:beat-run 3s linear infinite}
+.beat .dot{fill:var(--c500);filter:drop-shadow(0 0 4px var(--c500));animation:beat-dot 3s linear infinite}
+.beat .rip{fill:none;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center;animation:beat-rip 3s ease-out infinite}
+.beat .rip-m{stroke:var(--b600)}
+.beat .rip-b1,.beat .rip-b2,.beat .rip-b3{stroke:var(--r500)}
+.beat .rip-m{animation-name:rip-m}
+.beat .rip-b1{animation-name:rip-b1}
+.beat .rip-b2{animation-name:rip-b2}
+.beat .rip-b3{animation-name:rip-b3}
+.beat .heart{fill:var(--r500);opacity:.35;transform-box:fill-box;transform-origin:center;animation:beat-heart 3s ease-out infinite}
+/* The Urdu page reads right to left, so the trace runs that way too. */
+[dir=rtl] .beat{transform:scaleX(-1)}
+@keyframes beat-run{0%{stroke-dashoffset:.2;opacity:1}50%{stroke-dashoffset:-.8;opacity:1}58%,100%{stroke-dashoffset:-1;opacity:0}}
+@keyframes beat-dot{0%{offset-distance:0%;opacity:0}3%{opacity:1}50%{offset-distance:100%;opacity:1}55%,100%{offset-distance:100%;opacity:0}}
+@keyframes rip-m{0%,12.8%{opacity:0;transform:scale(1)}13.1%{opacity:.8;transform:scale(1)}33%,100%{opacity:0;transform:scale(4.5)}}
+@keyframes rip-b1{0%,22.6%{opacity:0;transform:scale(1)}22.9%{opacity:.8;transform:scale(1)}35%,100%{opacity:0;transform:scale(3.5)}}
+@keyframes rip-b2{0%,26.1%{opacity:0;transform:scale(1)}26.4%{opacity:.8;transform:scale(1)}38%,100%{opacity:0;transform:scale(3.5)}}
+@keyframes rip-b3{0%,29.5%{opacity:0;transform:scale(1)}29.8%{opacity:.8;transform:scale(1)}42%,100%{opacity:0;transform:scale(3.5)}}
+@keyframes beat-glow{0%,45%,100%{opacity:.35}54%{opacity:1}62%{opacity:.5}70%{opacity:.95}}
+@keyframes beat-heart{0%,49%{opacity:.35;transform:scale(1)}54%{opacity:1;transform:scale(1.3)}59%{opacity:.8;transform:scale(1.02)}64%{opacity:1;transform:scale(1.22)}76%{opacity:.6;transform:scale(1)}100%{opacity:.35;transform:scale(1)}}
 .h-ur{font-size:24px;color:var(--b700);margin-top:2px}
+.h-echo{font-family:var(--font-figtree),system-ui,sans-serif;font-size:17px;line-height:26px;font-weight:600;color:var(--b700);margin-top:12px;text-align:right}
 .h-statement{font-size:22px;line-height:34px;color:var(--n600);max-width:36ch;margin:18px 0 16px;font-weight:500}
 .h-statement strong{display:block;color:var(--b900);font-weight:700;font-size:26px;line-height:34px;letter-spacing:-.02em;margin-bottom:4px}
 .h-conds{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;max-width:560px}
@@ -147,7 +171,7 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .cred b{display:block;font-size:17px;line-height:24px;color:var(--b900)}
 .cred span:not(.ic){display:block;font-size:13.5px;line-height:19px;color:var(--n500)}
 .photo{position:relative;flex:1;min-height:360px;background:var(--n100);overflow:hidden}
-.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform 1.4s var(--ease)}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:56% 20%;transition:transform 1.4s var(--ease)}
 .h-photo:hover .photo img{transform:scale(1.03)}
 .photo::after{content:"";position:absolute;inset:auto 0 0;height:38%;background:linear-gradient(to top,rgba(3,37,79,.72),transparent)}
 .plate{position:absolute;z-index:2;left:20px;right:20px;bottom:16px;color:#fff;display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
@@ -212,7 +236,7 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .tl .where{grid-column:1/-1;font-size:16px;line-height:24px;color:var(--n600)}
 .tl .chip{font-size:12px;line-height:16px;font-weight:700;padding:4px 9px;border-radius:6px;background:var(--b50);color:var(--b600);align-self:center}
 .tl li:last-child .chip{background:var(--g100);color:var(--g800)}
-.ex-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ex-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:12px}
 .ex{padding:20px;border-radius:var(--r-md);background:var(--n50);border:1px solid var(--line);display:grid;grid-template-columns:44px 1fr;gap:4px 14px;align-content:start;transition:background .3s,border-color .3s}
 .ex:hover{background:#fff;border-color:var(--b200)}
 .ex .ic{grid-row:span 2;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:#fff;color:var(--b600);border:1px solid var(--line)}
@@ -227,17 +251,18 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .tabs button:not([aria-selected=true]):hover{background:var(--b50);color:var(--b700)}
 .tabs .ct{font-size:12px;opacity:.7;margin-inline-start:5px}
 .tx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.tx{padding:18px;display:grid;grid-template-columns:46px 1fr;gap:0 14px;align-items:center;transition:transform .35s var(--ease),box-shadow .35s,border-color .35s}
+.tx{padding:18px;display:grid;grid-template-columns:46px 1fr;grid-row:span 3;grid-template-rows:subgrid;gap:0 14px;align-items:center;transition:transform .35s var(--ease),box-shadow .35s,border-color .35s}
 .tx:hover{transform:translateY(-3px);box-shadow:var(--sh-hi);border-color:var(--b200)}
-.tx .ic{grid-row:span 2;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--b50);color:var(--b600);transition:transform .4s var(--ease),background .3s,color .3s}
+.tx .ic{grid-row:1/span 2;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--b50);color:var(--b600);transition:transform .4s var(--ease),background .3s,color .3s}
 .tx:hover .ic{transform:rotate(-8deg);background:var(--b600);color:#fff}
 .tx .ic svg{width:22px;height:22px}
-.tx b{font-size:17px;line-height:22px;color:var(--b900)}
-.tx .ur{font-size:17px;line-height:1.6;color:var(--b600);direction:rtl;text-align:left;margin-top:8px}
-.tx p{grid-column:1/-1;font-size:14.5px;line-height:22px;color:var(--n500);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.tx b{font-size:17px;line-height:22px;color:var(--b900);align-self:end}
+.tx .ur{font-size:17px;line-height:1.6;color:var(--b600);direction:rtl;text-align:left;margin-top:8px;align-self:start}
+.tx .en{font-family:var(--font-figtree),system-ui,sans-serif;font-size:15px;line-height:22px;font-weight:600;color:var(--b600);text-align:right;margin-top:4px;align-self:start}
+.tx p{grid-column:1/-1;grid-row:3;align-self:start;font-size:14.5px;line-height:22px;color:var(--n500);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
 .tx.hide{display:none}
 @media (min-width:1081px){.tx-grid .ask{grid-column:span 3}.tx-grid.filtered .ask{grid-column:1/-1}}
-.ask{grid-column:1/-1;padding:20px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:var(--b900);color:#fff;border:0}
+.ask{grid-column:1/-1;grid-row:span 3;padding:20px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:var(--b900);color:#fff;border:0}
 .ask .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.1);color:var(--b200)}
 .ask b{font-size:18px;line-height:26px;display:block}
 .ask span{color:var(--b200);font-size:15px}
@@ -251,7 +276,7 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .cl-map .pin{position:absolute;left:58%;top:26%;width:44px;height:44px;border-radius:50% 50% 50% 4px;transform:rotate(-45deg);background:var(--b600);display:grid;place-items:center;box-shadow:0 12px 24px -8px rgba(7,78,162,.6);animation:drop 1s var(--ease) both}
 .cl-map .pin::after{content:"";width:14px;height:14px;border-radius:50%;background:#fff}
 .cl-map .shadow{position:absolute;left:calc(58% + 2px);top:calc(26% + 42px);width:40px;height:12px;border-radius:50%;background:rgba(7,78,162,.22);animation:shadow 2.4s ease-in-out infinite}
-.cl-map .label{position:absolute;inset-inline-start:16px;top:14px;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--b700);background:#fff;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.cl-map .label{position:absolute;z-index:2;inset-inline-start:16px;top:14px;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--b700);background:#fff;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
 @keyframes drop{from{transform:translateY(-30px) rotate(-45deg);opacity:0}}
 @keyframes shadow{50%{transform:scale(1.4);opacity:.45}}
 .cl-body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:18px;flex:1}
@@ -350,7 +375,7 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 .final>div{position:relative;display:flex;align-items:center;gap:22px}
 .final .av{width:84px;height:84px;border-radius:50%;background:url("/images/dr-zeb-riaz-avatar.jpg") center 20%/cover;border:3px solid var(--c500);flex:none}
 .final h2{color:#fff;margin:0 0 4px;font-size:clamp(26px,1.6vw + 16px,36px)}
-.final p{color:var(--b100)}
+.final p{color:var(--b100);text-wrap:balance}
 .final .btn-pri{background:#fff;color:var(--b700);position:relative}
 .final .btn{flex:none}
 .final>div{min-width:0}
@@ -358,12 +383,12 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 32px;font-size:15px;line-height:24px}
 .ft{display:grid;grid-template-columns:1.5fr 1fr 1.2fr 1fr;gap:40px}
 .ft-brand .nm{font-size:22px;line-height:28px;font-weight:700;color:#fff}
-.ft-lockup{display:flex;align-items:center;gap:12px}
-.ft-lockup img{width:52px;height:52px;flex:none}
+.ft-lockup{display:flex;align-items:center;gap:14px}
+.ft-lockup img{width:72px;height:72px;flex:none}
 .ft-lockup small{display:block;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--r200)}
 .ft-clinic span{display:block}
-.ft-dua{display:inline-flex;align-items:center;gap:10px}
-.ft-dua img{width:28px;height:28px;background:#fff;border-radius:6px;padding:2px;flex:none}
+.ft-dua{display:inline-flex;align-items:center;justify-content:center;gap:12px;text-align:center;flex-wrap:wrap}
+.ft-dua img{width:44px;height:44px;background:#fff;border-radius:10px;padding:4px;flex:none}
 .ft-brand p{margin:6px 0 2px;color:var(--b200)}
 .ft-brand .ur{font-size:20px;color:#fff;display:block;margin-bottom:18px;text-align:left}
 .ft-brand .btn{background:#fff;color:var(--b800);box-shadow:none;--h:48px;font-size:15px}
@@ -380,7 +405,19 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
 .ft-note{font-size:14px;color:var(--b300)}
 .ft-emerg{margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(198,40,40,.16);border:1px solid rgba(245,194,194,.25);color:#FBD5D5;font-size:14px;line-height:20px}
 .ft-emerg b{color:#fff}
-.ft-bottom{border-top:1px solid rgba(191,209,231,.18);margin-top:48px;padding-top:22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px}
+.ft-bottom{border-top:1px solid rgba(191,209,231,.18);margin-top:48px;padding-top:22px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px}
+/* Social links: Dr. Zeb's under the WhatsApp button, Dua Hospital's beside its logo at the bottom. */
+.ft-follow{margin-top:24px}
+.ft-follow h4{margin-bottom:10px}
+.ft-social{display:flex;gap:8px;flex-wrap:wrap}
+.ft-social a{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--b100);border:1px solid rgba(191,209,231,.22);background:rgba(255,255,255,.04);transition:background .2s,color .2s,border-color .2s,transform .25s var(--ease)}
+.ft-social a:hover{background:#fff;color:var(--b800);border-color:#fff;transform:translateY(-2px)}
+.ft-social a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.ft-social svg{width:18px;height:18px}
+.ft-dua-social{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;color:var(--b300);padding-inline-start:12px;border-inline-start:1px solid rgba(191,209,231,.18)}
+.ft-dua-social .ft-social a{width:34px;height:34px;border-radius:10px}
+.ft-dua-social .ft-social svg{width:16px;height:16px}
+@media (max-width:640px){.ft-dua-social{border-inline-start:0;padding-inline-start:0;flex-basis:100%}}
 .dock{display:none}
 
 /* reveal */
@@ -392,10 +429,10 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
 @media (prefers-reduced-motion:reduce){
   .js .rv{transform:none}
   .btn-pri::after,.cl-map .shadow{animation:none}
-  .btn:hover,.rb:hover,.tx:hover,.review:hover{transform:none}
+  .btn:hover,.rb:hover,.tx:hover,.review:hover,.ft-social a:hover{transform:none}
   .tx:hover .ic{transform:none}
   .final svg.bg-arc path{animation:none;stroke-dashoffset:0}
-  .h-rule{animation:none}
+  .beat .base{opacity:1}.beat .run,.beat .dot,.beat .rip{display:none}.beat .heart{animation:beat-glow 3s ease-in-out infinite}
 }
 
 /* ==== PINK OCTOBER (October only, after hydration; spec §7.5) ==== */
@@ -469,9 +506,11 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
   .h-ctas .btn{flex:1 1 100%}
   .h-today{padding:22px 18px}.seg-t{display:none}
   .t-foot,.ribbon,.cl-grid,.rv-grid,.ex-list{grid-template-columns:1fr}
+  .ex-list{grid-auto-rows:auto}
   .ribbon{gap:12px}
   .tx-grid{grid-template-columns:1fr 1fr;gap:10px}
-  .tx{grid-template-columns:1fr;padding:16px;gap:2px}
+  .tx{grid-template-columns:1fr;grid-row:auto;grid-template-rows:none;padding:16px;gap:2px}
+  .tx .ic{grid-row:auto}.tx b,.tx .ur,.tx .en{align-self:auto}.ask{grid-row:auto}
   .tx .ic{grid-row:auto;width:42px;height:42px;margin-bottom:8px}
   .tx p{display:none}
   .tabs{flex-wrap:nowrap;overflow-x:auto;border-radius:16px;scrollbar-width:none;max-width:100%}
@@ -524,11 +563,11 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
 [dir=rtl][lang=ur] .nav-in{height:72px;padding:0 10px 0 14px;gap:12px}
 @media (max-width:760px){[dir=rtl][lang=ur] .nav-in{height:64px;padding:0 8px 0 10px}}
 [dir=rtl][lang=ur] .brand{gap:10px;line-height:1.3}
-[dir=rtl][lang=ur] .brand span{display:flex;flex-direction:column;gap:0;justify-content:center}
-[dir=rtl][lang=ur] .brand span > span:first-child{font-size:17px;line-height:1.4}
-[dir=rtl][lang=ur] .brand small{font-size:13px !important;line-height:1.3 !important}
+[dir=rtl][lang=ur] .brand span{display:flex;flex-direction:column;gap:5px;justify-content:center;font-size:19px;line-height:1.5}
+[dir=rtl][lang=ur] .brand span > span:first-child{font-size:19px;line-height:1.5}
+[dir=rtl][lang=ur] .brand small{font-size:14.5px !important;line-height:1.7 !important;color:var(--n600)}
 [dir=rtl][lang=ur] .nav-links{align-items:center;gap:4px}
-[dir=rtl][lang=ur] .nav-links a{font-size:16px;line-height:1.6;padding:5px 14px;display:inline-flex;align-items:center}
+[dir=rtl][lang=ur] .nav-links a{font-size:16.5px;line-height:1.6;padding:11px 15px 0;display:inline-flex;align-items:center}
 [dir=rtl][lang=ur] .nav .btn{--h:46px;font-size:15px;line-height:1.5;padding:0 18px}
 [dir=rtl][lang=ur] .lang{height:38px;padding:0 12px}
 [dir=rtl][lang=ur] .h-statement{line-height:2.2;margin:22px 0 20px;word-spacing:0.14em}
@@ -540,7 +579,22 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
 [dir=rtl][lang=ur] :is(.overline,.cred small,.ex b small,.cl-map .label,.tl .chip,.q-bar .tag,.badge,.pill-status,.h-conds span,.h-conds a,.blk h3,.ft h4,.brand small,.cl-time .cl-label,.ft-lockup small){font-size:16px;line-height:1.8}
 [dir=rtl][lang=ur] :is(.h-conds span,.h-conds a,.tabs button){height:auto;min-height:38px;padding-block:4px}
 [dir=rtl][lang=ur] :is(.week div,.cl-time span,.cl-addr small,.h-note,.t-status){font-size:16px;line-height:1.8}
-[dir=rtl][lang=ur] :is(.pill-status,.badge,.tl .chip,.q-bar .tag,.cl-map .label){padding-block:4px;padding-inline:12px}
+[dir=rtl][lang=ur] :is(.pill-status,.badge,.tl .chip,.q-bar .tag,.cl-map .label){padding-block:6px;padding-inline:14px}
+[dir=rtl][lang=ur] .pill-status{line-height:1.9;row-gap:2px}
+/* Gulzar's letters sit about 5px (0.33em) above the middle of their line box, so Urdu pills
+   look top-heavy. Move the text down by that much and lift the dots and icons back up with
+   `translate` (it stacks on the existing scaleX/scale transforms). */
+[dir=rtl][lang=ur] :is(.pill-status,.badge,.tl .chip,.q-bar .tag,.cl-map .label,.about-photo-badge){padding-top:11px;padding-bottom:1px}
+[dir=rtl][lang=ur] :is(.h-conds span,.h-conds a,.tabs button){padding-top:9px;padding-bottom:0}
+[dir=rtl][lang=ur] :is(.h-conds span::before,.h-conds a svg,.pill-status .live,.badge .live,.about-photo-badge svg,.tabs .ct){translate:0 -4.5px}
+/* Urdu buttons: same optical shift; the icon goes back up so it lines up with the words. */
+[dir=rtl][lang=ur] :is(.btn,.nav .btn){padding-top:10px}
+[dir=rtl][lang=ur] .btn svg{translate:0 -5px}
+/* The "اردو" switch on the English page is Gulzar too. */
+.lang[lang=ur]{padding-top:10.5px}
+/* Credentials: the Urdu line under each degree needs Gulzar's taller line, not 17px. */
+[dir=rtl][lang=ur] .cred b{line-height:1.7}
+[dir=rtl][lang=ur] .cred span:not(.ic){font-size:14px;line-height:1.9;margin-top:4px}
 [dir=rtl][lang=ur] :is(.tabs .ct,.ticks,.ticks span,.cl-time b,.t-time){font-family:var(--font-figtree),system-ui,sans-serif;direction:ltr}
 /* The language switch on the Urdu page reads "English": set it in Figtree, not Gulzar. */
 [dir=rtl][lang=ur] .lang{font-family:var(--font-figtree),system-ui,sans-serif;font-size:15px;font-weight:600;line-height:1}

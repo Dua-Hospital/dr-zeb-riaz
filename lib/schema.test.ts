@@ -72,3 +72,17 @@ test('Urdu locale', () => {
   assert.ok(/[؀-ۿ]/.test(clinics[0].name));
   assert.ok(graph('ur').some((n) => n.inLanguage === 'ur-PK'));
 });
+
+test('physician and hospital link their social accounts with sameAs', () => {
+  for (const l of ['en', 'ur'] as const) {
+    const { physicians, clinics } = parts(l);
+    assert.deepEqual(physicians[0].sameAs, [
+      'https://www.facebook.com/drzebriaz',
+      'https://www.instagram.com/drzebriaz/',
+      'https://www.youtube.com/@drzebriaz',
+      'https://www.tiktok.com/@drzebriaz',
+    ]);
+    assert.equal(clinics[0].sameAs.length, 4);
+    assert.ok(clinics[0].sameAs.every((u: string) => u.includes('duahospitalmultan')));
+  }
+});

@@ -41,13 +41,13 @@ Colour usage:
 
 - Page background cream; cards white with a `--line` border.
 - **Blue 600 is the only primary button colour.** Rose is for overlines, numbered chips, icons and soft accents.
-- **Champagne is never text** (it fails contrast). Use it for the rule under the name, the final-band arc, the logo seed and avatar ring.
+- **Champagne is never text** (it fails contrast). Use it for the travelling dot on the heartbeat trace, the final-band arc, the logo seed and avatar ring.
 - Pink October colours appear only in the October band.
 - Focus ring: `outline: 2px solid var(--b400); outline-offset: 3px`.
 
 ## Logo
 
-- Header: `public/brand/zeb-mark-full.svg` beside "Dr. Zeb Riaz" and "Owner & CEO · Dua Hospital".
+- Header: `public/brand/zeb-mark-full.svg` beside "Dr. Zeb Riaz" and her profession, "Consultant Gynaecologist & Obstetrician". Owner & CEO is a secondary fact (credential tile, timeline, footer), never the headline role.
 - Footer: `zeb-mark-reversed.svg` on navy, plus the unchanged Dua Hospital logo (`dua-hospital-logo.svg`) in the bottom line.
 - Below 48 px use `zeb-mark-small-*.svg`; the favicon is `app/icon.svg`.
 - Never recolour, merge with the Dua logo, or put the ribbon inside the mark.
@@ -56,7 +56,7 @@ Colour usage:
 
 Unchanged from the template: **Figtree** (English) and **Gulzar** (Urdu, `.ur`, RTL, line-height 2). Hero name `clamp(46px, 4.2vw + 14px, 76px)` with the surname in `--b600`.
 
-Urdu rules: Gulzar only, never mixed with Figtree on one line; Western digits; MBBS/FCPS/MRCOG in Latin; Urdu letterforms (`ہ ی ک`). Add every new or changed Urdu string to `docs/urdu-review.md`.
+Urdu rules: Gulzar only, never mixed with Figtree on one line; Western digits; MBBS/FCPS/MRCOG in Latin; Urdu letterforms (`ہ ی ک`). Add every new or changed Urdu string to `docs/urdu-review.md`. Gulzar's letters sit about 0.33em above the middle of their line, so Urdu pills and badges get extra top padding (and their dots and icons a matching `translate` up) to look centred; small Urdu lines under a label need line-height 1.9, never a fixed 17px. Care cards show the name in the other language under the title: Urdu under English on `/`, and the English name (Figtree, Blue 600, 15px) under the Urdu title on `/ur/`, as on Dr Hasan's site.
 
 ## Sections and IDs
 
@@ -72,7 +72,7 @@ Urdu rules: Gulzar only, never mixed with Figtree on one line; Western digits; M
 
 ## Motion
 
-As the template, with two replacements: the ECG line under the name is now a champagne rule that draws in once (static under reduced motion), and the final band's ECG sweep is a slow champagne arc (off under reduced motion).
+As the template, with two replacements: the ECG line under the name is now a "two heartbeats" trace: one slower beat (the mother) then three quick small ones (the baby), in a Dua-blue-to-Zeb-rose gradient. A soft trace stays in place while a glowing pulse with a champagne dot runs along it; each beat sends out a small ripple as the pulse passes, and the line ends in a small rose heart that beats twice (lub-dub) when the pulse arrives. It loops every 3s (the pulse crosses in 1.5s) and is mirrored on the Urdu page. Under reduced motion the trace is still and fully drawn, and only the heart fades softly in and out (opacity only, no movement), and the final band's ECG sweep is a slow champagne arc (off under reduced motion).
 
 ## Pre-ship checklist
 

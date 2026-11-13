@@ -78,3 +78,14 @@ The flyers show older timings (6–10, 7–9:30, 7–10 PM). The user's timings 
 
 - No Pink October strip above the header. Breast health stays a service card; campaign treatment to be designed inside the page.
 - No phone "Call" buttons; booking is WhatsApp only (same as Dr. Hasan Aziz).
+
+## Social accounts (supplied 2026-11-13)
+
+Shown in the footer (Dr. Zeb under the WhatsApp button, Dua Hospital beside its logo) and in the JSON-LD `sameAs`. Source: `SOCIALS` in `lib/content.ts`.
+
+| | Dr. Zeb Riaz | Dua Hospital |
+|---|---|---|
+| Facebook | https://www.facebook.com/drzebriaz | https://www.facebook.com/duahospitalmultan |
+| Instagram | https://www.instagram.com/drzebriaz/ | https://www.instagram.com/duahospitalmultan/ |
+| YouTube | https://www.youtube.com/@drzebriaz | https://www.youtube.com/@duahospitalmultan |
+| TikTok | https://www.tiktok.com/@drzebriaz | https://www.tiktok.com/@duahospitalmultan |

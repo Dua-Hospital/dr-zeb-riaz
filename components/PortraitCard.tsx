@@ -13,7 +13,7 @@ export function PortraitCard({ c, locale }: { c: SiteContent; locale: Locale }) 
   return (
     <div className="card h-photo rv" style={{ '--d': '.1s' } as CSSProperties}>
       <div className="photo">
-        <Image src="/images/dr-zeb-riaz-hero.jpg" width={1066} height={1599} alt={locale === 'ur' ? DOCTOR.nameUr : DOCTOR.name} priority />
+        <Image src="/images/dr-zeb-riaz-hero.jpg" width={1536} height={1024} alt={locale === 'ur' ? DOCTOR.nameUr : DOCTOR.name} priority />
         <div className="plate">
           <div>
             <div className="nm">{p.plateTitle}</div>
