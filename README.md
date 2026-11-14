@@ -74,7 +74,7 @@ The active season is chosen by the month in Pakistan time (`activeSeason` in `li
 | `public/brand/zeb-mark-full.svg` | header logo |
 | `public/brand/zeb-mark-reversed.svg` | footer logo (navy) |
 | `public/brand/zeb-mark-small-*.svg`, `zeb-app-icon.svg`, `app/icon.svg` | small sizes, app icon, favicon |
-| `public/brand/dua-hospital-logo.svg` | the Dua Hospital endorsement in the footer (unchanged master logo) |
+| `public/brand/dua-hospital-app-icon.svg` | the Dua Hospital logo (master v2, App icon) beside Dua Hospital in the footer |
 | `public/images/dr-zeb-riaz-hero.jpg` / `-about.jpg` / `-avatar.jpg` | portrait, About photo, chat and final-band avatar |
 
 Design sources: Figma "Dr Zeb Riaz — Branding" (`asnsGHyc0oMusfqvKTnzGt`), `docs/design/zeb-identity.html`, `docs/design/brand-board.html`.

@@ -60,13 +60,17 @@ export function Clinics({ c, locale }: { c: SiteContent; locale: Locale }) {
                 </div>
                 <div className="cl-body">
                   <div className="cl-top">
-                    <div>
-                      <h3>{name}</h3>
-                      {!ur && (
-                        <div className="ur" lang="ur">
-                          {clinic.nameUr}
-                        </div>
-                      )}
+                    <div className="cl-name">
+                      {/* Dua Hospital's logo (master v2, App icon) beside its name. */}
+                      <img src="/brand/dua-hospital-app-icon.svg" alt="" width={56} height={56} />
+                      <div>
+                        <h3>{name}</h3>
+                        {!ur && (
+                          <div className="ur" lang="ur">
+                            {clinic.nameUr}
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <ClinicBadge clinic={clinic} locale={locale} />
                   </div>

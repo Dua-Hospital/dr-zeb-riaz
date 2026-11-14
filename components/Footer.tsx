@@ -78,7 +78,7 @@ export function Footer({ c, locale }: { c: SiteContent; locale: Locale }) {
               <div className="ft-clinic" key={clinic.id}>
                 {/* Dua Hospital's logo beside its name, its website beside Directions. */}
                 <div className="ft-clinic-name">
-                  <img src="/brand/dua-hospital-logo.svg" alt="" width={36} height={36} />
+                  <img src="/brand/dua-hospital-app-icon.svg" alt="" width={36} height={36} />
                   <b>{ur ? clinic.nameUr : clinic.name}</b>
                 </div>
                 <span>{c.clinics.otherSeason.winter(clinic.hoursText.winter)}</span>

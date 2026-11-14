@@ -48,7 +48,7 @@ Colour usage:
 ## Logo
 
 - Header: `public/brand/zeb-mark-full.svg` beside "Dr. Zeb Riaz" and her profession, "Consultant Gynaecologist & Obstetrician". Owner & CEO is a secondary fact (credential tile, timeline, footer), never the headline role.
-- Footer: `zeb-mark-reversed.svg` on navy, plus the unchanged Dua Hospital logo (`dua-hospital-logo.svg`) in the bottom line.
+- Footer: `zeb-mark-reversed.svg` on navy, plus the Dua Hospital logo beside Dua Hospital in the Clinic block (and at 56px beside the name on the clinic card): master v2, App icon variant (`dua-hospital-app-icon.svg`, white mark on Blue 600, rounded 9px at 36px), as the client's brand guide prescribes below 120px and for profile-size use; the archived old logo is not used.
 - Below 48 px use `zeb-mark-small-*.svg`; the favicon is `app/icon.svg`.
 - Never recolour, merge with the Dua logo, or put the ribbon inside the mark.
 

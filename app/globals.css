@@ -284,6 +284,8 @@ section{padding:120px 0 0;scroll-margin-top:90px}
 @keyframes shadow{50%{transform:scale(1.4);opacity:.45}}
 .cl-body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:18px;flex:1}
 .cl-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.cl-name{display:flex;align-items:center;gap:14px;min-width:0}
+.cl-name img{width:56px;height:56px;border-radius:14px;flex:none}
 .cl-top h3{font-size:24px;line-height:32px;color:var(--b900);letter-spacing:-.02em;font-weight:700}
 .cl-top .ur{font-size:18px;color:var(--b600);text-align:left;line-height:1.7;margin-top:6px}
 .badge{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;line-height:20px;font-weight:700;padding:6px 12px;border-radius:999px;background:var(--b50);color:var(--b800);white-space:nowrap}
@@ -400,7 +402,7 @@ footer{margin-top:64px;background:var(--b900);color:var(--b200);padding:64px 0 3
 .ft-clinic{padding:0 0 14px;margin-bottom:14px;border-bottom:1px solid rgba(191,209,231,.14)}
 .ft-clinic b{display:block;color:#fff;font-size:16px}
 .ft-clinic-name{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.ft-clinic-name img{width:36px;height:36px;background:#fff;border-radius:9px;padding:3px;flex:none}
+.ft-clinic-name img{width:36px;height:36px;border-radius:9px;flex:none}
 .ft-clinic-links{display:flex;flex-wrap:wrap;gap:4px 18px}
 .ft-clinic span{display:block}
 .ft-clinic a{display:inline-flex;align-items:center;gap:6px;color:var(--b300);font-weight:600;font-size:14px;margin-top:2px}

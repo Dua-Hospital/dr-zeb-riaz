@@ -41,7 +41,7 @@ Node 22.18+ is required (native TypeScript type-stripping). Run `npm test` after
 - Value imports inside `lib/` use explicit `.ts` extensions so `node --test` can load them; type-only imports use `import type`.
 - `app/globals.css` is one file with a block per section — extend it rather than adding a stylesheet.
 - Motion is CSS keyframes plus four small JS islands (`Reveal`, `SmoothNav`, `BackToTop`, `ChatDemo`); keep the `prefers-reduced-motion` behaviour in spec §7.6.
-- Images use `next/image` with fixed `width`/`height` and `unoptimized` (static export). Logos: `public/brand/zeb-mark-*.svg` (approved Zeb mark), `public/brand/dua-hospital-logo.svg` (unchanged Dua master logo, footer endorsement), favicon `app/icon.svg`.
+- Images use `next/image` with fixed `width`/`height` and `unoptimized` (static export). Logos: `public/brand/zeb-mark-*.svg` (approved Zeb mark), `public/brand/dua-hospital-app-icon.svg` (Dua Hospital master logo v2, App icon variant, beside Dua Hospital in the footer's Clinic block; source: the client's "Dua Hospital Branding" Figma file, node 103:397, never redraw), favicon `app/icon.svg`.
 
 ## Where things are
 
